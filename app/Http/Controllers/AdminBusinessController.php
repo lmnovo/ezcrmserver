@@ -43,8 +43,9 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			$this->form[] = ['label'=>'Stage','name'=>'stages_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'stages,name'];
-			$this->form[] = ['label'=>'Date Limit','name'=>'date_limit','type'=>'date','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Lead Name','name'=>'leads_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'leads,name'];
+			$this->form[] = ['label'=>'Stage\'s Pipeline','name'=>'stages_groups_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'stages_groups,name'];
+			//$this->form[] = ['label'=>'Date Limit','name'=>'date_limit','type'=>'date','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Total Ammount','name'=>'total','type'=>'number','validation'=>'required','width'=>'col-sm-10'];
             $this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','width'=>'col-sm-10'];
             # END FORM DO NOT REMOVE THIS LINE
@@ -317,8 +318,28 @@
 	    | @id = last insert id
 	    | 
 	    */
-	    public function hook_after_add($id) {        
-	        //Your code here
+	    public function hook_after_add($id) {
+            $business = DB::table('business')->where('id', $id)->first();
+            $stages_groups = DB::table('stages_groups')->where('id', $business->stages_groups_id)->first();
+            $stages = DB::table('stages')
+                ->where('stages_groups_id', $stages_groups->id)
+                ->orderby('id', 'asc')
+                ->get();
+
+            DB::table('business')->where('id', $id)->update(['stages_id'=>$stages[0]->id]);
+
+            foreach ($stages as $stage) {
+                $sumarizedData = [
+                    'created_at' => Carbon::now(config('app.timezone')),
+                    'business_id' => $id,
+                    'stages_id' => $stage->id,
+                ];
+
+                DB::table('business_stages')->insertGetId($sumarizedData);
+            }
+
+            //Open Edit Negotiation
+            CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.$id),trans("crudbooster.text_business_create"));
 
 	    }
 
@@ -393,12 +414,20 @@
             $data['business'] = \Illuminate\Support\Facades\DB::table('business')
                 ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname',
                     'business.total', 'business.date_limit', 'cms_users.fullname as fullname',
-                    'stages.name as stage_name', 'stages.number as stage_number')
+                    'stages.name as stage_name', 'stages.number as stage_number',  'stages.id as stage_id', 'business.stages_groups_id as stages_groups_id')
                 ->join('leads', 'leads.id', '=', 'business.leads_id')
                 ->join('cms_users', 'cms_users.id', '=', 'business.cms_users_id')
                 ->join('stages', 'stages.id', '=', 'business.stages_id')
                 ->where('business.id', '=', $id)
                 ->first();
+
+            $data['stages'] = DB::table('stages')
+                ->select(DB::raw('stages.name as stage_name'), 'stages.number as stage_number', 'business.date_limit as business_date_limit'
+                    , 'stages.id as stage_id')
+
+                ->join('business', 'business.stages_groups_id', '=', 'stages.stages_groups_id')
+                ->where('business.id', '=', $id)
+                ->get();
 
             $this->cbView('business.edit',$data);
         }

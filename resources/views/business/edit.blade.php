@@ -39,7 +39,7 @@
                             <i class="fa fa-briefcase"></i>
                         </span>
 
-                        <h3 class="profile-username text-center" style="padding: 10px">Industrias Electronics Inc.</h3>
+                        <h3 class="profile-username text-center" style="padding: 10px">{{ $business->name }}</h3>
                         {{--<p class="text-muted" style="text-align: center">-Negocitation Name-</p>--}}
 
                         <ul class="list-group list-group-unbordered">
@@ -48,39 +48,39 @@
                                 <a title="{{trans('crudbooster.send_sms')}}" class='btn btn-primary pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-sms/$id")}}'><i class="glyphicon glyphicon-phone"></i></a>
                             </li>
                             <li class="list-group-item" style="height: 55px">
-                                <b>Total Ammount</b>
+                                <b>{{trans('crudbooster.Total Ammount')}}</b>
                                 <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     ${{ $business->total }}
                                 </p>
                             </li>
                             <li class="list-group-item" style="height: 55px">
-                                <b>Lead Name</b>
+                                <b>{{trans('crudbooster.Lead Name')}}</b>
                                 <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     {{ $business->name }} {{ $business->lastname }}
                                 </p>
                             </li>
                             <li class="list-group-item" style="height: 55px">
-                                <b>Fecha de Cierre</b>
+                                <b>{{trans('crudbooster.Closing Date')}}</b>
                                 <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     {{ $business->date_limit }}
                                 </p>
                             </li>
 
                             <li class="list-group-item" style="height: 55px">
-                                <b>Assigned To</b> <p class="text-muted" style="text-align: right; color: #3c8dbc;">
+                                <b>{{trans('crudbooster.assign_to')}}</b> <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     {{ $business->fullname }}
                                 </p>
                             </li>
 
                             <li class="list-group-item" style="height: 55px">
-                                <b>Actual Stage</b>
+                                <b>{{trans('crudbooster.Actual Stage')}}</b>
                                 <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     <span class="label label-primary" style="font-size: 12px;">{{ $business->stage_name }}</span>
                                 </p>
                             </li>
 
                             <li class="list-group-item" style="height: 55px">
-                                <b>Actual Stage (Number)</b>
+                                <b>{{trans('crudbooster.Actual Stage Number')}}</b>
                                 <p class="text-muted" style="text-align: right; color: #3c8dbc;">
                                     <span class="label label-success" style="font-size: 12px;">{{ $business->stage_number }}</span>
                                 </p>
@@ -101,11 +101,39 @@
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#notes" data-toggle="tab"><i class='fa fa-file-text-o'></i> Notes</a></li>
-                            <li><a href="#tasks" data-toggle="tab"><i class='fa fa-calendar-minus-o'></i> Tasks</a></li>
+                            <li class="active"><a href="#stages" data-toggle="tab"><i class='fa fa-clock-o'></i> {{trans('crudbooster.Stages')}}</a></li>
+                            <li><a href="#notes" data-toggle="tab"><i class='fa fa-file-text-o'></i> {{trans('crudbooster.notes')}}</a></li>
+                            <li><a href="#tasks" data-toggle="tab"><i class='fa fa-calendar-minus-o'></i> {{trans('crudbooster.tasks')}}</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="notes">
+                            <div class="tab-pane active" id="stages">
+                                <ul class="timeline">
+
+                                    @foreach($stages as $stage)
+                                        <!-- timeline time label -->
+                                        <li class="time-label">
+                                            <span class="bg-blue">Stage {{ $stage->stage_number }}</span>
+                                        </li>
+
+                                        <li>
+                                            @if($stage->stage_id == $business->stage_id)
+                                                    <i class="fa fa-check-circle bg-blue"></i>
+                                                @else
+                                                    <i class="fa fa-check-circle bg-white"></i>
+                                            @endif
+
+                                            <div class="timeline-item">
+                                                <span class="time" style="font-size: 12px">Date Limit:  <i class="fa fa-clock-o"></i> {{ $stage->business_date_limit }}</span>
+
+                                                <h3 class="timeline-header">
+                                                    <a href="#">{{ $stage->stage_name }}</a>
+                                                </h3>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="notes">
                                 <!-- Sidebar -->
                                 <?php
                                 if(count($notes) == 0) {

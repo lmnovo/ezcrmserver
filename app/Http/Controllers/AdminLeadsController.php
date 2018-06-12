@@ -467,12 +467,20 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 
         $data['lead'] = \Illuminate\Support\Facades\DB::table('leads')
             ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname', 'cms_users.fullname as user_fullname'
-                , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city')
+                , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city', 'leads.photo')
             ->join('cms_users', 'cms_users.id', '=', 'leads.cms_users_id')
             ->join('states', 'states.id', '=', 'leads.states_id')
             ->join('leads_type', 'leads_type.id', '=', 'leads.leads_type_id')
             ->where('leads.id', '=', $id)
             ->first();
+
+        $data['campaigns'] = \Illuminate\Support\Facades\DB::table('leads')
+            ->select(DB::raw('settings_campaigns.name as campaign_name'), 'settings_campaigns.type as type'
+                , 'settings_campaigns.subject as subject', 'settings_campaigns.id as campaign_id')
+            ->join('campaigns_leads', 'campaigns_leads.leads_id', '=', 'leads.id')
+            ->join('settings_campaigns', 'settings_campaigns.id', '=', 'campaigns_leads.campaigns_id')
+            ->where('leads.id', '=', $id)
+            ->get();
 
         //Please use cbView method instead view method from laravel
         $this->cbView('leads.perfil',$data);

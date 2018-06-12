@@ -5,14 +5,14 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminStagesController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminStagesGroupsController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "name";
-			$this->limit = "10";
-			$this->orderby = "number,asc";
+			$this->limit = "20";
+			$this->orderby = "id,desc";
 			$this->global_privilege = true;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -25,27 +25,23 @@
 			$this->button_filter = true;
 			$this->button_import = true;
 			$this->button_export = true;
-			$this->table = "stages";
+			$this->table = "stages_groups";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Number","name"=>"number"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Stages's Pipeline","name"=>"stages_groups_id","join"=>"stages_groups,name"];
+			$this->col[] = ["label"=>"Creation Date","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Number','name'=>'number','type'=>'number','validation'=>'required|unique:stages','width'=>'col-sm-10','placeholder'=>'Número que corresponda a la etapa'];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
-			$this->form[] = ['label'=>'Stages\'s Pipeline','name'=>'stages_groups_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'stages_groups,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Number','name'=>'number','type'=>'number','validation'=>'required|unique:stages','width'=>'col-sm-10','placeholder'=>'Número que corresponda a la etapa'];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Puedes introducir solo una letra'];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Puedes introducir solo una letra"];
 			# OLD END FORM
 
 			/* 

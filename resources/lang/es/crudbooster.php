@@ -283,6 +283,7 @@ return [
     'text_task_added'            => 'Tarea Guardada Satisfactoriamente!',
     'text_quote_added'           => 'Cotización Guardada Satisfactoriamente!',
     'text_invoice_added'         => 'Factura Creada Satisfactoriamente!',
+    'text_business_create'       => 'Negociación Creada Satisfactoriamente!',
     'text_open_edit_quote'       => 'Usted puede crear una nueva cotización!',
     'text_open_edit_campaign'    => 'Usted puede crear una nueva campaña!',
     'text_notification_success_1'  => 'La campaña: ',
@@ -608,9 +609,6 @@ return [
     'spanish'  => 'Español',
     'proyects_management'  => 'Gestionar Proyectos',
 
-
-
-
     'showing'  => 'Mostrando de',
     'To'  => 'a',
     'of'  => 'de',
@@ -618,6 +616,13 @@ return [
     'import_data'  => 'Importar Datos',
     'export_data'  => 'Exportar Datos',
 
+    'Total Ammount'  => 'Monto Total',
+    'Lead Name'  => 'Nombre del Prospecto',
+    'Closing Date'  => 'Fecha de Cierre',
+    'Actual Stage'  => 'Etapa Actual',
+    'Actual Stage Number'  => 'Etapa Actual (Número)',
+    'menu_Stages\'s Group'  => 'Pipeline de Etapas',
+    'Stages\'s Group'  => 'Pipeline de Etapas',
 
 
 

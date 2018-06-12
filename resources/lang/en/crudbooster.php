@@ -275,6 +275,7 @@ return [
     'text_task_added'            => 'Task Saved Successfully!',
     'text_quote_added'           => 'Quote Saved Successfully!',
     'text_invoice_added'         => 'Invoice Created Successfully!',
+    'text_business_create'       => 'Negotiation Created Successfully!',
     'text_open_edit_quote'       => 'You can create new quote!',
     'text_open_edit_campaign'    => 'You can create new campaign!',
     'text_notification_success_1'  => 'The campaign: ',
@@ -598,15 +599,20 @@ return [
     'spanish'  => 'Spanish',
     'proyects_management'  => 'Proyects Management',
 
-
-
-
     'showing'  => 'Showing',
     'To'  => 'to',
     'of'  => 'of',
     'results'  => 'results',
     'import_data'  => 'Import Data',
     'export_data'  => 'Export Data',
+
+    'Total Ammount'  => 'Total Ammount',
+    'Lead Name'  => 'Lead Name',
+    'Closing Date'  => 'Closing Date',
+    'Actual Stage'  => 'Actual Stage',
+    'Actual Stage Number'  => 'Actual Stage (Number)',
+    'menu_Stages\'s Group'  => 'Stages\'s Pipeline',
+    'Stages\'s Group'  => 'Stages\'s Pipeline',
 
 
 ];

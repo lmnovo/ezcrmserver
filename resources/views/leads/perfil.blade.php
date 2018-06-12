@@ -107,20 +107,23 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="<?php echo e(asset('assets/images/image-not-found.png')); ?>" alt="Perfil de Usuario picture">
+
+                        @if( $lead->photo == null )
+                            <img style="width: 65%;" class="profile-user-img img-responsive img-circle" src="<?php echo e(asset('assets/images/image-not-found.png')); ?>" alt="Perfil de Usuario picture">
+                        @else
+                            <img style="width: 65%;" class="profile-user-img img-responsive img-circle" src="{{CRUDBooster::mainpath("../../$lead->photo")}}" alt="Perfil de Usuario picture">
+                        @endif
 
                         <h3 class="profile-username text-center">
                             {{ $lead->name }} {{ $lead->lastname }}
                         </h3>
 
-                        <p class="text-muted text-center">
-                            <span class="label label-primary">{{ $lead->user_fullname }}</span>
-                        </p>
-
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item" style="height: 55px;">
                                 <a title="{{trans('crudbooster.send_email')}}" class='btn btn-success pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-email/$id")}}'><i class="fa fa-envelope-o"></i></a>
                                 <a title="{{trans('crudbooster.send_sms')}}" class='btn btn-primary pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-sms/$id")}}'><i class="glyphicon glyphicon-phone"></i></a>
+                                {{--<a title="{{trans('crudbooster.add_quote')}}" class='btn btn-danger pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("business/add-business/$id")}}'><i class="glyphicon glyphicon-briefcase"></i></a>--}}
+
                             </li>
                             <li class="list-group-item">
                                 <b>Negociations</b> <a class="pull-right">0</a>
@@ -252,6 +255,59 @@
                                                 {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
                                                 <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
                                                 --}}
+                                                <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
+                                                        title: '{{trans('crudbooster.are_you_sure')}}',
+                                                        text: '{{trans('crudbooster.message_delete')}}',
+                                                        type: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#ff0000',
+                                                        confirmButtonText: '{{trans('crudbooster.yes')}}',
+                                                        cancelButtonText: '{{trans('crudbooster.no')}}',
+                                                        closeOnConfirm: false },
+                                                        function(){  location.href='{{CRUDBooster::adminpath("eazy_tasks/delete/$task->id")}}' });"><i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="campaigns">
+
+                            <div class="table-responsive" style="padding-left: 20px; padding-right: 20px">
+                                <?php
+                                if(count($campaigns) == 0) {
+                                echo "<div style='text-align: center; color: red; padding-bottom: 20px;'><i class='fa fa-search'></i>";?> {{ trans('crudbooster.table_data_not_found') }}  <?php echo "</div>";
+                                }
+                                else {
+                                ?>
+
+                                <table id="table_tasks" class='table table-striped table-bordered'>
+                                    <thead>
+                                    <tr>
+                                        <th>{{trans('crudbooster.name')}}</th>
+                                        <th>{{trans('crudbooster.subject')}}</th>
+                                        <th>{{trans('crudbooster.type')}}</th>
+                                        <th style="text-align: center">{{trans('crudbooster.actions')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <?php    }
+                                    ?>
+
+                                    @foreach($campaigns as $campaign)
+                                        <tr>
+                                            <td>{{$campaign->campaign_name}}</td>
+                                            <td>{{$campaign->subject}}</td>
+                                            <td>{{$campaign->type}}</td>
+                                            <td style="text-align: center">
+                                                <a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="{{CRUDBooster::adminpath("settings_campaigns/detail/$campaign->campaign_id")}}"><i class="fa fa-eye"></i></a>
                                                 <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
                                                         title: '{{trans('crudbooster.are_you_sure')}}',
                                                         text: '{{trans('crudbooster.message_delete')}}',
