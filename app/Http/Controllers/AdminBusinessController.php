@@ -18,7 +18,7 @@
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = true;
+			$this->button_add = false;
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
@@ -169,32 +169,16 @@
                             data: \"name=\"+name+\"&leads_id=\"+leads_id,
                             type:  'get',
                             dataType: 'json',
-                            success : function(data) {
-                                window.location.href = 'http://127.0.0.1:8000/crm/business/edit/'+leads_id;                                                        
+                            success : function(data) {                                
+                                //Actualizo solo el listado de notas para no recargar la web completamente
+                                //Limpio el campo de nueva nota
+                                $('#div_add_note').load(' #div_add_note');
+                                $('#note_value').val('');                                                       
                             }
                          });  
                     });
                     
-                    $('#addTasks').on('click',function(){
-                        $('#taskLeadModal').modal('show'); 
-                    });
-                    
-                    $('#addSaveTask').on('click',function(){
-                        var name = $('#name').val();
-                        var date = $('#date').val();
-                        var lead_id = $('#lead_id').val();
-                        
-                        $.ajax({
-                            url: '../addsave',
-                            data: \"name=\"+$('#name').val()+\"&date=\"+$('#date').val()+\"&lead_id=\"+$('#lead_id').val(),
-                            type:  'get',
-                            dataType: 'json',
-                            success : function(data) {
-                               window.location.href = 'http://127.0.0.1:8000/crm/account/detail/'+lead_id; 
-                               $('#taskLeadModal').modal('hide');
-                            }
-                         }); 
-                    });                   
+                                     
                    
                     
 	        	})
@@ -276,7 +260,6 @@
 	            
 	    }
 
-
 	    /*
 	    | ---------------------------------------------------------------------- 
 	    | Hook for manipulate query of index result 
@@ -331,12 +314,24 @@
             foreach ($stages as $stage) {
                 $sumarizedData = [
                     'created_at' => Carbon::now(config('app.timezone')),
+                    'updated_at' => Carbon::now(config('app.timezone')),
                     'business_id' => $id,
                     'stages_id' => $stage->id,
                 ];
 
                 DB::table('business_stages')->insertGetId($sumarizedData);
+
+                //Ponemos por defecto la primera etapa del business
+                DB::table('business_stages')->where('stages_id', $stages[0]->id)->update(['is_completed'=>1]);
             }
+
+            //Adicionar "Recent Activity" de la primera etapa creada por defecto
+            DB::table('stages_activities')->insert([
+                'stages_id'=>$stages[0]->id,
+                'description'=>'Created initial stage by: '.CRUDBooster::myName(),
+                'business_id'=>$id,
+                'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+            ]);
 
             //Open Edit Negotiation
             CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.$id),trans("crudbooster.text_business_create"));
@@ -392,7 +387,7 @@
 
 	    }
 
-
+	    //Muestra los datos de un Business
         public function getEdit($id) {
             //Create an Auth
             if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {
@@ -403,8 +398,9 @@
             $data['page_title'] = 'Editing the Negotiation';
             $data['id'] = $id;
 
-            $data['notes'] = DB::table('notes')->where('leads_id', $id)->where('deleted_at', null)->get();
+            $data['notes'] = DB::table('eazy_notes')->where('assign_to_id', $id)->where('type','business')->where('deleted_at', null)->get();
 
+            //Obtener las tasks de type Business
             $data['tasks'] = DB::table('eazy_tasks')
                 ->where('eazy_tasks.deleted_at', null)
                 ->where('assign_to_id', $id)
@@ -414,24 +410,30 @@
             $data['business'] = \Illuminate\Support\Facades\DB::table('business')
                 ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname',
                     'business.total', 'business.date_limit', 'cms_users.fullname as fullname',
-                    'stages.name as stage_name', 'stages.number as stage_number',  'stages.id as stage_id', 'business.stages_groups_id as stages_groups_id')
+                    'stages.name as stage_name', 'stages.number as stage_number',  'stages.id as stage_id',
+                    'business.stages_groups_id as stages_groups_id', 'business.stages_id as business_stage_id',
+                    'business.name as business_name', 'business.id as business_id')
                 ->join('leads', 'leads.id', '=', 'business.leads_id')
                 ->join('cms_users', 'cms_users.id', '=', 'business.cms_users_id')
                 ->join('stages', 'stages.id', '=', 'business.stages_id')
                 ->where('business.id', '=', $id)
                 ->first();
 
-            $data['stages'] = DB::table('stages')
-                ->select(DB::raw('stages.name as stage_name'), 'stages.number as stage_number', 'business.date_limit as business_date_limit'
-                    , 'stages.id as stage_id')
+            $data['stages'] = DB::table('business')
+                ->select(DB::raw('stages.name as stage_name'), 'stages.number as stage_number',
+                    'business_stages.updated_at as date_limit', 'stages.id as stage_id',
+                    'business_stages.files as files', 'business_stages.notes as notes')
 
-                ->join('business', 'business.stages_groups_id', '=', 'stages.stages_groups_id')
+                ->join('business_stages', 'business_stages.business_id', '=', 'business.id')
+                ->join('stages', 'stages.id', '=', 'business_stages.stages_id')
                 ->where('business.id', '=', $id)
                 ->get();
 
+            $data['stages_activities'] = DB::table('stages_activities')
+                ->where('business_id', $id)->orderby('created_at','desc')->get();
+
             $this->cbView('business.edit',$data);
         }
-
 
         //Agregar nueva nota de tipo Lead
         public function getAddnote(\Illuminate\Http\Request $request) {
@@ -441,26 +443,24 @@
             $sumarizedData = [
                 'created_at' => Carbon::now(config('app.timezone')),
                 'name' => $name,
-                'leads_id' => $leads_id,
+                'assign_to_id' => $leads_id,
+                'type' => 'business',
             ];
 
-            DB::table('notes')->insertGetId($sumarizedData);
+            DB::table('eazy_notes')->insertGetId($sumarizedData);
 
             return 1;
         }
 
-        //Agregar Tarea de tipo Lead
+        //Agregar Tarea de tipo Business
         public function getAddsave(\Illuminate\Http\Request $request) {
 
             $date = $request->get('date');
-            $date = explode("/", $date);
-            $date = $date[2].'-'.$date[0].'-'.$date[1];
-            $date = Carbon::createFromFormat("Y-m-d", $date);
 
             $sumarizedData = [
                 'created_at' => $date,
                 'name' => $request->get('name'),
-                'assign_to_id' => $request->get('lead_id'),
+                'assign_to_id' => $request->get('business_id'),
                 'type' => 'business',
             ];
 
@@ -468,7 +468,6 @@
 
             return 1;
         }
-
 
         //Enviar Email dado el id de Lead
         public function getSendEmail($id) {
@@ -508,6 +507,133 @@
             //Open Edit Campaign
             CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns/edit/'.$lastId),trans("crudbooster.text_open_edit_campaign"));
 
+        }
+
+        //Acción que se ejecuta al dar clic en Leads y Add Business
+        public function getAddBusiness($id) {
+            $lead = DB::table('leads')->where('id', $id)->first();
+
+            $maxId = DB::table('business')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
+            $maxId = $maxId->id + 1;
+
+            //Create Business
+            $sumarizedData = [
+                'id' => $maxId,
+                'leads_id' => $id,
+                'cms_users_id' => CRUDBooster::myId(),
+                'is_active' => 0,
+                'created_at' => Carbon::now(config('app.timezone')),
+            ];
+
+            DB::table('business')->insert($sumarizedData);
+
+            //Open Edit Quote
+            CRUDBooster::redirect(CRUDBooster::adminPath('business/create/'.$maxId),trans("crudbooster.text_open_edit_quote"));
+
+        }
+
+        //Acción que se ejecuta luego de seleccionar en un lead la opción "Add Business"
+        public function getCreate($id) {
+            //Create an Auth
+            if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {
+                CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.text_open_edit_quote"));
+            }
+
+            $data = [];
+            $data['page_title'] = 'Creating the Negotiation';
+            $data['id'] = $id;
+
+            //Obtener los datos del business actual
+            $data['business'] = DB::table('business')->where('id',$id)->first();
+
+            //Obtener el listado de estados de Estados Unidos
+            $data['states_list'] = DB::table('states')->get();
+
+            //Obtener el listado de usuarios del sistema
+            $data['users'] = DB::table('cms_users')->get();
+
+            //Obtener el listado de stages_groups (pipeline) del sistema
+            $data['stages_groups'] = DB::table('stages_groups')->get();
+
+            //Obtener los datos del lead asociado al business actual
+            $data['lead'] = DB::table('leads')->where('id',$data['business']->leads_id)->first();
+
+            $this->cbView('business.create',$data);
+        }
+
+        //Se ejecuta a partir de la acción "getCreate" y guarda la información de un nuevo Business
+        public function getEditsave(\Illuminate\Http\Request $request) {
+	        //dd($request->all());
+
+            $lead_id = $request->get('lead_id');
+
+	        $stage = DB::table('stages')->where('stages_groups_id', $request->get('stages_group'))->orderby('number')->first();
+            (count($stage) == 0) ? $stage = null : $stage = $stage->id;
+
+            $sumarizedData = [
+                'name' => $request->get('business_name'),
+                'description' => $request->get('description'),
+                'cms_users_id' => $request->get('assign_to'),
+                'stages_id' => $stage,
+                'stages_groups_id' => $request->get('stages_group'),
+                'total' => $request->get('total'),
+                'date_limit' => $request->get('date_limit'),
+                'created_at' => Carbon::now(config('app.timezone')),
+                'is_active' => 1,
+            ];
+            DB::table('business')->where('id',$request->get('business_id'))->update($sumarizedData);
+
+            //Actualiza la información del lead asociado al business
+            $sumarizedDataLead = [
+                'name' => $request->get('name'),
+                'lastname' => $request->get('lastname'),
+                'email' => $request->get('email'),
+                'phone' => $request->get('phone'),
+                'states_id' => $request->get('state'),
+                'cms_users_id' => $request->get('assign_to'),
+                'updated_at' => Carbon::now(config('app.timezone')),
+            ];
+            DB::table('leads')->where('id',$request->get('lead_id'))->update($sumarizedDataLead);
+
+            //Adicionar "Recent Activity" a la creación del business
+            DB::table('leads_activities')->insert([
+                'leads_id'=>$lead_id,
+                'description'=>'The negociation: '.$request->get('business_name').', was added by: '.CRUDBooster::myName(),
+                'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+            ]);
+
+            //Creamos los pasos por defecto
+            $stages =  DB::table('stages')->where('stages_groups_id',$request->get('stages_group'))->get();
+
+            foreach ($stages as $stage) {
+                //Primera etapa por defecto
+                if ($stage->number == 1) {
+                    $sumarizedDataBusinessStages = [
+                        'business_id' => $request->get('business_id'),
+                        'stages_id' => $stage->id,
+                        'notes' => null,
+                        'files' => null,
+                        'is_completed' => 1,
+                        'created_at' => Carbon::now(config('app.timezone')),
+                    ];
+                    DB::table('business_stages')->insert($sumarizedDataBusinessStages);
+                } else {
+                    $sumarizedDataBusinessStages = [
+                        'business_id' => $request->get('business_id'),
+                        'stages_id' => $stage->id,
+                        'notes' => null,
+                        'files' => null,
+                        'is_completed' => 0,
+                        'created_at' => Carbon::now(config('app.timezone')),
+                    ];
+                    DB::table('business_stages')->insert($sumarizedDataBusinessStages);
+                }
+
+            }
+
+
+            //Redireccionamos al lead que creo el business
+            CRUDBooster::redirect(CRUDBooster::adminPath("leads/detail/$lead_id"),trans("crudbooster.text_open_created_business"));
         }
 
 	}

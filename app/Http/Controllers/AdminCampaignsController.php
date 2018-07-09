@@ -326,8 +326,6 @@
 
             $toArray = [];
             $toTemp = explode("; ", $postdata['to']);
-
-
             $isMail = strpos($toTemp[0], "@");
 
             //Comprobamos que se envía un email o un sms
@@ -377,21 +375,36 @@
             ///////////////////Envío Campaign Email//////////////////////////
             if ($campaignsType->type == 'Email') {
 
-                \Mail::send("crudbooster::emails.blank",['content'=>$html],function($message) use ($to,$subject,$template) {
-                    $message->priority(1);
-                    $message->cc($to);
+                foreach ($to as $to_item) {
+                    //Agregar links de suscripción a las campañas de email marketing
+                    $content = $html."</br> <a href='http://127.0.0.1:8000/unsubscribed/leads/$to_item'>Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí</a>";
 
-                    if($template->from_email) {
-                        $from_name = ($template->from_name)?:CRUDBooster::getSetting('appname');
-                        $message->from($template->from_email,$from_name);
-                    }
+                    \Mail::send("crudbooster::emails.blank",['content'=>$content],function($message) use ($to_item,$subject,$template, $html) {
+                        $message->priority(1);
+                        $message->cc($to_item);
 
-                    if($template->cc_email) {
-                        $message->cc($template->cc_email);
-                    }
+                        if($template->from_email) {
+                            $from_name = ($template->from_name)?:CRUDBooster::getSetting('appname');
+                            $message->from($template->from_email,$from_name);
+                        }
 
-                    $message->subject($subject);
-                });
+                        if($template->cc_email) {
+                            $message->cc($template->cc_email);
+                        }
+
+                        $message->subject($subject);
+                    });
+
+                    //Adicionar "Recent Activity" al envío de email al lead
+                    $lead_actual = DB::table('leads')->where('email',$to_item)->first();
+                    DB::table('leads_activities')->insert([
+                        'leads_id'=>$lead_actual->id,
+                        'description'=>'The campaign (email): '.$subject.', was sent by: '.CRUDBooster::myName(),
+                        'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+                    ]);
+                }
+
+
 
             }
             ///////////////////Envío Campaign SMS//////////////////////////
@@ -418,6 +431,14 @@
                             'body' => $html
                         )
                     );
+
+                    //Adicionar "Recent Activity" al envío de email al lead
+                    $lead_actual = DB::table('leads')->where('phone',$number_phone)->first();
+                    DB::table('leads_activities')->insert([
+                        'leads_id'=>$lead_actual->id,
+                        'description'=>'The campaign (sms): '.$subject.', was sent by: '.CRUDBooster::myName(),
+                        'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+                    ]);
                 }
             }
 
@@ -449,19 +470,15 @@
                 ]);
             }
 
-            //Notificación de envío de campaña de tipo campaña
-            $config['content'] = trans("crudbooster.text_notification_success_1")."'".$template_name."' ".trans("crudbooster.text_notification_success_2");
-            $config['to'] = CRUDBooster::adminPath('settings_campaigns/detail/'.$id);
+            $lastId = DB::table('campaigns_leads')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
+            $actual_lead = DB::table('campaigns_leads')->where('id',$lastId->id)->first();
+            $total_send = DB::table('settings_campaigns')->where('id', $id)->first();
 
-            if (CRUDBooster::myId() != 1) {
-                $config['id_cms_users'] = [1,CRUDBooster::myId()]; //This is an array of id users
+            if ($total_send->total_sent == 1) {
+                CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$actual_lead->leads_id),trans("crudbooster.text_send_campaign"));
+            } else {
+                CRUDBooster::redirect(CRUDBooster::adminPath('leads'),trans("crudbooster.text_send_campaign"));
             }
-            else {
-                $config['id_cms_users'] = [1]; //This is an array of id users
-            }
-
-            CRUDBooster::sendNotification($config);
-            CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns'),trans("crudbooster.text_send_campaign"));
 	    }
 
 	    /* 

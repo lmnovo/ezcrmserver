@@ -4,6 +4,7 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+	use Carbon\Carbon;
 
 	class AdminStagesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -318,6 +319,46 @@
 	        //Your code here
 
 	    }
+
+        //Agregar notas a las etapas del Business actual
+        public function getAddstagesnotes(\Illuminate\Http\Request $request) {
+            $stages_id = $request->get('stages_id');
+            $business_id = $request->get('business_id');
+
+            DB::table('business_stages')->where('business_id', $business_id)->where('stages_id', $stages_id)->update(['notes'=>$request->get('notes')]);
+
+            //Adicionar "Recent Activity" de agregar nota a stage
+            DB::table('stages_activities')->insert([
+                'stages_id'=>$stages_id,
+                'description'=>'A note has been added by: '.CRUDBooster::myName(),
+                'business_id'=>$business_id,
+                'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+            ]);
+
+            return 1;
+        }
+
+        //Enviar email de alerta de Paso finalizado
+        public function getStageterminate(\Illuminate\Http\Request $request) {
+            $stages_id = $request->get('stages_id');
+            $business_id = $request->get('business_id');
+
+            $stage_actual = DB::table('stages')->where('id',$stages_id)->first();
+
+            //Adicionar "Recent Activity" del envío de Email
+            DB::table('stages_activities')->insert([
+                'stages_id'=>$stages_id,
+                'description'=>'The stage: '.$stage_actual->name.', was finalized by: '.CRUDBooster::myName(),
+                'business_id'=>$business_id,
+                'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+            ]);
+
+            //Actualizar fecha de terminada la etapa actual
+            DB::table('business')->where('id',$business_id)->update(['stages_id' => $stages_id]);
+
+            return DB::table('business_stages')->where('stages_id',$stages_id)->where('business_id',$business_id)
+                ->update(['updated_at' => Carbon::now(config('app.timezone')), 'is_completed'=>1]);
+        }
 
 
 

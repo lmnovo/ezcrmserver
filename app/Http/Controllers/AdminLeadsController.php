@@ -46,7 +46,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 			$this->col[] = ["label"=>"Phone","name"=>"phone"];
 			$this->col[] = ["label"=>"Lead Type","name"=>"leads_type_id","join"=>"leads_type,name"];
 			$this->col[] = ["label"=>"Assigned To","name"=>"cms_users_id","join"=>"cms_users,name"];
-			$this->col[] = ["label"=>"Address","name"=>"address"];
+			//$this->col[] = ["label"=>"Address","name"=>"address"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -54,8 +54,10 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Last Name','name'=>'lastname','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:leads','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required|min:10|max:10|unique:leads','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'City','name'=>'city','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'State','name'=>'states_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'states,name'];
 			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'cms_users,name'];
 			$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
@@ -66,12 +68,14 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 			//$this->form = [];
 			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Last Name','name'=>'lastname','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:account','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:leads','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required|min:10|max:10','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'City','name'=>'city','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','datatable'=>'states,name'];
+			//$this->form[] = ['label'=>'State','name'=>'states_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10','datatable'=>'cms_users,name'];
 			//$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10','latitude'=>'latitude','longitude'=>'longitude'];
+			//$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
@@ -174,44 +178,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         */
         $this->script_js = "
             
-	        	$(function() {  
-                    //Agregar nueva nota
-                    $('#add_note').on('click',function(){
-                        var name = $('#note_value').val();
-                        var leads_id = $('#note_lead_id').val();
-        
-                        $.ajax({
-                            url: '../addnote',
-                            data: \"name=\"+name+\"&leads_id=\"+leads_id,
-                            type:  'get',
-                            dataType: 'json',
-                            success : function(data) {
-                                window.location.href = 'http://127.0.0.1:8000/crm/leads/detail/'+leads_id;                                                        
-                            }
-                         });  
-                    });
-                    
-                    $('#addTasks').on('click',function(){
-                        $('#taskLeadModal').modal('show'); 
-                    });
-                    
-                    $('#addSaveTask').on('click',function(){
-                        var name = $('#name').val();
-                        var date = $('#date').val();
-                        var lead_id = $('#lead_id').val();
-                        
-                        $.ajax({
-                            url: '../addsave',
-                            data: \"name=\"+$('#name').val()+\"&date=\"+$('#date').val()+\"&lead_id=\"+$('#lead_id').val(),
-                            type:  'get',
-                            dataType: 'json',
-                            success : function(data) {
-                               window.location.href = 'http://127.0.0.1:8000/crm/account/detail/'+lead_id; 
-                               $('#taskLeadModal').modal('hide');
-                            }
-                         }); 
-                    });                   
-                   
+	        	$(function() {                      
                     
 	        	})
 	        ";
@@ -312,6 +279,8 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         if ($id != 1) {
             $query->where(['is_client' => 0])
                 ->where('cms_users_id', $user_id);
+        } else {
+            $query->where(['is_client' => 0]);
         }
     }
 
@@ -344,6 +313,13 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     |
     */
     public function hook_after_add($id) {
+
+        //Adicionar "Recent Activity" a la creación de un Leads
+        DB::table('leads_activities')->insert([
+            'leads_id'=>$id,
+            'description'=>'The lead was created by: '.CRUDBooster::myName(),
+            'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+        ]);
 
     }
 
@@ -401,10 +377,18 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         $sumarizedData = [
             'created_at' => Carbon::now(config('app.timezone')),
             'name' => $name,
-            'leads_id' => $leads_id,
+            'assign_to_id' => $leads_id,
+            'type' => 'leads',
         ];
 
-        DB::table('notes')->insertGetId($sumarizedData);
+        DB::table('eazy_notes')->insertGetId($sumarizedData);
+
+        //Adicionar "Recent Activity" a la creación de una nota
+        DB::table('leads_activities')->insert([
+            'leads_id'=>$leads_id,
+            'description'=>'A note was added by: '.CRUDBooster::myName(),
+            'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+        ]);
 
         return 1;
     }
@@ -422,9 +406,6 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     public function getAddsave(\Illuminate\Http\Request $request) {
 
         $date = $request->get('date');
-        $date = explode("/", $date);
-        $date = $date[2].'-'.$date[0].'-'.$date[1];
-        $date = Carbon::createFromFormat("Y-m-d", $date);
 
         $sumarizedData = [
             'created_at' => $date,
@@ -434,6 +415,13 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         ];
 
         DB::table('eazy_tasks')->insertGetId($sumarizedData);
+
+        //Adicionar "Recent Activity" a la creación de una tarea
+        DB::table('leads_activities')->insert([
+            'leads_id'=>$request->get('lead_id'),
+            'description'=>'The task: '.$request->get('name').' was added by: '.CRUDBooster::myName(),
+            'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+        ]);
 
         return 1;
     }
@@ -457,8 +445,23 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         $data['page_title'] = 'Lead Profile';
         $data['id'] = $id;
 
-        $data['notes'] = DB::table('notes')->where('leads_id', $id)->where('deleted_at', null)->get();
+        $data['notes'] = DB::table('eazy_notes')
+            ->where('assign_to_id', $id)->where('type','leads')->where('deleted_at', null)
+            ->get();
 
+        $data['recent_activities'] = DB::table('leads_activities')->where('leads_id', $id)->where('deleted_at', null)->orderby('created_at', 'DESC')->get();
+
+        $data['business'] = \Illuminate\Support\Facades\DB::table('business')
+            ->select(DB::raw('business.name as name'), 'stages.name as stage', 'business.created_at as created_at',
+                'business.total as total', 'business.date_limit as date_limit', 'business.id as id')
+            ->join('stages', 'stages.id', '=', 'business.stages_id')
+            ->join('leads', 'leads.id', '=', 'business.leads_id')
+            ->where('business.leads_id', '=', $id)
+            ->where('business.is_active', '=', 1)
+            ->where('business.deleted_at', '=', null)
+            ->get();
+
+        //Obtener las tasks de type Leads
         $data['tasks'] = DB::table('eazy_tasks')
             ->where('eazy_tasks.deleted_at', null)
             ->where('assign_to_id', $id)
@@ -467,7 +470,8 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 
         $data['lead'] = \Illuminate\Support\Facades\DB::table('leads')
             ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname', 'cms_users.fullname as user_fullname'
-                , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city', 'leads.photo')
+                , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city'
+                , 'leads.photo', 'leads.address', 'leads.subscribed')
             ->join('cms_users', 'cms_users.id', '=', 'leads.cms_users_id')
             ->join('states', 'states.id', '=', 'leads.states_id')
             ->join('leads_type', 'leads_type.id', '=', 'leads.leads_type_id')
@@ -587,5 +591,34 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns/edit/'.$lastId),trans("crudbooster.text_open_edit_campaign"));
 
     }
+
+    //Ajax - Cambiar el estado de la suscripción del lead a las campañas de email marketing
+    public function getSubscriptionchange(\Illuminate\Http\Request $request) {
+
+        $id = $request->get('id');
+        $subscribed = $request->get('subscribed');
+
+        $lead = DB::table('leads')->where('id',$id)->first();
+
+        if (!empty($lead)) {
+            $description = '';
+            /*if ($subscribed == 1) {
+                $description = 'The subscription for the campaigns of email marketing was activated at: ';
+            } else {
+                $description = 'The subscription for the campaigns of email marketing was deactivated at: ';
+            }
+
+            //Adicionar "Recent Activity" a la suscripción de un Lead
+            DB::table('leads_activities')->insert([
+                'leads_id'=>$id,
+                'description'=>$description.Carbon::now(config('app.timezone')).' by: '.CRUDBooster::myName(),
+                'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+            ]);*/
+
+            return DB::table('leads')->where('id',$id)->update(['subscribed'=>$subscribed]);
+        }
+        return -1;
+    }
+
 
 }

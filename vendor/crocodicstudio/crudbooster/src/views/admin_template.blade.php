@@ -20,13 +20,6 @@
     <link rel='stylesheet' href='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/css/select2.min.css'/>
     <script src='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/js/select2.full.min.js'></script>
 
-
-
-
-
-
-
-
     <style type="text/css">
         .select2-container--default .select2-selection--single {border-radius: 0px !important}
         .select2-container .select2-selection--single {height: 35px}
@@ -88,11 +81,15 @@
             $('#appliance').select2();
             $('#product').select2();
             $('#appliance_inside_category').select2();
-            //$('#buildout_name').select2();
             $('#sizes').select2();
             $('#state').select2();
 
             $('#date').datepicker();
+
+            //Ocultar botones innecesarios
+            $("a[href*='leads/edit'][class*='btn-edit']").hide();
+            $("a[href*='clients/edit'][class*='btn-edit']").hide();
+
         })
     </script>
 
@@ -134,12 +131,11 @@
             $("a[href*='fases/detail'][class*='btn-detail']").hide();
             $("a[href*='products/detail'][class*='btn-detail']").hide();
             $("a[href*='settings31/detail'][class*='btn-detail']").hide();
-            $("a[href*='account/edit'][class*='btn-edit']").hide();
-
             $("div[class*='note-editing-area']").attr('contenteditable', 'true');
-
-
             $("a[title=' ']").attr('title', 'Convert to Client');
+
+            //Oculta el botón de detail del listado de business
+            $("a[href*='business/detail'][class*='btn-detail']").hide();
 
             //Ocultar el mensaje de alerta pasados 4 segundos
             setTimeout("$(\"div[class*='alert alert-warning']\").fadeOut(350);", 2000);
@@ -180,35 +176,6 @@
 
         });
 
-        /*$(document).ready(function() {
-            $('#buildout_description').summernote({
-                height: ($(window).height() - 300),
-                callbacks: {
-                    onImageUpload: function(image) {
-                        uploadImagenotes(image[0]);
-                    }
-                }
-            });
-            function uploadImagenotes(image) {
-                var data = new FormData();
-                data.append("userfile", image);
-                $.ajax({
-                    url: 'http://127.0.0.1:8000/admin/fases/upload-summernote',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    type: "post",
-                    success: function(url) {
-                        var image = $('<img>').attr('src',url);
-                        $('#textarea_notes').summernote("insertNode", image[0]);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
-                });
-            }
-        })*/
     </script>
 
     <!-- load js -->

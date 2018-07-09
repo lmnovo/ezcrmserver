@@ -32,13 +32,13 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-            $this->col[] = ["label"=>"Name","name"=>"name"];
-            $this->col[] = ["label"=>"Last Name","name"=>"lastname"];
-            $this->col[] = ["label"=>"Email","name"=>"email"];
-            $this->col[] = ["label"=>"Phone","name"=>"phone"];
-            $this->col[] = ["label"=>"Lead Type","name"=>"leads_type_id","join"=>"leads_type,name"];
-            $this->col[] = ["label"=>"Assigned To","name"=>"cms_users_id","join"=>"cms_users,name"];
-            $this->col[] = ["label"=>"Address","name"=>"address"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Last Name","name"=>"lastname"];
+			$this->col[] = ["label"=>"Email","name"=>"email"];
+			$this->col[] = ["label"=>"Phone","name"=>"phone"];
+			$this->col[] = ["label"=>"Lead Type","name"=>"leads_type_id","join"=>"leads_type,name"];
+			$this->col[] = ["label"=>"Assigned To","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Address","name"=>"address"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -173,29 +173,6 @@
 	        $this->script_js = "
                 $(function() {
                 
-                    $('#addTasks').on('click',function(){
-                        $('#taskLeadModal').modal('show'); 
-                    });
-                    
-                    $('#addSaveTask').on('click',function(){
-                        var name = $('#name').val();
-                        var date = $('#date').val();
-                        var lead_id = $('#lead_id').val();
-                        
-                        $.ajax({
-                            url: '../addsave',
-                            data: \"name=\"+$('#name').val()+\"&date=\"+$('#date').val()+\"&task_type=\"+\"&lead_id=\"+$('#lead_id').val(),
-                            type:  'get',
-                            dataType: 'json',
-                            success : function(data) {
-                                window.location.href = 'http://127.0.0.1:8000/crm/customers25/detail/'+lead_id; 
-                               $('#taskLeadModal').modal('hide');
-                            }
-                         }); 
-                        
-                        
-                    });                                 
-                    
                     //Agregar nueva nota
                     $('#add_note').on('click',function(){
                         var name = $('#note_value').val();
@@ -311,6 +288,8 @@
             if ($id != 1) {
                 $query->where(['is_client' => 1])
                     ->where('cms_users_id', $user_id);
+            } else {
+                $query->where(['is_client' => 1]);
             }
 
 	    }
@@ -729,79 +708,42 @@
                 CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
             }
 
-            $account_exists = DB::table('clients')->where('id',$id)->first();
+            $account_exists = DB::table('leads')->where('id',$id)->first();
             if (!empty($account_exists)) {
                 if ($account_exists->deleted_at != null) {
-                    CRUDBooster::redirect(CRUDBooster::adminPath('customers25'),trans("crudbooster.text_delete_client"));
+                    CRUDBooster::redirect(CRUDBooster::adminPath('account'),trans("crudbooster.text_delete_account"));
                 }
             }
 
             $data = [];
-            $data['page_title'] = 'Client Profile';
+            $data['page_title'] = 'Lead Profile';
             $data['id'] = $id;
-            $data['row'] = DB::table('campaigns')->where('id',$id)->first();
 
-            $data['lead'] = DB::table('clients')
-                ->select(DB::raw('states.name as abbreviation'), 'clients.name', 'clients.lastname',
-                    'clients.telephone', 'clients.id', 'clients.email', 'clients.id', 'clients.address', 'clients.date_created',
-                    'clients.zip_code', 'clients.estado', 'clients.id_usuario', 'clients.city', 'clients.quotes', 'clients.notes'
-                )
-                ->leftJoin('states', 'states.abbreviation', '=', 'clients.state')
-                ->where('clients.id',$id)->first();
+            $data['notes'] = DB::table('notes')->where('leads_id', $id)->where('deleted_at', null)->get();
 
-            $data['assign_to'] = DB::table('cms_users')->where('id',$data['lead']->id_usuario)->first();
-
-            $data['contact_type'] = DB::table('customer_type')->where('id',$data['lead']->estado)->first();
-            $data['notes'] = DB::table('eazy_notes')->where('customers_id', $id)->where('deleted_at', null)->get();
-
-            $data['tasks'] = DB::table('eazy_tasks_clients')
-                ->select(DB::raw('eazy_tasks_clients.name'), 'eazy_tasks_clients.description', 'eazy_tasks_clients.created_at', 'eazy_tasks_clients.date', 'eazy_tasks_clients.id')
-                ->where('eazy_tasks_clients.deleted_at', null)
-                ->where('clients_id', $id)
+            $data['tasks'] = DB::table('eazy_tasks')
+                ->where('eazy_tasks.deleted_at', null)
+                ->where('assign_to_id', $id)
+                ->where('type', 'leads')
                 ->get();
 
-            $data['client'] =  DB::table('user_trucks')
-                ->join('account', 'account.id', '=', 'user_trucks.id_account')
-                ->where('user_trucks.id_account', $id)->first();
+            $data['lead'] = \Illuminate\Support\Facades\DB::table('leads')
+                ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname', 'cms_users.fullname as user_fullname'
+                    , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city'
+                    , 'leads.photo', 'leads.address', 'leads.subscribed')
+                ->join('cms_users', 'cms_users.id', '=', 'leads.cms_users_id')
+                ->join('states', 'states.id', '=', 'leads.states_id')
+                ->join('leads_type', 'leads_type.id', '=', 'leads.leads_type_id')
+                ->where('leads.id', '=', $id)
+                ->first();
 
-            $data['quotes_closed'] = DB::table('user_trucks')
-                ->select('user_trucks.id','user_trucks.truck_budget', 'user_trucks.truck_name', 'user_trucks.truck_date_created','user_trucks.financing','user_trucks.truck_aprox_price')
-                ->join('client_quotes', 'client_quotes.id_quote', '=', 'user_trucks.id')
-                ->where('client_quotes.id_client', $id)
-                ->where('client_quotes.main', 1)
-                ->where('user_trucks.deleted_at', '=', null)
-                ->where('user_trucks.is_invoice', '=', 0)
+            $data['campaigns'] = \Illuminate\Support\Facades\DB::table('leads')
+                ->select(DB::raw('settings_campaigns.name as campaign_name'), 'settings_campaigns.type as type'
+                    , 'settings_campaigns.subject as subject', 'settings_campaigns.id as campaign_id')
+                ->join('campaigns_leads', 'campaigns_leads.leads_id', '=', 'leads.id')
+                ->join('settings_campaigns', 'settings_campaigns.id', '=', 'campaigns_leads.campaigns_id')
+                ->where('leads.id', '=', $id)
                 ->get();
-
-            $data['task_type'] = DB::table('eazy_task_type')->get();
-
-            $idAccount =  DB::table('account')
-                ->select(\Illuminate\Support\Facades\DB::raw('account.id as id'))
-                ->join('clients', 'clients.email', '=', 'account.email')
-                ->where('clients.id', $id)->first();
-
-            $quotes_opened = DB::table('user_trucks')
-                ->select('user_trucks.id','user_trucks.truck_budget', 'user_trucks.truck_name', 'user_trucks.truck_date_created','user_trucks.financing','user_trucks.truck_aprox_price')
-                ->where('user_trucks.id_account', $idAccount->id)
-                ->where('user_trucks.deleted_at', '=', null)
-                ->where('user_trucks.is_invoice', '=', 0)
-                ->get()->toArray();
-
-
-            $data['quotes_opened'] = [];
-            foreach ($quotes_opened as $opened) {
-                $duplicado = false;
-                foreach ($data['quotes_closed'] as $closed) {
-
-                    if ($opened->id == $closed->id) {
-                        $duplicado = true;
-                    }
-                }
-
-                if ($duplicado == false) {
-                    $data['quotes_opened'][] = $opened;
-                }
-            }
 
             //Please use cbView method instead view method from laravel
             $this->cbView('clients.perfil',$data);

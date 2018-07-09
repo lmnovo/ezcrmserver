@@ -131,7 +131,7 @@ return [
     'form_back_to_list'         => 'Back To List Data :module',
     'not_logged_in'             => 'You are not logged in !',
     'menu_navigation'           => "GENERAL",
-    'table_data_not_found'      => "No Data Avaliable",
+    'table_data_not_found'      => "No Data Available",
     "notice_delete_file_upload" => "* If you want to upload other file, please first delete the file.",
     "file_broken"               => "Oops looks like File was Broken !. Click Delete and Re-Upload.",
 
@@ -276,7 +276,6 @@ return [
     'text_quote_added'           => 'Quote Saved Successfully!',
     'text_invoice_added'         => 'Invoice Created Successfully!',
     'text_business_create'       => 'Negotiation Created Successfully!',
-    'text_open_edit_quote'       => 'You can create new quote!',
     'text_open_edit_campaign'    => 'You can create new campaign!',
     'text_notification_success_1'  => 'The campaign: ',
     'text_notification_success_2'  => ' has been sent satisfactorily.',
@@ -606,13 +605,39 @@ return [
     'import_data'  => 'Import Data',
     'export_data'  => 'Export Data',
 
-    'Total Ammount'  => 'Total Ammount',
+    'Total Ammount'  => 'Total Amount',
     'Lead Name'  => 'Lead Name',
     'Closing Date'  => 'Closing Date',
     'Actual Stage'  => 'Actual Stage',
     'Actual Stage Number'  => 'Actual Stage (Number)',
     'menu_Stages\'s Group'  => 'Stages\'s Pipeline',
     'Stages\'s Group'  => 'Stages\'s Pipeline',
+
+
+
+    'no_address'  => 'No Address',
+    'campaigns_email'  => 'Campaigns of Email Marketing (Subscription)',
+    'email_subscribed'  => 'You have requested not to receive more e-mails of our system. Greetings, EZCRM',
+    'subscription'  => 'Subscription of Campaigns Email Marketing',
+    'information'  => 'Information',
+    'add_files'  => 'Add Files & Photos',
+    'stages_files'  => 'Stage Files',
+    'Stage\'s Information'  => 'Stage\'s Information',
+    'no_files'  => 'No Files',
+    'click_to_view'  => 'Click To View',
+    'history'  => 'Recent Activity',
+    'no_history'  => 'No Recent Activity',
+    'text_open_edit_quote' => 'You can create new business!',
+    'text_open_created_business' => 'Business Created Successfully!',
+    'total_amount' => 'Total Amount',
+    'date_limit' => 'Date Limit',
+    'campaigns_emails' => 'Campaigns',
+    'negociations' => 'Negociations',
+    'stage' => 'Stage',
+    'add_notes' => 'Add Notes',
+    'note_creation'  => 'Add Notes',
+
+
 
 
 ];

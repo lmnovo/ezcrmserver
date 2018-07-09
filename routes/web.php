@@ -24,6 +24,9 @@ use Carbon\Carbon;
         return view('tour_default');
     });
 
+    Route::get('file','FileController@create');
+    Route::post('file','FileController@store');
+
     Route::get('/register_client', function () {
         $maxId = DB::table('cms_users')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
         $maxId = $maxId->id + 1;
@@ -312,6 +315,27 @@ use Carbon\Carbon;
 
         return view('statistics/index', compact('data'));
     });
+
+    /*Permite deshabilitar el envío de emails a los Leads*/
+    Route::get('unsubscribed/leads/{email}', function () {
+            $email = request('email');
+
+            //Poner el lead como "No Suscrito" y poner el tipo como "Lost"
+            DB::table('leads')->where('email','LIKE','%'.$email.'%')->update(['subscribed' => 0]);
+
+            //Mandar email al lead "No suscrito" como confirmación
+            //Send Email with notification End Step
+            $html = trans('crudbooster.email_subscribed');
+            $subject = trans('crudbooster.subscription');
+
+            \Mail::send("crudbooster::emails.blank", ['content' => $html], function ($message) use ($email, $subject) {
+                $message->priority(1);
+                $message->to($email);
+                $message->subject($subject);
+            });
+
+            return view('tour_default');
+        });
 
 
 });

@@ -284,7 +284,6 @@ return [
     'text_quote_added'           => 'Cotización Guardada Satisfactoriamente!',
     'text_invoice_added'         => 'Factura Creada Satisfactoriamente!',
     'text_business_create'       => 'Negociación Creada Satisfactoriamente!',
-    'text_open_edit_quote'       => 'Usted puede crear una nueva cotización!',
     'text_open_edit_campaign'    => 'Usted puede crear una nueva campaña!',
     'text_notification_success_1'  => 'La campaña: ',
     'text_notification_success_2'  => ' ha sido enviada satisfactoriamente.',
@@ -625,5 +624,27 @@ return [
     'Stages\'s Group'  => 'Pipeline de Etapas',
 
 
+    'no_address'  => 'Sin Dirección',
+    'campaigns_email'  => 'Campañas de Email Marketing (Suscripción)',
+    'email_subscribed'  => 'Usted ha solicitado no recibir correos electrónicos de nuestro sistema. Saludos cordiales, Chefunits',
+    'subscription'  => 'Suscripción de Campañas Email Marketing',
+
+    'information'  => 'Información',
+    'add_files'  => 'Agregar Archivos y Fotos',
+    'stages_files'  => 'Archivos de la Etapa',
+    'Stage\'s Information'  => 'Información de la Etapa',
+    'no_files'  => 'No Existen Archivos',
+    'click_to_view'  => 'Click Para Visualizar',
+    'history'  => 'Historial de Acciones',
+    'no_history'  => 'No Existe Historial de Acciones',
+    'text_open_edit_quote' => 'Usted puede crear un nuevo negocio!',
+    'text_open_created_business' => 'Negociación Creada Satisfactoriamente!',
+    'total_amount' => 'Cantidad Total',
+    'date_limit' => 'Fecha Estimada de Cierre',
+    'campaigns_emails' => 'Campañas',
+    'negociations' => 'Negociaciones',
+    'stage' => 'Etapa',
+    'add_notes' => 'Agregar Notas',
+    'note_creation'  => 'Agregar Notas',
 
 ];
