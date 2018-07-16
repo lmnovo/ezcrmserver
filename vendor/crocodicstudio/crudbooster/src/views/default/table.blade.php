@@ -521,19 +521,6 @@
                                </select>
                                <br>
 
-                            @elseif( $col['label'] == 'Interested' or $col['label'] == 'Interesed' or $col['label'] == 'Type')
-                              <select class="filter-value form-control" name='filter_column[{{$col["field_with"]}}][value]' value='{{ (!is_array(CRUDBooster::getValueFilter($col["field_with"])))?CRUDBooster::getValueFilter($col["field_with"]):"" }}'>
-                                <option></option>
-                                  <?php
-                                  $result = \Illuminate\Support\Facades\DB::table('products_type')->get();
-
-                                  foreach($result as $item) {
-                                      echo "<option value='$item->name'>$item->name</option>";
-                                  }
-                                  ?>
-                              </select>
-                              <br>
-
                             @elseif( $col['label'] == 'Source' )
                               <select class="filter-value form-control" name='filter_column[{{$col["field_with"]}}][value]' value='{{ (!is_array(CRUDBooster::getValueFilter($col["field_with"])))?CRUDBooster::getValueFilter($col["field_with"]):"" }}'>
                                 <option></option>
