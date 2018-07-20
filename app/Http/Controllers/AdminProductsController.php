@@ -11,11 +11,11 @@
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "name";
-			$this->limit = "10";
-			$this->orderby = "name,asc";
-			$this->global_privilege = false;
+			$this->limit = "20";
+			$this->orderby = "id,desc";
+			$this->global_privilege = true;
 			$this->button_table_action = true;
-			$this->button_bulk_action = false;
+			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
 			$this->button_edit = true;
@@ -30,32 +30,32 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-            //$this->col[] = ["label"=>"Photo","name"=>"imagen","image"=>true];
-            $this->col[] = ["label"=>"Size","name"=>"name","join"=>"sizes,name"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Type","name"=>"products_type_id","join"=>"products_type,name"];
-			//$this->col[] = ["label"=>"Description","name"=>"description"];
-			$this->col[] = ["label"=>"Sell Price","name"=>"sell_price","callback_php"=>'number_format($row->sell_price)'];
+			$this->col[] = ["label"=>"Weight","name"=>"weight"];
+			$this->col[] = ["label"=>"Buy Price","name"=>"buy_price"];
+			$this->col[] = ["label"=>"Sell Price","name"=>"sell_price"];
 			$this->col[] = ["label"=>"Stock","name"=>"stock"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Type','name'=>'products_type_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'products_type,name'];
-			$this->form[] = ['label'=>'Size','name'=>'sizes_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'sizes,name'];
-			$this->form[] = ['label'=>'Description','name'=>'description','type'=>'wysiwyg','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:0','width'=>'col-sm-10'];
-			# END FORM DO NOT REMOVE THIS LINE
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
+			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+            $this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
+            # END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Products Type','name'=>'products_type_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'products_type,name'];
-			//$this->form[] = ['label'=>'Description','name'=>'description','type'=>'wysiwyg','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'money','validation'=>'required|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Supplier','name'=>'suppliers_id','type'=>'select2','validation'=>'integer|min:0','width'=>'col-sm-10','datatable'=>'products_type,name'];
-			# OLD END FORM
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter"];
+			//$this->form[] = ["label"=>"Weight","name"=>"weight","type"=>"number","required"=>TRUE,"validation"=>"integer|min:0"];
+			//$this->form[] = ["label"=>"Buy Price","name"=>"buy_price","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Sell Price","name"=>"sell_price","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Stock","name"=>"stock","type"=>"number","required"=>TRUE,"validation"=>"integer|min:0"];
+            //$this->form[] = ["label"=>"Description","name"=>"description","type"=>"textarea","required"=>TRUE,"validation"=>"string|min:5|max:5000"];
+            # OLD END FORM
 
 			/* 
 	        | ---------------------------------------------------------------------- 
@@ -63,13 +63,13 @@
 	        | ----------------------------------------------------------------------     
 			| @label          = Label of action 
 			| @path           = Path of sub module
+			| @foreign_key 	  = foreign key of sub table/module
 			| @button_color   = Bootstrap Class (primary,success,warning,danger)
 			| @button_icon    = Font Awesome Class  
 			| @parent_columns = Sparate with comma, e.g : name,created_at
 	        | 
 	        */
 	        $this->sub_module = array();
-	        $this->sub_module[] = ['label'=>'','path'=>'products_stock','button_color'=>'danger','button_icon'=>'fa fa-cart-plus','parent_columns'=>'id,sku,name,stock','foreign_key'=>'products_id'];
 
 
 	        /* 
@@ -121,15 +121,10 @@
 	        | 
 	        */
 	        $this->index_button = array();
-            $this->index_button[] = ['label'=>'','url'=>CRUDBooster::adminPath($slug="products_type"),"icon"=>"fa fa-product-hunt", "title"=>"Types"];
-            $this->index_button[] = ['label'=>'','url'=>CRUDBooster::adminPath($slug="sizes"),"icon"=>"fa fa-tags", "title"=>"Sizes", "color"=>"warning"];
-            $this->index_button[] = ['label'=>'','url'=>CRUDBooster::adminPath($slug="appliances_categories"),"icon"=>"fa fa-cubes", "title"=>"Appliances Categories"];
-            $this->index_button[] = ['label'=>'','url'=>CRUDBooster::adminPath($slug="appliances_inside"),"icon"=>"fa fa-cubes", "title"=>"Appliances", "color"=>"danger"];
-            $this->index_button[] = ['label'=>'','url'=>CRUDBooster::adminPath($slug="appliances"),"icon"=>"fa fa-cubes", "title"=>"Appliances Details"];
 
 
 
-	        /*
+	        /* 
 	        | ---------------------------------------------------------------------- 
 	        | Customize Table Row Color
 	        | ----------------------------------------------------------------------     
@@ -147,8 +142,7 @@
 	        | @label, @count, @icon, @color 
 	        |
 	        */
-            $this->index_statistic = array();
-            //$this->index_statistic[] = ['label'=>'Total Data','count'=>\Illuminate\Support\Facades\DB::table('products')->count(),'icon'=>'fa fa-check','color'=>'success'];
+	        $this->index_statistic = array();
 
 
 

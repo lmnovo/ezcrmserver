@@ -587,6 +587,7 @@ return [
     'text_forgot'  => 'Your password was recovered satisfactorily. From now on we show your data:',
 
     'menu_Proyects'  => 'Proyects',
+    'menu_Lead Type'  => 'Lead Type',
     'client'  => 'Client',
     'status'  => 'Status',
     'status_name'  => 'Step Name',
@@ -636,6 +637,7 @@ return [
     'stage' => 'Stage',
     'add_notes' => 'Add Notes',
     'note_creation'  => 'Add Notes',
+    'Products'  => 'Products',
 
 
 

@@ -5,49 +5,42 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminProductsStockController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminLeadsTypeController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "name";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
-			$this->global_privilege = false;
-			$this->button_table_action = false;
-			$this->button_bulk_action = false;
+			$this->global_privilege = true;
+			$this->button_table_action = true;
+			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
-			$this->button_edit = false;
-			$this->button_delete = false;
+			$this->button_edit = true;
+			$this->button_delete = true;
 			$this->button_detail = false;
 			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "products_stock";
+			$this->table = "leads_type";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Stock-In","name"=>"stock_in"];
-			$this->col[] = ["label"=>"Description","name"=>"description"];
-			$this->col[] = ["label"=>"Created By","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Name","name"=>"name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
-			$this->form[] = ['label'=>'Stock In','name'=>'stock_in','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Product Name','name'=>'products_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'products,name'];
-			//$this->form[] = ['label'=>'Stock In','name'=>'stock_in','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Stock Out','name'=>'stock_out','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'min:0','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter"];
 			# OLD END FORM
 
 			/* 
@@ -56,6 +49,7 @@
 	        | ----------------------------------------------------------------------     
 			| @label          = Label of action 
 			| @path           = Path of sub module
+			| @foreign_key 	  = foreign key of sub table/module
 			| @button_color   = Bootstrap Class (primary,success,warning,danger)
 			| @button_icon    = Font Awesome Class  
 			| @parent_columns = Sparate with comma, e.g : name,created_at
@@ -256,7 +250,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-	    	$postdata['cms_users_id'] = CRUDBooster::myId();
+
 	    }
 
 	    /* 
@@ -268,9 +262,7 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-	    	$product = CRUDBooster::first('products',Request::get('products_id'));
-	    	$stock = $product->stock + Request::get('stock_in') - Request::get('stock_out');
-	    	DB::table('products')->where('id',Request::get('products_id'))->update(['stock'=>$stock]);
+
 	    }
 
 	    /* 

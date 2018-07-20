@@ -163,6 +163,7 @@ return [
     'Add_New_Setting'     => 'Añadir Nuevo Ajuste',
     'Add_New_Module'      => 'Añadir Nuevo Módulo',
     'List_Module'         => 'Ver Módulos',
+    'menu_Lead Type'      => 'Tipo de Prospecto',
     'Add_New_Statistic'   => 'Añadir Nueva Estadística',
     'Add_New_API'         => 'Crear Nueva API',
     'API_Generator'       => 'Generador de API',
@@ -646,5 +647,6 @@ return [
     'stage' => 'Etapa',
     'add_notes' => 'Agregar Notas',
     'note_creation'  => 'Agregar Notas',
+    'Products'  => 'Productos',
 
 ];

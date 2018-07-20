@@ -53,11 +53,7 @@
                                 </ul>
                             </li>
 
-                            <li class="{{ (Request::is(config('crudbooster.ADMIN_PATH').'/customer_type')) ? 'active' : '' }}"><a href='{{Route("AdminCustomerType1ControllerGetIndex")}}?m=0'><i class='fa fa-user-secret'></i> {{ trans('crudbooster.menu_Lead_Type') }} </a></li>
-
-                            <li class="{{ (Request::is(config('crudbooster.ADMIN_PATH').'/settings31')) ? 'active' : '' }}"><a href='{{Route("AdminSettings31ControllerGetIndex")}}?m=0'><i class='fa fa-credit-card'></i> {{ trans('crudbooster.menu_Invoice_Information') }} </a></li>
-
-                            <li class="{{ (Request::is(config('crudbooster.ADMIN_PATH').'/suppliers')) ? 'active' : '' }}"><a href='{{Route("AdminSuppliersControllerGetIndex")}}?m=0'><i class='fa fa-user-times'></i> {{ trans('crudbooster.menu_Supplies') }} </a></li>
+                            <li class="{{ (Request::is(config('crudbooster.ADMIN_PATH').'/leads_type')) ? 'active' : '' }}"><a href='{{Route("AdminLeadsTypeControllerGetIndex")}}?m=0'><i class='fa fa-user-secret'></i> {{ trans('crudbooster.menu_Lead Type') }} </a></li>
 
                             <li class="{{ (Request::is(config('crudbooster.ADMIN_PATH').'/module_generator')) ? 'active' : '' }}"><a href='{{Route("ModulsControllerGetIndex")}}?m=0'><i class='fa fa-th'></i> {{ trans('crudbooster.Module_Generator') }}</a></li>
 
