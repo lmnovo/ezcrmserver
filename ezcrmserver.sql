@@ -215,14 +215,14 @@ CREATE TABLE IF NOT EXISTS `cms_logs` (
 -- Volcando datos para la tabla ezcrmserver.cms_logs: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_logs` DISABLE KEYS */;
 INSERT INTO `cms_logs` (`id`, `created_at`, `updated_at`, `ipaddress`, `useragent`, `url`, `description`, `id_cms_users`) VALUES
-	(1, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://127.0.0.1:8000/crm/module_generator/delete/28', 'Delete data Tasks Type at Module Generator', 4),
-	(2, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://127.0.0.1:8000/crm/logout', 'juan@gmail.com logout', 4),
-	(3, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://127.0.0.1:8000/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
-	(4, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://127.0.0.1:8000/crm/logout', 'admin@gmail.com logout', 1),
-	(5, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://127.0.0.1:8000/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
-	(6, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://127.0.0.1:8000/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
-	(7, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://127.0.0.1:8000/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
-	(8, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://127.0.0.1:8000/crm/leads/add-save', 'Add New Data Julio at Leads', 1);
+	(1, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://18.222.4.15/crm/module_generator/delete/28', 'Delete data Tasks Type at Module Generator', 4),
+	(2, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://18.222.4.15/crm/logout', 'juan@gmail.com logout', 4),
+	(3, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://18.222.4.15/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
+	(4, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://18.222.4.15/crm/logout', 'admin@gmail.com logout', 1),
+	(5, '2018-07-09', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36', 'http://18.222.4.15/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
+	(6, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://18.222.4.15/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
+	(7, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://18.222.4.15/crm/login', 'admin@gmail.com login with IP Address 127.0.0.1', 1),
+	(8, '2018-07-15', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36', 'http://18.222.4.15/crm/leads/add-save', 'Add New Data Julio at Leads', 1);
 /*!40000 ALTER TABLE `cms_logs` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.cms_menus

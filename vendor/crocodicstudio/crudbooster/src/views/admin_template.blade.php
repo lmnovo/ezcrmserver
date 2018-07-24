@@ -14,11 +14,11 @@
     <!-- Theme style -->
     <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/vendor/crudbooster/assets/summernote/summernote.css">
-    <script type="text/javascript" src="http://127.0.0.1:8000/vendor/crudbooster/assets/summernote/summernote.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://18.222.4.15/vendor/crudbooster/assets/summernote/summernote.css">
+    <script type="text/javascript" src="http://18.222.4.15/vendor/crudbooster/assets/summernote/summernote.js"></script>
 
-    <link rel='stylesheet' href='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/css/select2.min.css'/>
-    <script src='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/js/select2.full.min.js'></script>
+    <link rel='stylesheet' href='http://18.222.4.15/vendor/crudbooster/assets/select2/dist/css/select2.min.css'/>
+    <script src='http://18.222.4.15/vendor/crudbooster/assets/select2/dist/js/select2.full.min.js'></script>
 
     <style type="text/css">
         .select2-container--default .select2-selection--single {border-radius: 0px !important}

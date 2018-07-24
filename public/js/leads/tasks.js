@@ -83,7 +83,7 @@ $(document).ready(function()
             type:  'get',
             dataType: 'json',
             success : function(data) {
-                window.location.href = 'http://127.0.0.1:8000/crm/leads/detail/'+lead_id;
+                window.location.href = 'http://18.222.4.15/crm/leads/detail/'+lead_id;
                 $('#taskLeadModal').modal('hide');
             }
         });
