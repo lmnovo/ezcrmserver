@@ -16,7 +16,7 @@
                 <!-- Optionally, you can add icons to the links -->
 
                 <li class=""><a href='{{CRUDBooster::adminpath("tour/general")}}'><i class='fa fa-get-pocket'></i> {{ trans("crudbooster.General_Tour") }}</a></li>
-                <li class=""><a href='{{CRUDBooster::adminpath("tour/first_steps")}}'><i class='fa fa-edit'></i> {{ trans("crudbooster.text_tour_first_steps") }}</a></li>
+                {{--<li class=""><a href='{{CRUDBooster::adminpath("tour/first_steps")}}'><i class='fa fa-edit'></i> {{ trans("crudbooster.text_tour_first_steps") }}</a></li>
 
                 <li class='treeview'>
                     <a href='#'><i class='fa fa-user'></i> <span>{{ trans("crudbooster.leads") }}</span>  <i class="fa fa-angle-{{ trans("crudbooster.right") }} pull-{{ trans("crudbooster.right") }}"></i></a>
@@ -36,7 +36,7 @@
                 <li class=""><a href='{{CRUDBooster::adminpath("tour/menu_management")}}'><i class='fa fa-bars text-normal'></i> {{ trans("crudbooster.Menu_Management") }}</a></li>
                 <li class=""><a href='{{CRUDBooster::adminpath("tour/configuration_privileges")}}'><i class='fa fa-clock-o text-normal'></i> {{ trans("crudbooster.Privileges_Configuration") }}</a></li>
                 <li class=""><a href='{{CRUDBooster::adminpath("tour/proyects_management")}}'><i class='fa fa-folder-open text-normal'></i> {{ trans("crudbooster.proyects_management") }}</a></li>
-
+--}}
 
 
             </ul><!-- /.sidebar-menu -->
