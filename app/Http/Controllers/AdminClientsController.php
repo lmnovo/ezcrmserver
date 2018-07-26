@@ -184,7 +184,7 @@
                             type:  'get',
                             dataType: 'json',
                             success : function(data) {
-                                window.location.href = 'http://18.222.4.15/crm/customers25/detail/'+customers_id;                                                        
+                                window.location.href = 'http://18.220.213.59/crm/customers25/detail/'+customers_id;                                                        
                             }
                          });  
                     });
