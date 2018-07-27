@@ -33,7 +33,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 		$this->form[] = array("label"=>trans('crudbooster.name'),"name"=>"name",'required'=>true,'validation'=>'required|alpha_spaces|min:3');
 		$this->form[] = array("label"=>trans('crudbooster.email'),"name"=>"email",'required'=>true,'type'=>'email','validation'=>'required|email|unique:cms_users,email,'.CRUDBooster::getCurrentId());
 		$this->form[] = array("label"=>trans('crudbooster.photo'),"name"=>"photo","type"=>"upload","help"=>"Recommended resolution is 200x200px",'required'=>false,'validation'=>'image|max:1000');
-        $this->form[] = array('label'=>trans('crudbooster.date_birthday'),'name'=>'date_birthday','type'=>'date','required'=>true, 'validation'=>'required');
+        $this->form[] = array('label'=>trans('crudbooster.date_birthday'),'name'=>'date_birthday','type'=>'date','required'=>false, 'validation'=>'required');
 		$this->form[] = array("label"=>trans('crudbooster.Privilege'),"name"=>"id_cms_privileges","type"=>"select","datatable"=>"cms_privileges,name",'required'=>true);
 		$this->form[] = array("label"=>trans('crudbooster.password'),"name"=>"password","type"=>"password","help"=>trans('crudbooster.password_message'));
         $this->form[] = array("label"=>trans('crudbooster.sign'),"name"=>"firma","type"=>"wysiwyg",'required'=>false);

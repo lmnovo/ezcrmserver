@@ -12,7 +12,7 @@
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "name";
-			$this->limit = "10";
+			$this->limit = "100";
 			$this->orderby = "id,desc";
 			$this->global_privilege = true;
 			$this->button_table_action = true;
@@ -268,8 +268,15 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
-	            
+            $id = (CRUDBooster::isSuperadmin());
+            $user_id = (CRUDBooster::myId());
+
+            if ($id != 1) {
+                $query->where('leads.cms_users_id', $user_id)->where('business.is_active', 1)
+                ;
+            } else {
+                $query->where('business.is_active', 1);
+            }
 	    }
 
 	    /*

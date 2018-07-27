@@ -318,7 +318,7 @@ return [
     'all_times'  => '',
 
     'text_information'  => 'Estadísticas',
-    'text_quick_tour'  => '¡Manuales Aquí!',
+    'text_quick_tour'  => 'Manual',
     'menu_Leads'  => 'Prospectos',
     'menu_Quotes'  => 'Cotizaciones',
     'menu_Charts'  => 'Reportes',
@@ -648,5 +648,7 @@ return [
     'add_notes' => 'Agregar Notas',
     'note_creation'  => 'Agregar Notas',
     'Products'  => 'Productos',
+
+    'total'  => 'Total',
 
 ];

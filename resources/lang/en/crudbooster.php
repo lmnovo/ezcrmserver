@@ -308,7 +308,7 @@ return [
     'all_times'  => 'all times',
 
     'text_information'  => 'Statistics',
-    'text_quick_tour'  => 'Quick Tour Here!',
+    'text_quick_tour'  => 'Tour',
     'menu_Leads'   => 'Leads',
     'menu_Quotes'  => 'Quotes',
     'menu_Charts'  => 'Charts',
@@ -638,6 +638,8 @@ return [
     'add_notes' => 'Add Notes',
     'note_creation'  => 'Add Notes',
     'Products'  => 'Products',
+
+    'total'  => 'Total',
 
 
 
