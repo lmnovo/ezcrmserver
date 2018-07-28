@@ -13,6 +13,11 @@ use Carbon\Carbon;
 |
 */
 
+    Route::get('ajaxImageUpload', ['uses'=>'AjaxImageUploadController@ajaxImageUpload']);
+    Route::post('ajaxImageUpload', ['as'=>'ajaxImageUpload','uses'=>'ImageUploadController@imageUploadPost']);
+
+    Route::post('ajaxAddProduct', ['as'=>'ajaxAddProduct','uses'=>'ImageUploadController@addProductPost']);
+
     Route::get('/', function () {
         return view('welcome');
     });
@@ -99,7 +104,7 @@ use Carbon\Carbon;
                     // Add color and link on event
                     [
                         'color' => $color->description,
-                        'url' => 'http://127.0.0.1:8000/crm/eazy_tasks/detail/'.$value->id,
+                        'url' => 'http://18.220.213.59/crm/eazy_tasks/detail/'.$value->id,
                     ]
                 );
             }

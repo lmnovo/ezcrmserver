@@ -26,7 +26,7 @@
                 var patternSpanish = /.*Paso/;
                 if( (col == 4 || col == 5) && (patternEnglish.test(col_text) || patternSpanish.test(col_text))) {
                     e.preventDefault();
-                    window.location.href = 'http://127.0.0.1:8000/crm/orders/detail/'+id_row;
+                    window.location.href = 'http://18.220.213.59/crm/orders/detail/'+id_row;
                 }
 
                 id_account_user = $(this).siblings('*')[0].children[0].value;
@@ -74,7 +74,7 @@
             {
                 e.preventDefault();
                 td_user.html(valor_user);
-                window.location.href = 'http://127.0.0.1:8000/crm/account';
+                window.location.href = 'http://18.220.213.59/crm/account';
             });
 
             var nuevovalor_user;
@@ -143,74 +143,73 @@
     @endif
  
     <div class="box">
-      <div class="box-header">  
-        @if($button_bulk_action && ( ($button_delete && CRUDBooster::isDelete()) || $button_selected) )
-        <div class="pull-{{ trans('crudbooster.left') }}">          
-          <div class="selected-action" style="display:inline-block;position:relative;" id="bulk_actions_button" >
-              <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fa fa-check-square-o'></i> {{trans("crudbooster.button_selected_action")}}
-                <span class="fa fa-caret-down"></span></button>                              
-              <ul class="dropdown-menu">    
-                @if($button_delete && CRUDBooster::isDelete())                                                                                                                                                         
-                <li><a href="javascript:void(0)" data-name='delete' title='{{trans('crudbooster.action_delete_selected')}}'><i class="fa fa-trash"></i> {{trans('crudbooster.action_delete_selected')}}</a></li>
-                @endif                
+      <div class="box-header">
+            <div class="box-tools pull-{{ trans('crudbooster.right') }}" style="position: relative;margin-top: 0px;margin-right: -10px">
 
-                @if($button_selected)
-                  @foreach($button_selected as $button)
-                    <li><a href="javascript:void(0)" data-name='{{$button["name"]}}' title='{{$button["label"]}}'><i class="fa fa-{{$button['icon']}}"></i> {{$button['label']}}</a></li>
-                  @endforeach
+                @if($button_bulk_action && ( ($button_delete && CRUDBooster::isDelete()) || $button_selected) )
+                    <div class="selected-action pull-{{ trans('crudbooster.left') }}">
+                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fa fa-check-square-o'></i> {{trans("crudbooster.button_selected_action")}}
+                            <span class="fa fa-caret-down"></span></button>
+                        <ul class="dropdown-menu">
+                            @if($button_delete && CRUDBooster::isDelete())
+                                <li><a href="javascript:void(0)" data-name='delete' title='{{trans('crudbooster.action_delete_selected')}}'><i class="fa fa-trash"></i> {{trans('crudbooster.action_delete_selected')}}</a></li>
+                            @endif
+
+                            @if($button_selected)
+                                @foreach($button_selected as $button)
+                                    <li><a href="javascript:void(0)" data-name='{{$button["name"]}}' title='{{$button["label"]}}'><i class="fa fa-{{$button['icon']}}"></i> {{$button['label']}}</a></li>
+                                @endforeach
+                            @endif
+
+                        </ul><!--end-dropdown-menu-->
+                    </div><!--end-pull-left-->
                 @endif
 
-              </ul><!--end-dropdown-menu-->
-          </div><!--end-selected-action-->        
-        </div><!--end-pull-left-->
-        @endif
-        <div class="box-tools pull-{{ trans('crudbooster.right') }}" style="position: relative;margin-top: 0px;margin-right: -10px">
-          
-              @if($button_filter)
-                  <a style="margin-top:-23px" href="javascript:void(0)" id='btn_advanced_filter' data-url-parameter='{{$build_query}}' title='{{trans('crudbooster.filter_dialog_title')}}' class="btn btn-sm btn-default {{(Request::get('filter_column'))?'active':''}}">
-                    <i class="fa fa-filter"></i> {{trans("crudbooster.button_filter")}}
-                  </a>
-              @endif
+                @if($button_filter)
+                    <a style="margin-top:-23px" href="javascript:void(0)" id='btn_advanced_filter' data-url-parameter='{{$build_query}}' title='{{trans('crudbooster.filter_dialog_title')}}' class="btn btn-sm btn-default {{(Request::get('filter_column'))?'active':''}}">
+                        <i class="fa fa-filter"></i> {{trans("crudbooster.button_filter")}}
+                    </a>
+                @endif
 
-            <form method='get' style="display:inline-block;width: 260px;" action='{{Request::url()}}'>
-                <div class="input-group">
-                  <input type="text" name="q" value="{{ Request::get('q') }}" class="form-control input-sm pull-{{ trans('crudbooster.right') }}" placeholder="{{trans('crudbooster.filter_search')}}"/>
-                  {!! CRUDBooster::getUrlParameters(['q']) !!}
-                  <div class="input-group-btn">
-                    @if(Request::get('q'))
-                    <?php 
-                      $parameters = Request::all();
-                      unset($parameters['q']);
-                      $build_query = urldecode(http_build_query($parameters));
-                      $build_query = ($build_query)?"?".$build_query:"";
-                      $build_query = (Request::all())?$build_query:"";
-                    ?>
-                    <button type='button' onclick='location.href="{{ CRUDBooster::mainpath().$build_query}}"' title="{{trans('crudbooster.button_reset')}}" class='btn btn-sm btn-warning'><i class='fa fa-ban'></i></button>
-                    @endif
-                    <button type='submit' class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-            </form>
+                <form method='get' style="display:inline-block;width: 145px;" action='{{Request::url()}}'>
+                    <div class="input-group">
+                        <input type="text" name="q" value="{{ Request::get('q') }}" class="form-control input-sm pull-{{ trans('crudbooster.right') }}" placeholder="{{trans('crudbooster.filter_search')}}"/>
+                        {!! CRUDBooster::getUrlParameters(['q']) !!}
+                        <div class="input-group-btn">
+                            @if(Request::get('q'))
+                                <?php
+                                $parameters = Request::all();
+                                unset($parameters['q']);
+                                $build_query = urldecode(http_build_query($parameters));
+                                $build_query = ($build_query)?"?".$build_query:"";
+                                $build_query = (Request::all())?$build_query:"";
+                                ?>
+                                <button type='button' onclick='location.href="{{ CRUDBooster::mainpath().$build_query}}"' title="{{trans('crudbooster.button_reset')}}" class='btn btn-sm btn-warning'><i class='fa fa-ban'></i></button>
+                            @endif
+                            <button type='submit' class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
 
 
-          <form method='get' id='form-limit-paging' style="display:inline-block" action='{{Request::url()}}'>                        
-              {!! CRUDBooster::getUrlParameters(['limit']) !!}
-              <div class="input-group">
-                <select onchange="$('#form-limit-paging').submit()" name='limit' style="width: 65px;"  class='form-control input-sm'>
-                    <option {{($limit==5)?'selected':''}} value='5'>5</option> 
-                    <option {{($limit==10)?'selected':''}} value='10'>10</option>
-                    <option {{($limit==20)?'selected':''}} value='20'>20</option>
-                    <option {{($limit==25)?'selected':''}} value='25'>25</option>
-                    <option {{($limit==50)?'selected':''}} value='50'>50</option>
-                    <option {{($limit==100)?'selected':''}} value='100'>100</option>
-                    {{--<option {{($limit==200)?'selected':''}} value='200'>200</option>--}}
-                </select>                              
-              </div>
-            </form>
+                {{--<form method='get' id='form-limit-paging' style="display:inline-block" action='{{Request::url()}}'>
+                    {!! CRUDBooster::getUrlParameters(['limit']) !!}
+                    <div class="input-group">
+                      <select onchange="$('#form-limit-paging').submit()" name='limit' style="width: 65px;"  class='form-control input-sm'>
+                          <option {{($limit==5)?'selected':''}} value='5'>5</option>
+                          <option {{($limit==10)?'selected':''}} value='10'>10</option>
+                          <option {{($limit==20)?'selected':''}} value='20'>20</option>
+                          <option {{($limit==25)?'selected':''}} value='25'>25</option>
+                          <option {{($limit==50)?'selected':''}} value='50'>50</option>
+                          <option {{($limit==100)?'selected':''}} value='100'>100</option>
+                          --}}{{--<option {{($limit==200)?'selected':''}} value='200'>200</option>--}}{{--
+                      </select>
+                    </div>
+                  </form>--}}
 
-        </div> 
+            </div>
 
-        <br style="clear:both"/>
+            <br style="clear:both"/>
 
       </div>
       <div class="box-body table-responsive no-padding">

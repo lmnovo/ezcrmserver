@@ -14,11 +14,11 @@
     <!-- Theme style -->
     <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("vendor/crudbooster/assets/adminlte/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/vendor/crudbooster/assets/summernote/summernote.css">
-    <script type="text/javascript" src="http://127.0.0.1:8000/vendor/crudbooster/assets/summernote/summernote.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://18.220.213.59/vendor/crudbooster/assets/summernote/summernote.css">
+    <script type="text/javascript" src="http://18.220.213.59/vendor/crudbooster/assets/summernote/summernote.js"></script>
 
-    <link rel='stylesheet' href='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/css/select2.min.css'/>
-    <script src='http://127.0.0.1:8000/vendor/crudbooster/assets/select2/dist/js/select2.full.min.js'></script>
+    <link rel='stylesheet' href='http://18.220.213.59/vendor/crudbooster/assets/select2/dist/css/select2.min.css'/>
+    <script src='http://18.220.213.59/vendor/crudbooster/assets/select2/dist/js/select2.full.min.js'></script>
 
     <style type="text/css">
         .select2-container--default .select2-selection--single {border-radius: 0px !important}
@@ -83,7 +83,6 @@
             $('#appliance_inside_category').select2();
             $('#sizes').select2();
             $('#state').select2();
-
             $('#date').datepicker();
 
             //Ocultar botones innecesarios
@@ -121,10 +120,6 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            //Oculta el botón de editar en el listado de Leads
-            $("a[href*='account/edit'][class*='btn-edit']").hide();
-            $("a[href*='customers25/edit'][class*='btn-edit']").hide();
-
             //Adicionar atributo title al botón de products stock
             $("a[href*='products_stock'][class*='btn-danger']").attr('title', 'Add Stock');
 
@@ -135,7 +130,7 @@
             $("a[title=' ']").attr('title', 'Convert to Client');
 
             //Oculta el botón de detail del listado de business
-            $("a[href*='business/detail'][class*='btn-detail']").hide();
+            $("a[href*='business/edit'][class*='btn-edit']").hide();
 
             //Ocultar el mensaje de alerta pasados 4 segundos
             setTimeout("$(\"div[class*='alert alert-warning']\").fadeOut(350);", 2000);

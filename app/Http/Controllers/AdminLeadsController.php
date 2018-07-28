@@ -21,7 +21,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "name";
-			$this->limit = "10";
+			$this->limit = "100";
 			$this->orderby = "id,desc";
 			$this->global_privilege = true;
 			$this->button_table_action = true;
@@ -343,7 +343,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     |
     */
     public function hook_after_edit($id) {
-
+        CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$id),trans("crudbooster.text_edit_lead"));
     }
 
     /*
@@ -496,20 +496,17 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         $to = null;
 
         if(gettype($id) == 'array') {
-            $leadsSelected = DB::table('account')->whereIn('id',$id)->get();
-
+            $leadsSelected = DB::table('leads')->whereIn('id',$id)->get();
             foreach ($leadsSelected as $item) {
-                if (!empty($item->telephone)) {
-                    $to[] = $item->telephone;
+                if (!empty($item->phone)) {
+                    $to[] = $item->phone;
                 }
             }
-
         }
         else {
-            $leadsSelected = DB::table('account')->where('id',$id)->first();
-
-            if (!empty($leadsSelected->telephone)) {
-                $to[] = $leadsSelected->telephone;
+            $leadsSelected = DB::table('leads')->where('id',$id)->first();
+            if (!empty($leadsSelected->phone)) {
+                $to[] = $leadsSelected->phone;
             }
         }
 
@@ -533,11 +530,12 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
             'cms_users_id' => CRUDBooster::myId()
         ];
 
+        $maxId = DB::table('settings_campaigns')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
+        $maxId = $maxId->id + 1;
         $lastId = DB::table('settings_campaigns')->insertGetId($sumarizedData);
 
-        //Open Edit Quote
+        //Open Edit Campaign
         CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns/edit/'.$lastId),trans("crudbooster.text_open_edit_campaign"));
-
     }
 
     //Enviar Email dado el id de Lead

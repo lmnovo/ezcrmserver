@@ -51,7 +51,7 @@ class FileController extends Controller
             'updated_at' => Carbon::now(config('app.timezone')),
         ];
 
-        DB::table('business_stages')->where('id',request('stages_id'))->where('business_id',request('business_id'))->update($sumarizedData);
+        DB::table('business_stages')->where('stages_id',request('stages_id'))->where('business_id',request('business_id'))->update($sumarizedData);
 
         $stage = DB::table('stages')->where('id',request('stages_id'))->first();
         $userLogin = CRUDBooster::myName();

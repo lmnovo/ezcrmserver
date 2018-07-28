@@ -395,7 +395,7 @@
 	    }
 
 	    //Muestra los datos de un Business
-        public function getEdit($id) {
+        public function getDetail($id) {
             //Create an Auth
             if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {
                 CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.text_open_edit_quote"));
@@ -439,7 +439,7 @@
             $data['stages_activities'] = DB::table('stages_activities')
                 ->where('business_id', $id)->orderby('created_at','desc')->get();
 
-            $this->cbView('business.edit',$data);
+            $this->cbView('business.detail',$data);
         }
 
         //Agregar nueva nota de tipo Lead
@@ -535,8 +535,43 @@
             DB::table('business')->insert($sumarizedData);
 
             //Open Edit Quote
-            CRUDBooster::redirect(CRUDBooster::adminPath('business/create/'.$maxId),trans("crudbooster.text_open_edit_quote"));
+            CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.$maxId),trans("crudbooster.text_open_edit_quote"));
 
+        }
+
+        //Acción que se ejecuta al dar clic en Leads y Add Business
+        public function getEdit($id) {
+
+            $data = [];
+            $data['id'] = $id;
+
+            $data['products'] = DB::table('business')
+                ->select(DB::raw('products.name'), 'products.description', 'products.sell_price', 'products.buy_price', 'products.weight', 'products.id as id', 'business_products.quantity as quantity')
+                ->join('business_products', 'business_products.business_id', '=', 'business.id')
+                ->join('products', 'products.id', '=', 'business_products.products_id')
+                ->where('business.id', $id)->get();
+
+            $data['total'] = 0;
+            foreach ($data['products'] as $items) {
+                $data['total'] += $items->quantity * $items->sell_price;
+            }
+
+            //Obtener los datos del business actual
+            $data['business'] = DB::table('business')->where('id',$id)->first();
+
+            //Obtener el listado de estados de Estados Unidos
+            $data['states_list'] = DB::table('states')->get();
+
+            //Obtener el listado de usuarios del sistema
+            $data['users'] = DB::table('cms_users')->get();
+
+            //Obtener el listado de stages_groups (pipeline) del sistema
+            $data['stages_groups'] = DB::table('stages_groups')->get();
+
+            //Obtener los datos del lead asociado al business actual
+            $data['lead'] = DB::table('leads')->where('id',$data['business']->leads_id)->first();
+
+            $this->cbView('business.create',$data);
         }
 
         //Acción que se ejecuta luego de seleccionar en un lead la opción "Add Business"
@@ -552,6 +587,9 @@
 
             //Obtener los datos del business actual
             $data['business'] = DB::table('business')->where('id',$id)->first();
+
+            //Obtener los productos existentes
+            $data['products'] = DB::table('products')->where('deleted_at',null)->get();
 
             //Obtener el listado de estados de Estados Unidos
             $data['states_list'] = DB::table('states')->get();
@@ -573,6 +611,7 @@
 	        //dd($request->all());
 
             $lead_id = $request->get('lead_id');
+            $business_id = $request->get('business_id');
 
 	        $stage = DB::table('stages')->where('stages_groups_id', $request->get('stages_group'))->orderby('number')->first();
             (count($stage) == 0) ? $stage = null : $stage = $stage->id;
@@ -609,38 +648,53 @@
                 'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
             ]);
 
-            //Creamos los pasos por defecto
-            $stages =  DB::table('stages')->where('stages_groups_id',$request->get('stages_group'))->get();
+            //Creamos los pasos por defecto (si no existen)
+            //Comprobamos existencia inicialmente
+            $exists_business_stages =  DB::table('business_stages')
+                ->where('business_id',$request->get('business_id'))->first();
+            //Si no existe creamos las stages por defecto
+            if (count($exists_business_stages) == 0) {
+                $stages =  DB::table('stages')->where('stages_groups_id',$request->get('stages_group'))->get();
 
-            foreach ($stages as $stage) {
-                //Primera etapa por defecto
-                if ($stage->number == 1) {
-                    $sumarizedDataBusinessStages = [
-                        'business_id' => $request->get('business_id'),
-                        'stages_id' => $stage->id,
-                        'notes' => null,
-                        'files' => null,
-                        'is_completed' => 1,
-                        'created_at' => Carbon::now(config('app.timezone')),
-                    ];
-                    DB::table('business_stages')->insert($sumarizedDataBusinessStages);
-                } else {
-                    $sumarizedDataBusinessStages = [
-                        'business_id' => $request->get('business_id'),
-                        'stages_id' => $stage->id,
-                        'notes' => null,
-                        'files' => null,
-                        'is_completed' => 0,
-                        'created_at' => Carbon::now(config('app.timezone')),
-                    ];
-                    DB::table('business_stages')->insert($sumarizedDataBusinessStages);
+                foreach ($stages as $stage) {
+                    //Primera etapa por defecto
+                    if ($stage->number == 1) {
+                        $sumarizedDataBusinessStages = [
+                            'business_id' => $request->get('business_id'),
+                            'stages_id' => $stage->id,
+                            'notes' => null,
+                            'files' => null,
+                            'is_completed' => 1,
+                            'created_at' => Carbon::now(config('app.timezone')),
+                        ];
+                        DB::table('business_stages')->insert($sumarizedDataBusinessStages);
+                    } else {
+                        $sumarizedDataBusinessStages = [
+                            'business_id' => $request->get('business_id'),
+                            'stages_id' => $stage->id,
+                            'notes' => null,
+                            'files' => null,
+                            'is_completed' => 0,
+                            'created_at' => Carbon::now(config('app.timezone')),
+                        ];
+                        DB::table('business_stages')->insert($sumarizedDataBusinessStages);
+                    }
                 }
-
             }
 
-
             //Redireccionamos al lead que creo el business
-            CRUDBooster::redirect(CRUDBooster::adminPath("leads/detail/$lead_id"),trans("crudbooster.text_open_created_business"));
+            CRUDBooster::redirect(CRUDBooster::adminPath("business/detail/$business_id"),trans("crudbooster.text_open_edited_business"));
+        }
+
+        //Se obtienen todos los productos existentes
+        public function getProducts() {
+            $data = DB::table('products')->where('deleted_at', null)->get();
+            return $data;
+        }
+
+        //Se obtienen el producto dado su "id"
+        public function getProduct(\Illuminate\Http\Request $request) {
+            return DB::table('products')->where('id', $request->get('id'))->get();
         }
 
 	}

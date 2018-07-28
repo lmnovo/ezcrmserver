@@ -105,12 +105,12 @@ return [
     'button_save_more'       => 'Save & Add More',
     'button_import'          => ' ',
     'button_export'          => ' ',
-    'button_filter'          => 'Filter',
+    'button_filter'          => '',
     'button_close'           => 'Close',
     'button_submit'          => 'Submit',
     'button_logout'          => 'Logout',
     'button_sign_in'         => 'Sign In',
-    'button_selected_action' => 'Bulk Actions',
+    'button_selected_action' => 'Actions',
     'button_download_file'   => 'Download file',
     'button_reset'           => 'Reset',
 
@@ -373,7 +373,7 @@ return [
     'Notes' => 'List of Notes',
     'send_email' => 'Send Email',
     'send_sms' => 'Send SMS',
-    'add_quote' => 'Add Quote',
+    'add_business' => 'Add Business',
     'add_task' => 'Add Task',
     'add_note' => 'Add Note',
     'edit' => 'Edit',
@@ -630,6 +630,7 @@ return [
     'no_history'  => 'No Recent Activity',
     'text_open_edit_quote' => 'You can create new business!',
     'text_open_created_business' => 'Business Created Successfully!',
+    'text_open_edited_business' => 'Business Edited Successfully!',
     'total_amount' => 'Total Amount',
     'date_limit' => 'Date Limit',
     'campaigns_emails' => 'Campaigns',
@@ -640,6 +641,13 @@ return [
     'Products'  => 'Products',
 
     'total'  => 'Total',
+    'text_edit_lead' => 'Lead Edited Successfully!',
+    'add_product' => 'Add Product',
+    'products' => 'Products',
+    'buy_price' => 'Buy Price',
+    'sell_price' => 'Sell Price',
+    'weight' => 'Weight',
+    'select_data' => 'Select Data',
 
 
 

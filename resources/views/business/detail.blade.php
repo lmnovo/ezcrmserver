@@ -1,24 +1,24 @@
 @extends('crudbooster::admin_template')
 @section('content')
 
-    <script src='http://127.0.0.1:8000/p/jquery-ui.custom.min.js'></script>
-    <script src="http://127.0.0.1:8000/p/jquery.ui.touch-punch.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/chosen.jquery.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/spinbox.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-datepicker.min.js"></script>
-    {{--<script src="http://127.0.0.1:8000/p/bootstrap-timepicker.min.js"></script>--}}
-    <script src="http://127.0.0.1:8000/p/moment.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/daterangepicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-datetimepicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-colorpicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/jquery.knob.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/autosize.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/jquery.inputlimiter.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-tag.min.js"></script>
+    <script src='http://18.220.213.59/p/jquery-ui.custom.min.js'></script>
+    <script src="http://18.220.213.59/p/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://18.220.213.59/p/chosen.jquery.min.js"></script>
+    <script src="http://18.220.213.59/p/spinbox.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-datepicker.min.js"></script>
+    {{--<script src="http://18.220.213.59/p/bootstrap-timepicker.min.js"></script>--}}
+    <script src="http://18.220.213.59/p/moment.min.js"></script>
+    <script src="http://18.220.213.59/p/daterangepicker.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-colorpicker.min.js"></script>
+    <script src="http://18.220.213.59/p/jquery.knob.min.js"></script>
+    <script src="http://18.220.213.59/p/autosize.min.js"></script>
+    <script src="http://18.220.213.59/p/jquery.inputlimiter.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-tag.min.js"></script>
 
     <!-- ace scripts -->
-    <script src="http://127.0.0.1:8000/p/ace-elements.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
+    <script src="http://18.220.213.59/p/ace-elements.min.js"></script>
+    <script src="http://18.220.213.59/p/ace.min.js"></script>
 
     <script>
         $(document).ready(function()
@@ -41,7 +41,7 @@
                     type:  'get',
                     dataType: 'json',
                     success : function(data) {
-                        window.location.href = 'http://127.0.0.1:8000/crm/business/edit/'+business_id;
+                        window.location.href = 'http://18.220.213.59/crm/business/detail/'+business_id;
                     }
                 });
 
@@ -87,7 +87,7 @@
                     type:  'get',
                     dataType: 'json',
                     success : function(data) {
-                        window.location.href = 'http://127.0.0.1:8000/crm/business/edit/'+business_id;
+                        window.location.href = 'http://18.220.213.59/crm/business/edit/'+business_id;
                         $('#taskLeadModal').modal('hide');
                     }
                 });
@@ -119,7 +119,7 @@
                                 console.log(item);
                                 item.removeClass('bg-gray');
                                 item.addClass('bg-blue');
-                                window.location.href = 'http://127.0.0.1:8000/crm/business/edit/'+business_id;
+                                window.location.href = 'http://18.220.213.59/crm/business/edit/'+business_id;
                             }
                         });
                     });
@@ -148,8 +148,7 @@
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item" style="height: 55px;">
-                                <a title="{{trans('crudbooster.send_email')}}" class='btn btn-success pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-email/$id")}}'><i class="fa fa-envelope-o"></i></a>
-                                <a title="{{trans('crudbooster.send_sms')}}" class='btn btn-primary pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-sms/$id")}}'><i class="glyphicon glyphicon-phone"></i></a>
+                                <a title="{{trans('crudbooster.edit')}}" class='btn btn-success pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("business/edit/$id")}}'><i class="fa fa-pencil"></i> </a>
                             </li>
                             <li class="list-group-item" style="height: 55px">
                                 <b>{{trans('crudbooster.Total Ammount')}}</b>
@@ -302,7 +301,7 @@
                                                             </div>
 
                                                             <div class="col-md-3">
-                                                                <h5 style="text-align: right">{{trans('crudbooster.stages_files')}}</h5>
+                                                                <h5 style="text-align: right; font-weight: bold;">{{trans('crudbooster.stages_files')}}</h5>
                                                                 <ul class="list-unstyled project_files" style="text-align: right">
                                                                     <?php
                                                                     $files = explode(';', $stage->files);
@@ -316,7 +315,7 @@
                                                                     {
                                                                     ?>
                                                                     <li>
-                                                                        <a title="{{trans('crudbooster.click_to_view')}}" data-lightbox="roadtrip" href="http://127.0.0.1:8000/files/{{$item}}"><i class="fa fa-picture-o"></i><?php print_r($item); ?></a>
+                                                                        <a title="{{trans('crudbooster.click_to_view')}}" data-lightbox="roadtrip" href="http://18.220.213.59/files/{{$item}}"><i class="fa fa-picture-o"></i><?php print_r($item); ?></a>
                                                                     </li>
                                                                     <?php
                                                                     }
@@ -324,7 +323,7 @@
                                                                     {
                                                                     ?>
                                                                     <li>
-                                                                        <a title="{{trans('crudbooster.click_to_view')}}" href="http://127.0.0.1:8000/files/{{$item}}" target="_blank"><i class="fa fa-file-pdf-o"></i><?php print_r($item); ?></a>
+                                                                        <a title="{{trans('crudbooster.click_to_view')}}" href="http://18.220.213.59/files/{{$item}}" target="_blank"><i class="fa fa-file-pdf-o"></i><?php print_r($item); ?></a>
                                                                     </li>
                                                                     <?php
                                                                     }
@@ -343,11 +342,11 @@
 
                                                                 <div class="text-right mtop20">
                                                                     @if($stage->stage_id <= $business->business_stage_id)
-                                                                        <a href="#" data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" class="btn btn-sm btn-primary add-files">{{trans('crudbooster.add_files')}}</a>
-                                                                        <a style="margin-top: 5px" href="#" data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" class="btn btn-sm btn-primary add-notes">{{trans('crudbooster.add_notes')}}</a>
+                                                                        <a data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" title="{{trans('crudbooster.add_files')}}" class="btn btn-primary pull-right add-files" style="margin: 2px" href="#"><i class="fa fa-file-archive-o"></i></a>
+                                                                        <a data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" title="{{trans('crudbooster.add_notes')}}" class="btn btn-primary pull-right add-notes" style="margin: 2px" href="#"><i class="fa fa-file-text-o"></i></a>
                                                                     @else
-                                                                        <a href="#" data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" class="disabled btn btn-sm btn-primary add-files">{{trans('crudbooster.add_files')}}</a>
-                                                                        <a style="margin-top: 5px" href="#" data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" class="disabled btn btn-sm btn-primary add-notes">{{trans('crudbooster.add_notes')}}</a>
+                                                                        <a data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" title="{{trans('crudbooster.add_files')}}" class="disabled btn btn-primary pull-right add-files" style="margin: 2px" href="#"><i class="fa fa-file-archive-o"></i></a>
+                                                                        <a data-business="{{ $business->business_id }}" data-id="{{ $stage->stage_id }}" title="{{trans('crudbooster.add_notes')}}" class="disabled btn btn-primary pull-right add-notes" style="margin: 2px" href="#"><i class="fa fa-file-text-o"></i></a>
                                                                     @endif
                                                                 </div>
 
@@ -387,7 +386,7 @@
                                                                 confirmButtonText: '{{trans('crudbooster.yes')}}',
                                                                 cancelButtonText: '{{trans('crudbooster.no')}}',
                                                                 closeOnConfirm: false },
-                                                                function(){  location.href='http://127.0.0.1:8000/crm/eazy_notes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
+                                                                function(){  location.href='http://18.220.213.59/crm/eazy_notes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -436,8 +435,8 @@
                                                 <td>{{$task->name}}</td>
                                                 <td>{{$task->created_at}}</td>
                                                 <td style="text-align: center">
-                                                    {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
-                                                    <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
+                                                    {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://18.220.213.59/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
+                                                    <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://18.220.213.59/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
                                                     --}}
                                                     <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
                                                             title: '{{trans('crudbooster.are_you_sure')}}',
@@ -529,7 +528,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">{{trans('crudbooster.close')}}</button>
                     <button type="submit" class="btn btn-primary" id="">{{trans('crudbooster.save')}}</button>
                 </div>
                 </form>
