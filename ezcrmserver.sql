@@ -30,16 +30,29 @@ CREATE TABLE IF NOT EXISTS `business` (
   KEY `FK_business_cms_users` (`cms_users_id`),
   KEY `FK_business_leads` (`leads_id`),
   KEY `FK_business_stages` (`stages_id`),
-  KEY `FK_business_stages_groups` (`stages_groups_id`),
-  CONSTRAINT `FK_business_cms_users` FOREIGN KEY (`cms_users_id`) REFERENCES `cms_users` (`id`),
-  CONSTRAINT `FK_business_leads` FOREIGN KEY (`leads_id`) REFERENCES `leads` (`id`),
-  CONSTRAINT `FK_business_stages` FOREIGN KEY (`stages_id`) REFERENCES `stages` (`id`),
-  CONSTRAINT `FK_business_stages_groups` FOREIGN KEY (`stages_groups_id`) REFERENCES `stages_groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `FK_business_stages_groups` (`stages_groups_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla ezcrmserver.business: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `business` DISABLE KEYS */;
 /*!40000 ALTER TABLE `business` ENABLE KEYS */;
+
+-- Volcando estructura para tabla ezcrmserver.business_products
+CREATE TABLE IF NOT EXISTS `business_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `business_id` int(11) DEFAULT NULL,
+  `products_id` int(11) DEFAULT NULL,
+  `quantity` int(11) unsigned DEFAULT '0',
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `deleted_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla ezcrmserver.business_products: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `business_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `business_products` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.business_stages
 CREATE TABLE IF NOT EXISTS `business_stages` (
@@ -54,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `business_stages` (
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla ezcrmserver.business_stages: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `business_stages` DISABLE KEYS */;
@@ -188,10 +201,12 @@ CREATE TABLE IF NOT EXISTS `cms_email_templates` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla ezcrmserver.cms_email_templates: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_email_templates` DISABLE KEYS */;
+INSERT INTO `cms_email_templates` (`id`, `name`, `slug`, `subject`, `content`, `description`, `from_name`, `from_email`, `cc_email`, `created_at`, `deleted_at`, `updated_at`) VALUES
+	(1, 'Test Template', NULL, 'Test Subject', '<p>sda dad ada das ad a</p><ul><li>1sdasdada</li><li>sdasdasdasd</li><li>asdasdasda</li><li>ada</li></ul><p><br></p><ol><li>asdadas</li><li>asd</li><li>a</li><li>asd</li></ol>', NULL, NULL, NULL, NULL, '2018-07-27', NULL, NULL);
 /*!40000 ALTER TABLE `cms_email_templates` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.cms_logs
@@ -205,9 +220,9 @@ CREATE TABLE IF NOT EXISTS `cms_logs` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_cms_users` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla ezcrmserver.cms_logs: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla ezcrmserver.cms_logs: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cms_logs` ENABLE KEYS */;
 
@@ -228,21 +243,21 @@ CREATE TABLE IF NOT EXISTS `cms_menus` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla ezcrmserver.cms_menus: ~29 rows (aproximadamente)
+-- Volcando datos para la tabla ezcrmserver.cms_menus: ~34 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_menus` DISABLE KEYS */;
 INSERT INTO `cms_menus` (`id`, `name`, `type`, `path`, `color`, `icon`, `parent_id`, `is_active`, `is_dashboard`, `id_cms_privileges`, `sorting`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(50, 'Leads', 'Route', 'AdminLeadsControllerGetIndex', 'normal', 'fa fa-user', 0, 1, 0, 1, 2, '2017-12-21 14:55:06', '2018-06-09 14:48:30', NULL),
-	(59, 'Campaigns', 'URL', '#', 'aqua', 'fa fa-list-alt', 0, 0, 0, 1, 15, '2018-01-10 22:04:58', NULL, NULL),
-	(61, 'Campaigns', 'Route', 'AdminCampaignsControllerGetIndex', 'normal', 'fa fa-envelope-o', 0, 1, 0, 1, 4, '2018-01-11 17:31:27', '2018-02-09 07:48:54', NULL),
+	(59, 'Campaigns', 'URL', '#', 'aqua', 'fa fa-list-alt', 0, 0, 0, 1, 6, '2018-01-10 22:04:58', NULL, NULL),
+	(61, 'Campaigns', 'Route', 'AdminCampaignsControllerGetIndex', 'normal', 'fa fa-envelope-o', 0, 1, 0, 1, 5, '2018-01-11 17:31:27', '2018-02-09 07:48:54', NULL),
 	(62, 'Clients', 'Route', 'AdminClientsControllerGetIndex', 'normal', 'fa fa-user-plus', 0, 1, 0, 1, 3, '2018-01-11 19:42:24', '2018-06-10 09:00:08', NULL),
-	(64, 'General Settings', 'URL', '#', 'aqua', 'fa fa-cog', 0, 0, 0, 1, 7, '2018-01-29 18:38:25', '2018-01-29 21:43:25', '2018-07-20 14:50:55'),
-	(65, 'Notes', 'Route', 'AdminNotesControllerGetIndex', 'normal', 'fa fa-sticky-note', 0, 0, 0, 1, 1, '2018-01-29 19:37:27', '2018-06-10 21:48:27', '2018-07-20 14:51:09'),
-	(67, 'Task', 'Route', 'AdminEazyTasks1ControllerGetIndex', NULL, 'fa fa-calendar-minus-o', 0, 0, 0, 1, 25, '2018-01-29 21:12:16', NULL, NULL),
-	(71, 'Notes Quotes', 'Route', 'AdminNotesQuotesControllerGetIndex', NULL, 'fa fa-glass', 0, 0, 0, 1, 20, '2018-02-04 02:57:06', NULL, NULL),
-	(72, 'Notes Phases', 'Route', 'AdminNotesFasesControllerGetIndex', NULL, 'fa fa-sticky-note-o', 0, 0, 0, 1, 19, '2018-02-06 06:07:38', NULL, NULL),
-	(78, 'Products', 'URL', '#', 'normal', 'fa fa-product-hunt', 0, 0, 0, 1, 14, '2018-02-12 05:51:09', NULL, '2018-07-20 14:50:59'),
+	(64, 'General Settings', 'URL', '#', 'aqua', 'fa fa-cog', 0, 0, 0, 1, 4, '2018-01-29 18:38:25', '2018-01-29 21:43:25', '2018-07-20 14:50:55'),
+	(65, 'Notes', 'Route', 'AdminNotesControllerGetIndex', 'normal', 'fa fa-sticky-note', 0, 0, 0, 1, 2, '2018-01-29 19:37:27', '2018-06-10 21:48:27', '2018-07-20 14:51:09'),
+	(67, 'Task', 'Route', 'AdminEazyTasks1ControllerGetIndex', NULL, 'fa fa-calendar-minus-o', 0, 0, 0, 1, 9, '2018-01-29 21:12:16', NULL, NULL),
+	(71, 'Notes Quotes', 'Route', 'AdminNotesQuotesControllerGetIndex', NULL, 'fa fa-glass', 0, 0, 0, 1, 8, '2018-02-04 02:57:06', NULL, NULL),
+	(72, 'Notes Phases', 'Route', 'AdminNotesFasesControllerGetIndex', NULL, 'fa fa-sticky-note-o', 0, 0, 0, 1, 7, '2018-02-06 06:07:38', NULL, NULL),
+	(78, 'Products', 'URL', '#', 'normal', 'fa fa-product-hunt', 0, 0, 0, 1, 5, '2018-02-12 05:51:09', NULL, '2018-07-20 14:50:59'),
 	(79, 'Charts', 'URL', '/crm/wizard', 'normal', 'fa fa-bar-chart-o', 0, 1, 0, 1, 1, '2018-02-12 06:18:57', '2018-03-20 18:01:06', NULL),
 	(84, 'Leads', 'Route', 'AdminCustomersControllerGetIndex', 'normal', 'fa fa-user', 0, 1, 0, 5, 2, '2018-02-19 19:04:35', NULL, NULL),
 	(86, 'Clients', 'Route', 'AdminCustomers25ControllerGetIndex', 'normal', 'fa fa-users', 0, 1, 0, 5, 4, '2018-02-19 19:07:31', NULL, NULL),
@@ -255,13 +270,18 @@ INSERT INTO `cms_menus` (`id`, `name`, `type`, `path`, `color`, `icon`, `parent_
 	(94, 'Email Template', 'Route', 'EmailTemplatesControllerGetIndex', 'normal', 'fa fa-envelope-o', 91, 1, 0, 5, 2, '2018-02-19 20:02:47', NULL, NULL),
 	(103, 'Tasks', 'Route', 'AdminEazyTasks1ControllerGetIndex', 'normal', 'fa fa-calendar-minus-o', 0, 0, 0, 5, 7, '2018-05-25 15:07:13', NULL, NULL),
 	(104, 'Tasks Quotes', 'Route', 'AdminEazyTasksQuotesControllerGetIndex', 'normal', 'fa fa-glass', 0, 0, 0, 5, 8, '2018-05-25 15:07:14', NULL, NULL),
-	(107, 'Campañas Automatizadas', 'Route', 'AdminCampaignAutomationsControllerGetIndex', NULL, 'fa fa-calendar-plus-o', 0, 0, 0, 1, 4, '2018-06-05 12:47:13', NULL, '2018-07-20 14:51:18'),
-	(108, 'Business', 'Route', 'AdminBusinessControllerGetIndex', NULL, 'fa fa-briefcase', 0, 1, 0, 1, 5, '2018-06-10 13:45:50', NULL, NULL),
+	(107, 'Campañas Automatizadas', 'Route', 'AdminCampaignAutomationsControllerGetIndex', NULL, 'fa fa-calendar-plus-o', 0, 0, 0, 1, 3, '2018-06-05 12:47:13', NULL, '2018-07-20 14:51:18'),
+	(108, 'Business', 'Route', 'AdminBusinessControllerGetIndex', NULL, 'fa fa-briefcase', 0, 1, 0, 1, 4, '2018-06-10 13:45:50', NULL, NULL),
 	(109, 'Stages', 'Route', 'AdminStagesControllerGetIndex', NULL, 'fa fa-clock-o', 111, 1, 0, 1, 1, '2018-06-10 14:22:10', NULL, NULL),
 	(110, 'Stages\'s Group', 'Route', 'AdminStagesGroupsControllerGetIndex', NULL, 'fa fa-clock-o', 111, 1, 0, 1, 2, '2018-06-12 13:16:20', NULL, NULL),
 	(111, 'Stages', 'URL', '#', 'normal', 'fa fa-clock-o', 0, 1, 0, 1, 6, '2018-07-05 05:46:31', NULL, NULL),
-	(112, 'Lead Type', 'Route', 'AdminLeadsTypeControllerGetIndex', NULL, 'fa fa-user-secret', 0, 1, 0, 1, 26, '2018-07-20 14:42:39', NULL, '2018-07-20 14:50:36'),
-	(113, 'Products', 'Route', 'AdminProductsControllerGetIndex', NULL, 'fa fa-product-hunt', 0, 1, 0, 1, 27, '2018-07-20 14:49:43', NULL, NULL);
+	(112, 'Lead Type', 'Route', 'AdminLeadsTypeControllerGetIndex', NULL, 'fa fa-user-secret', 0, 0, 0, 1, 1, '2018-07-20 14:42:39', NULL, '2018-07-20 14:50:36'),
+	(113, 'Products', 'Route', 'AdminProductsControllerGetIndex', NULL, 'fa fa-product-hunt', 0, 1, 0, 1, 8, '2018-07-20 14:49:43', NULL, NULL),
+	(114, 'Campañas Automatizadas', 'Route', 'AdminCampaignAutomationsControllerGetIndex', 'normal', 'fa fa-calendar-plus-o', 0, 1, 0, 5, 12, '2018-07-27 17:57:26', NULL, NULL),
+	(115, 'Clients', 'Route', 'AdminClientsControllerGetIndex', 'normal', 'fa fa-user-plus', 0, 1, 0, 5, 13, '2018-07-27 17:57:27', NULL, NULL),
+	(116, 'Leads', 'Route', 'AdminLeadsControllerGetIndex', 'normal', 'fa fa-user', 0, 1, 0, 5, 14, '2018-07-27 17:57:27', NULL, NULL),
+	(117, 'Products', 'Route', 'AdminProductsControllerGetIndex', 'normal', 'fa fa-product-hunt', 0, 1, 0, 5, 15, '2018-07-27 17:57:27', NULL, NULL),
+	(118, 'Tasks Type', 'Route', 'AdminEazyTaskType1ControllerGetIndex', 'normal', 'fa fa-folder-open', 0, 1, 0, 5, 16, '2018-07-27 17:57:27', NULL, NULL);
 /*!40000 ALTER TABLE `cms_menus` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.cms_moduls
@@ -361,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `cms_privileges_roles` (
   `id_cms_privileges` int(11) DEFAULT NULL,
   `id_cms_moduls` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla ezcrmserver.cms_privileges_roles: ~57 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_privileges_roles` DISABLE KEYS */;
@@ -422,7 +442,11 @@ INSERT INTO `cms_privileges_roles` (`id`, `created_at`, `updated_at`, `is_visibl
 	(87, NULL, NULL, 1, 1, 1, 1, 1, 1, 44),
 	(88, NULL, NULL, 1, 1, 1, 1, 1, 1, 45),
 	(89, NULL, NULL, 1, 1, 1, 1, 1, 1, 46),
-	(90, NULL, NULL, 1, 1, 1, 1, 1, 1, 47);
+	(90, NULL, NULL, 1, 1, 1, 1, 1, 1, 47),
+	(91, NULL, NULL, 1, 1, 1, 1, 1, 5, 42),
+	(92, NULL, NULL, 0, 0, 0, 0, 1, 5, 27),
+	(93, NULL, NULL, 0, 0, 0, 0, 1, 5, 34),
+	(94, NULL, NULL, 1, 1, 1, 1, 1, 5, 47);
 /*!40000 ALTER TABLE `cms_privileges_roles` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.cms_settings
@@ -507,15 +531,12 @@ INSERT INTO `cms_statistic_components` (`id`, `id_cms_statistics`, `componentID`
 -- Volcando estructura para tabla ezcrmserver.cms_users
 CREATE TABLE IF NOT EXISTS `cms_users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_cms_privileges` int(11) DEFAULT NULL,
   `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `latitude` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '0.000000',
@@ -524,14 +545,18 @@ CREATE TABLE IF NOT EXISTS `cms_users` (
   `color` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date_birthday` date DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla ezcrmserver.cms_users: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla ezcrmserver.cms_users: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `cms_users` DISABLE KEYS */;
-INSERT INTO `cms_users` (`id`, `created_at`, `updated_at`, `name`, `photo`, `email`, `password`, `id_cms_privileges`, `status`, `deleted_at`, `address`, `fullname`, `latitude`, `longitude`, `firma`, `color`, `date_birthday`, `phone`) VALUES
-	(1, NULL, '2018-07-06 16:09:03', 'Super Admin', 'uploads/2018-06/admin.png', 'admin@gmail.com', '$2y$10$WqV4ys55Ci7c3a6kjEpfrusMmJwdL8shXHh4QG42uN1xEOqZBqsSO', 1, 'Active', NULL, NULL, 'Super Admin', '0.000000', '0.000000', '', 'purple', '2018-06-03', NULL),
-	(3, NULL, '2018-07-04 23:40:24', 'Marcelo', 'uploads/2018-06/admin.png', 'lmarcelonovo@gmail.com', '$2y$10$t.lfkXh2VrnOdx4hB697uuMGNtlOaxtTn03GiQM7ANQ3PTSxu7QmC', 1, NULL, NULL, '2501 Karbach St\r\nC', 'Marcelo Novo', '0.000000', '0.000000', '<p>Sincerely,</p><p><br></p><p>Luis Novo<br><br></p><div id="Zm-_Id_-Sgn"><table border="0" cellspacing="0" cellpadding="0" width="485" style="font-size: 15.0225px; background-color: rgb(255, 255, 255); color: rgb(47, 59, 76); font-family: Helvetica, Arial, sans-serif; width: 485px;"><tbody style="font-size: 15.024px;"><tr valign="top" style="font-size: 15.0255px;"><td style="font-size: 15.027px; padding-right: 10px; width: 10px;"><img src="https://s3.amazonaws.com/ucwebapp.wisestamp.com/fee501fa-cade-44dd-b313-74da9f0641e2/ChefUnits3.format_png.resize_200x.png#logo" width="65" height="64.3816067653" alt="photo" style="font-size: 15.0285px; border-radius: 4px; width: 65px; height: auto; max-width: 120px;"><br></td><td style="font-size: 15.027px; border-right: 1px solid rgb(0, 161, 230);"><br></td><td style="font-size: 12px; padding-right: 10px; padding-left: 10px; display: inline-block; text-align: initial; font-stretch: normal; line-height: normal; font-family: Arial; color: rgb(100, 100, 100);"><table border="0" cellspacing="0" cellpadding="0" style="font-size: 12.0012px;"><tbody style="font-size: 12.0024px;"><tr style="font-size: 12.0036px;"><td style="font-size: 12px; display: inline-block; text-align: initial; font-stretch: normal; line-height: normal;"><div><b class="text-color theme-font" style="font-size: 12.0012px;">EZCRM Team</b></div></td></tr><tr style="font-size: 12.0036px;"><td style="font-size: 12px; padding-top: 5px; padding-bottom: 5px; font-stretch: normal; line-height: normal; color: rgb(141, 141, 141);"><span class="size" style="font-size: 12.0012px;"><a href="tel:713-589-2613" style="box-sizing: initial; font-size: 12.0024px; color: rgb(141, 141, 141); display: inline-block;">713-589-2613</a></span>&nbsp;<span class="colour" style="color: rgb(0, 161, 230);"><span class="size" style="font-size: 12.0012px;">|</span></span>&nbsp;<span class="size" style="font-size: 12.0012px;"><a href="tel:9566051776" style="box-sizing: initial; font-size: 12.0024px; color: rgb(141, 141, 141); display: inline-block;">9566051776</a></span></td></tr><tr style="font-size: 12.0036px;"><td style="font-size: 12.0048px; margin-top: 5px;"><a href="http://www.facebook.com/ChefUnits" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/facebook.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a>&nbsp;<a href="http://www.linkedin.com/company/chef-units-llc" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/linkedin.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a>&nbsp;<a href="http://twitter.com/chefunits" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/twitter.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a><br><br></td></tr></tbody></table></td></tr></tbody></table></div><p></p>', 'green', '2017-03-06', '8324348183');
+INSERT INTO `cms_users` (`id`, `name`, `photo`, `email`, `password`, `id_cms_privileges`, `status`, `address`, `fullname`, `latitude`, `longitude`, `firma`, `color`, `date_birthday`, `phone`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(1, 'Super Admin', 'uploads/2018-06/admin.png', 'admin@gmail.com', '$2y$10$WqV4ys55Ci7c3a6kjEpfrusMmJwdL8shXHh4QG42uN1xEOqZBqsSO', 1, 'Active', NULL, 'Super Admin', '0.000000', '0.000000', '', 'purple', '2018-06-03', NULL, NULL, '2018-07-06 16:09:03', NULL),
+	(3, 'Marcelo', 'uploads/2018-06/admin.png', 'lmarcelonovo@gmail.com', '$2y$10$t.lfkXh2VrnOdx4hB697uuMGNtlOaxtTn03GiQM7ANQ3PTSxu7QmC', 1, NULL, '2501 Karbach St\r\nC', 'Marcelo Novo', '0.000000', '0.000000', '<p>Sincerely,</p><p><br></p><p>Luis Novo<br><br></p><div id="Zm-_Id_-Sgn"><table border="0" cellspacing="0" cellpadding="0" width="485" style="font-size: 15.0225px; background-color: rgb(255, 255, 255); color: rgb(47, 59, 76); font-family: Helvetica, Arial, sans-serif; width: 485px;"><tbody style="font-size: 15.024px;"><tr valign="top" style="font-size: 15.0255px;"><td style="font-size: 15.027px; padding-right: 10px; width: 10px;"><img src="https://s3.amazonaws.com/ucwebapp.wisestamp.com/fee501fa-cade-44dd-b313-74da9f0641e2/ChefUnits3.format_png.resize_200x.png#logo" width="65" height="64.3816067653" alt="photo" style="font-size: 15.0285px; border-radius: 4px; width: 65px; height: auto; max-width: 120px;"><br></td><td style="font-size: 15.027px; border-right: 1px solid rgb(0, 161, 230);"><br></td><td style="font-size: 12px; padding-right: 10px; padding-left: 10px; display: inline-block; text-align: initial; font-stretch: normal; line-height: normal; font-family: Arial; color: rgb(100, 100, 100);"><table border="0" cellspacing="0" cellpadding="0" style="font-size: 12.0012px;"><tbody style="font-size: 12.0024px;"><tr style="font-size: 12.0036px;"><td style="font-size: 12px; display: inline-block; text-align: initial; font-stretch: normal; line-height: normal;"><div><b class="text-color theme-font" style="font-size: 12.0012px;">EZCRM Team</b></div></td></tr><tr style="font-size: 12.0036px;"><td style="font-size: 12px; padding-top: 5px; padding-bottom: 5px; font-stretch: normal; line-height: normal; color: rgb(141, 141, 141);"><span class="size" style="font-size: 12.0012px;"><a href="tel:713-589-2613" style="box-sizing: initial; font-size: 12.0024px; color: rgb(141, 141, 141); display: inline-block;">713-589-2613</a></span>&nbsp;<span class="colour" style="color: rgb(0, 161, 230);"><span class="size" style="font-size: 12.0012px;">|</span></span>&nbsp;<span class="size" style="font-size: 12.0012px;"><a href="tel:9566051776" style="box-sizing: initial; font-size: 12.0024px; color: rgb(141, 141, 141); display: inline-block;">9566051776</a></span></td></tr><tr style="font-size: 12.0036px;"><td style="font-size: 12.0048px; margin-top: 5px;"><a href="http://www.facebook.com/ChefUnits" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/facebook.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a>&nbsp;<a href="http://www.linkedin.com/company/chef-units-llc" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/linkedin.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a>&nbsp;<a href="http://twitter.com/chefunits" target="_blank" style="box-sizing: initial; font-size: 12.006px; color: rgb(0, 191, 232);"><img width="16" height="16" src="https://s3.amazonaws.com/images.wisestamp.com/icons_32/twitter.png" style="box-sizing: initial; font-size: 12.0072px; vertical-align: initial; border-radius: 0px; width: 16px; height: 16px;"></a><br><br></td></tr></tbody></table></td></tr></tbody></table></div><p></p>', 'green', '2017-03-06', '8324348183', NULL, '2018-07-04 23:40:24', NULL),
+	(4, 'Test', NULL, 'test@gmail.com', '$2y$10$zxXL3IZRT6lK80YU6vX9heoClXbjtb2tAgo/O0WjVsOVKicjt/tQS', 5, NULL, NULL, NULL, '0.000000', '0.000000', '<p>Sign Example Here</p>', NULL, '1988-02-17', NULL, '2018-07-27 17:56:00', NULL, NULL);
 /*!40000 ALTER TABLE `cms_users` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.eazy_notes
@@ -544,7 +569,7 @@ CREATE TABLE IF NOT EXISTS `eazy_notes` (
   `updated_at` date DEFAULT NULL,
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf16;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- Volcando datos para la tabla ezcrmserver.eazy_notes: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `eazy_notes` DISABLE KEYS */;
@@ -560,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `eazy_tasks` (
   `updated_at` date DEFAULT NULL,
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla ezcrmserver.eazy_tasks: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `eazy_tasks` DISABLE KEYS */;
@@ -623,10 +648,8 @@ CREATE TABLE IF NOT EXISTS `leads` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `FK_leads_leads_type` (`leads_type_id`),
-  KEY `FK_leads_cms_users` (`cms_users_id`),
-  CONSTRAINT `FK_leads_cms_users` FOREIGN KEY (`cms_users_id`) REFERENCES `cms_users` (`id`),
-  CONSTRAINT `FK_leads_leads_type` FOREIGN KEY (`leads_type_id`) REFERENCES `leads_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  KEY `FK_leads_cms_users` (`cms_users_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Volcando datos para la tabla ezcrmserver.leads: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `leads` DISABLE KEYS */;
@@ -642,7 +665,7 @@ CREATE TABLE IF NOT EXISTS `leads_activities` (
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla ezcrmserver.leads_activities: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `leads_activities` DISABLE KEYS */;
@@ -727,11 +750,12 @@ CREATE TABLE IF NOT EXISTS `products` (
   `buy_price` double NOT NULL,
   `sell_price` double NOT NULL,
   `stock` int(11) DEFAULT '0',
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla ezcrmserver.products: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
@@ -765,10 +789,13 @@ CREATE TABLE IF NOT EXISTS `settings_campaigns` (
   `updated_at` date DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
--- Volcando datos para la tabla ezcrmserver.settings_campaigns: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla ezcrmserver.settings_campaigns: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `settings_campaigns` DISABLE KEYS */;
+INSERT INTO `settings_campaigns` (`id`, `name`, `to`, `subject`, `content`, `type`, `cms_email_templates_id`, `cms_users_id`, `is_active`, `total_sent`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(10, 'Test Template', 'narvaslopez@gmail.com', 'Test Subject', '<p>sda dad ada das ad a</p><ul><li>1sdasdada</li><li>sdasdasdasd</li><li>asdasdasda</li><li>ada</li></ul><p><br></p><ol><li>asdadas</li><li>asd</li><li>a</li><li>asd</li></ol>', 'Email', 1, 1, 1, 1, '2018-07-27', NULL, NULL),
+	(12, 'Test Template', 'narvaslopez@gmail.com', 'Test Subject', '<p>sda dad ada das ad a</p><ul><li>1sdasdada</li><li>sdasdasdasd</li><li>asdasdasda</li><li>ada</li></ul><p><br></p><ol><li>asdadas</li><li>asd</li><li>a</li><li>asd</li></ol>', 'Email', 1, 1, 1, 1, '2018-07-27', NULL, NULL);
 /*!40000 ALTER TABLE `settings_campaigns` ENABLE KEYS */;
 
 -- Volcando estructura para tabla ezcrmserver.stages
@@ -782,8 +809,7 @@ CREATE TABLE IF NOT EXISTS `stages` (
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
-  KEY `FK_stages_stages_groups` (`stages_groups_id`),
-  CONSTRAINT `FK_stages_stages_groups` FOREIGN KEY (`stages_groups_id`) REFERENCES `stages_groups` (`id`)
+  KEY `FK_stages_stages_groups` (`stages_groups_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla ezcrmserver.stages: ~7 rows (aproximadamente)
@@ -809,7 +835,7 @@ CREATE TABLE IF NOT EXISTS `stages_activities` (
   `deleted_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla ezcrmserver.stages_activities: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `stages_activities` DISABLE KEYS */;
