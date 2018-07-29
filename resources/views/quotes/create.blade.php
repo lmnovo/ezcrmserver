@@ -1,24 +1,24 @@
 @extends('crudbooster::admin_template')
 @section('content')
 
-    <script src='http://127.0.0.1:8000/p/jquery-ui.custom.min.js'></script>
-    <script src="http://127.0.0.1:8000/p/jquery.ui.touch-punch.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/chosen.jquery.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/spinbox.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-datepicker.min.js"></script>
-    {{--<script src="http://127.0.0.1:8000/p/bootstrap-timepicker.min.js"></script>--}}
-    <script src="http://127.0.0.1:8000/p/moment.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/daterangepicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-datetimepicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-colorpicker.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/jquery.knob.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/autosize.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/jquery.inputlimiter.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/bootstrap-tag.min.js"></script>
+    <script src='http://18.220.213.59/p/jquery-ui.custom.min.js'></script>
+    <script src="http://18.220.213.59/p/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://18.220.213.59/p/chosen.jquery.min.js"></script>
+    <script src="http://18.220.213.59/p/spinbox.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-datepicker.min.js"></script>
+    {{--<script src="http://18.220.213.59/p/bootstrap-timepicker.min.js"></script>--}}
+    <script src="http://18.220.213.59/p/moment.min.js"></script>
+    <script src="http://18.220.213.59/p/daterangepicker.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-colorpicker.min.js"></script>
+    <script src="http://18.220.213.59/p/jquery.knob.min.js"></script>
+    <script src="http://18.220.213.59/p/autosize.min.js"></script>
+    <script src="http://18.220.213.59/p/jquery.inputlimiter.min.js"></script>
+    <script src="http://18.220.213.59/p/bootstrap-tag.min.js"></script>
 
     <!-- ace scripts -->
-    <script src="http://127.0.0.1:8000/p/ace-elements.min.js"></script>
-    <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
+    <script src="http://18.220.213.59/p/ace-elements.min.js"></script>
+    <script src="http://18.220.213.59/p/ace.min.js"></script>
 
     <script>
         $(document).ready(function()
@@ -58,7 +58,7 @@
                     $('#total_appliance').html(nuevovalor * $('#price_appliance').text());
                     td.html("<span>"+nuevovalor+"</span>");
                     $("td:not(#id)").addClass("editable");
-                    window.location.href = 'http://127.0.0.1:8000/crm/orders/edit/'+msg;
+                    window.location.href = 'http://18.220.213.59/crm/orders/edit/'+msg;
                 });
             });
 
@@ -541,7 +541,7 @@
                                             confirmButtonText: '{{trans('crudbooster.yes')}}',
                                             cancelButtonText: '{{trans('crudbooster.no')}}',
                                             closeOnConfirm: false },
-                                            function(){  location.href='http://127.0.0.1:8000/crm/notes_quotes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
+                                            function(){  location.href='http://18.220.213.59/crm/notes_quotes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </div>

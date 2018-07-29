@@ -115,7 +115,7 @@ $(document).ready(function()
             type:  'get',
             dataType: 'json',
             success : function(data) {
-                window.location.href = 'http://127.0.0.1:8000/crm/products/add-product';
+                window.location.href = 'http://18.220.213.59/crm/products/add-product';
                 $('#modal-loading').modal('hide');
                 $('#newProductModal').modal('hide');
             }
