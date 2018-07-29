@@ -55,6 +55,7 @@ class FileController extends Controller
 
         $stage = DB::table('stages')->where('id',request('stages_id'))->first();
         $userLogin = CRUDBooster::myName();
+        $business_id = request('business_id');
 
         if ($cont != 0) {
             //Crear "Recent Activity" del envío de Email
@@ -66,7 +67,9 @@ class FileController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Your files has been successfully added');
+        //Open Edit Negotiation
+        CRUDBooster::redirect(CRUDBooster::adminPath('business/detail/'.$business_id),trans("crudbooster.text_business_create"));
+        //return back()->with('success', 'Your files has been successfully added');
     }
 
 

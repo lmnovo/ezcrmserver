@@ -45,7 +45,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 			$this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Phone","name"=>"phone"];
 			$this->col[] = ["label"=>"Lead Type","name"=>"leads_type_id","join"=>"leads_type,name"];
-			$this->col[] = ["label"=>"Assigned To","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Assigned","name"=>"cms_users_id","join"=>"cms_users,name"];
 			//$this->col[] = ["label"=>"Address","name"=>"address"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 

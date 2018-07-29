@@ -22,6 +22,8 @@
 
     <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
 
+    <script src="http://127.0.0.1:8000/js/leads/save_forms.js"></script>
+
 {{--
     <script src="http://127.0.0.1:8000/js/products.js"></script>
 --}}
@@ -29,7 +31,32 @@
     <script>
         $(document).ready(function()
         {
+            var business_name = '';
+            var business_description = '';
+            var business_user_id = '';
+            var business_total = '';
+            var business_date_limit = '';
+            var business_stages_groups_id = '';
             updateTotalSummary();
+
+            //Al cambiar el "business total" se salva automáticamente
+            $('#total').on('blur',function() {
+                var id = $('#business_id').val();
+                business_total = $('#total').val();
+
+                //Guardar el campo al hacer foco fuera "blur"
+                $.ajax({
+                    type: "GET",
+                    url: "../ajaxsave",
+                    data: "id="+id+"&business_name="+business_name+"&business_description="+business_description
+                    +"&business_user_id="+business_user_id+"&business_total="+business_total
+                    +"&business_date_limit="+business_date_limit+"&business_stages_groups_id="+business_stages_groups_id,
+                })
+                    .done(function(data) {
+                        updateTotalSummary();
+                        console.log('ok');
+                    });
+            });
 
             //Calcular los valores de "Total Summary"
             function updateTotalSummary() {
@@ -53,6 +80,24 @@
                 if($('#discount').val() == '') {
                     $('#discount').val('0.00');
                 }
+
+                var id = $('#business_id').val();
+                business_discount = $('#discount').val();
+
+                //Guardar el campo al hacer foco fuera "blur"
+                $.ajax({
+                    type: "GET",
+                    url: "../ajaxsave",
+                    data: "id="+id+"&business_name="+business_name+"&business_description="+business_description
+                    +"&business_user_id="+business_user_id+"&business_total="+business_total
+                    +"&business_date_limit="+business_date_limit+"&business_discount="+business_discount
+                    +"&business_stages_groups_id="+business_stages_groups_id,
+                })
+                    .done(function(data) {
+                        updateTotalSummary();
+                        console.log('ok');
+                    });
+
                 updateTotalSummary();
             });
             //-------------------------------------------------------------------------

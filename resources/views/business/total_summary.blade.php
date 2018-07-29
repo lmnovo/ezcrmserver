@@ -25,7 +25,7 @@
         <div class="row" style="padding-top: 15px;">
             <div class="col-md-6">
                 <label id="label_item" for="budget">{{trans('crudbooster.discount')}}</label>
-                <input type="text" class="form-control" id="discount" name="discount"  value="0.00" placeholder="Discount" required >
+                <input type="text" class="form-control" id="discount" name="discount"  value="<?php echo !$business->discount == 0 ? $business->discount : "0.00" ?>" placeholder="Discount" required >
             </div>
             <div class="col-md-6">
                 <label for="gtotalquote" >{{trans('crudbooster.subtotal_ammount')}}</label>

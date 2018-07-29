@@ -32,7 +32,7 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
-			$this->col[] = ["label"=>"Assigned To","name"=>"cms_users_id","join"=>"cms_users,name"];
+			$this->col[] = ["label"=>"Assigned","name"=>"cms_users_id","join"=>"cms_users,name"];
 			$this->col[] = ["label"=>"Lead Name","name"=>"leads_id","join"=>"leads,name"];
 			$this->col[] = ["label"=>"Date Limit","name"=>"date_limit"];
 			$this->col[] = ["label"=>"Total","name"=>"total"];
@@ -617,6 +617,7 @@
             $total = $business->total;
             $date_limit = $business->date_limit;
             $stages_groups_id = $business->stages_groups_id;
+            $discount = $business->discount;
 
             if (!empty($request->get('business_name'))) {
                 $name = $request->get('business_name');
@@ -636,6 +637,9 @@
             if (!empty($request->get('business_stages_groups_id'))) {
                 $stages_groups_id = $request->get('business_stages_groups_id');
             }
+            if (!empty($request->get('business_discount'))) {
+                $discount = $request->get('business_discount');
+            }
 
             $sumarizedData = [
                 'name' => $name,
@@ -644,6 +648,7 @@
                 'total' => $total,
                 'date_limit' => $date_limit,
                 'stages_groups_id' => $stages_groups_id,
+                'discount' => $discount,
             ];
             return DB::table('business')->where('id',$request->get('id'))->update($sumarizedData);
         }

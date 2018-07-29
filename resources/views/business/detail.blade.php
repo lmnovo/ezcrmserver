@@ -119,7 +119,7 @@
                                 console.log(item);
                                 item.removeClass('bg-gray');
                                 item.addClass('bg-blue');
-                                window.location.href = 'http://127.0.0.1:8000/crm/business/edit/'+business_id;
+                                window.location.href = 'http://127.0.0.1:8000/crm/business/detail/'+business_id;
                             }
                         });
                     });
