@@ -36,7 +36,7 @@
 			$this->col[] = ["label"=>"Type","name"=>"type"];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
 			$this->col[] = ["label"=>"Total Sent","name"=>"total_sent"];
-			$this->col[] = ["label"=>"Template","name"=>"cms_email_templates_id", "join"=>"cms_email_templates,name"];
+			$this->col[] = ["label"=>"Template","name"=>"cms_email_templates_id","join"=>"cms_email_templates,name"];
 			$this->col[] = ["label"=>"Creation Date","name"=>"created_at"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -44,16 +44,16 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'To','name'=>'to','type'=>'textarea','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Subject','name'=>'subject','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Template','name'=>'cms_email_templates_id','type'=>'select2','width'=>'col-sm-10','datatable'=>'cms_email_templates,name'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>trans('crudbooster.to'),'name'=>'to','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>trans('crudbooster.subject'),'name'=>'subject','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>trans('crudbooster.content'),'name'=>'content','type'=>'wysiwyg','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>trans('crudbooster.templates'),'name'=>'cms_email_templates_id','type'=>'select2','width'=>'col-sm-10','datatable'=>'cms_email_templates,name'];
+			//$this->form[] = ['label'=>'To','name'=>'to','type'=>'textarea','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Subject','name'=>'subject','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Content','name'=>'content','type'=>'wysiwyg','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Template','name'=>'cms_email_templates_id','type'=>'select2','width'=>'col-sm-10','datatable'=>'cms_email_templates,name'];
 			# OLD END FORM
 
 			/* 
@@ -162,8 +162,8 @@
 	        	    //$('section[class=content-header] h1').text('Campaigns');	    
 	        	    //$('div[class=panel-heading] strong').text('Campaigns');
 	        	    
-	        	    var template = '<div style=\"margin-right: 15px; margin-left: 15px\"><a class=\"btn btn-warning pull-right\" title=\"New Template\" href=\"http://18.220.213.59/crm/email_templates/add\"><i class=\"fa fa-envelope-o\"></i></a></div>';
-	        	    var schedule_email = '<div style=\"margin-right: 15px; \"><a style=\"margin-left: 5px; \" class=\"btn btn-primary pull-right\" title=\"Schedule Email\" href=\"http://18.220.213.59/crm/campaign_automations/add\"><i class=\"fa fa-calendar-plus-o\"></i></a></div>';
+	        	    var template = '<div style=\"margin-right: 15px; margin-left: 15px\"><a class=\"btn btn-warning pull-right\" title=\"New Template\" href=\"http://127.0.0.1:8000/crm/email_templates/add\"><i class=\"fa fa-envelope-o\"></i></a></div>';
+	        	    var schedule_email = '<div style=\"margin-right: 15px; \"><a style=\"margin-left: 5px; \" class=\"btn btn-primary pull-right\" title=\"Schedule Email\" href=\"http://127.0.0.1:8000/crm/campaign_automations/add\"><i class=\"fa fa-calendar-plus-o\"></i></a></div>';
 	        	    	 
 	        	    $('#form-group-cms_email_templates_id').append(schedule_email);	 
 	        	    $('#form-group-cms_email_templates_id').append(template);	 
@@ -377,7 +377,7 @@
 
                 foreach ($to as $to_item) {
                     //Agregar links de suscripción a las campañas de email marketing
-                    $content = $html."</br> <a href='http://18.220.213.59/unsubscribed/leads/$to_item'>Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí</a>";
+                    $content = $html."</br> <a href='http://127.0.0.1:8000/unsubscribed/leads/$to_item'>Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí</a>";
 
                     \Mail::send("crudbooster::emails.blank",['content'=>$content],function($message) use ($to_item,$subject,$template, $html) {
                         $message->priority(1);

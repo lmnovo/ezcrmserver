@@ -394,7 +394,7 @@ return [
     'discount' => 'Discount',
     'tax' => 'Tax',
     'leads' => 'Leads',
-    'Need_create_a_lead' => 'Begin Now - Click Here',
+    'Need_create_a_lead' => 'Begin Now',
     'General_System' => 'Quick Tour - General System',
     'Add_Lead' => 'Quick Tour - Add Lead',
     'Edit_Lead' => 'Quick Tour - Edit Lead',
@@ -574,7 +574,7 @@ return [
     'crm_gratis'  => 'Begin with Free EzCRM',
     'access'  => 'Begin Now',
     'text_client'  => 'Already have an account?',
-    'text_tour_promotion'  => 'EzCRM allows managing your business adding prospects, potential customers, opportunities of sales, reminders, notifications, notes, automated tasks, campaigns, statistical charts. It allows sending e-mails and sms. Ezcrm is an easy and simple way you can organize your business in a few minutes.',
+    'text_tour_promotion'  => 'EzCRM allows managing your business adding potential customers, reminders, notifications, notes, automated tasks, campaigns, statistical charts. It allows sending e-mails and sms. Ezcrm is an easy and simple way you can organize your business in a few minutes.',
     'text_tour_first_steps'  => 'First Steps',
     'first_steps'  => 'First Steps - Initial Configuration',
     'Content'  => 'Content',
@@ -582,7 +582,7 @@ return [
 
     'add_buildout'  => 'Add Build Out',
     'buildout_creation'  => 'Add Build Out',
-    'text_login'  => 'Login Here!',
+    'text_login'  => 'Login',
     'text_email'  => 'Enter email here...',
     'text_forgot'  => 'Your password was recovered satisfactorily. From now on we show your data:',
 

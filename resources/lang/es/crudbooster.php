@@ -405,7 +405,7 @@ return [
     'discount' => 'Descuento',
     'tax' => 'Impuesto',
     'leads' => 'Prospectos',
-    'Need_create_a_lead' => 'Comience Ahora - Clic Aquí',
+    'Need_create_a_lead' => 'Comience Ahora',
     'General_System' => 'Guía rápida - Sistema General',
     'Add_Lead' => 'Guía rápida - Crear Prospecto',
     'Edit_Lead' => 'Guía rápida - Editar Prospecto',
@@ -584,7 +584,7 @@ return [
     'crm_gratis'  => 'Comience con EazyCRM Gratis',
     'access'  => 'Comience Ahora',
     'text_client'  => '¿Ya se encuentra registrado?',
-    'text_tour_promotion'  => 'EzCRM le permite administrar tu negocio adicionando prospectos, clientes potenciales, oportunidades de ventas, recordatorios, notificaciones, notas, tareas automatizadas, campañas, gráficas estadísticas. Permite enviar correos electrónicos y sms. Ezcrm es una forma fácil y simple usted puede organizar su negocio en pocos minutos.',
+    'text_tour_promotion'  => 'EzCRM le permite administrar tu negocio adicionando clientes potenciales, recordatorios, notificaciones, notas, tareas automatizadas, campañas, gráficas estadísticas. Permite enviar correos electrónicos y sms. Ezcrm es una forma fácil y simple usted puede organizar su negocio en pocos minutos.',
     'text_tour_first_steps'  => 'Primeros Pasos',
     'first_steps'  => 'Primeros Pasos - Configuración Inicial',
     'Content'  => 'Contenido',
@@ -593,7 +593,7 @@ return [
     'add_buildout'  => 'Add Build Out',
 
     'buildout_creation'  => 'Adicionar Build Out',
-    'text_login'  => '¡Acceda con Credenciales Aquí!',
+    'text_login'  => 'Login',
     'text_email'  => 'Introduzca correo aquí...',
     'text_forgot'  => 'Su contraseña fue recuperada satisfactoriamente. A continuación le mostramos sus datos:',
 

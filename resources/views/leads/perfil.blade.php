@@ -1,27 +1,27 @@
 <!-- First, extends to the CRUDBooster Layout -->
 @extends('crudbooster::admin_template')
 @section('content')
-    <script src='http://18.220.213.59/p/jquery-ui.custom.min.js'></script>
-    <script src="http://18.220.213.59/p/jquery.ui.touch-punch.min.js"></script>
-    <script src="http://18.220.213.59/p/chosen.jquery.min.js"></script>
-    <script src="http://18.220.213.59/p/spinbox.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-datepicker.min.js"></script>
-    <script src="http://18.220.213.59/p/moment.min.js"></script>
-    <script src="http://18.220.213.59/p/daterangepicker.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-datetimepicker.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-colorpicker.min.js"></script>
-    <script src="http://18.220.213.59/p/jquery.knob.min.js"></script>
-    <script src="http://18.220.213.59/p/autosize.min.js"></script>
-    <script src="http://18.220.213.59/p/jquery.inputlimiter.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-tag.min.js"></script>
+    <script src='http://127.0.0.1:8000/p/jquery-ui.custom.min.js'></script>
+    <script src="http://127.0.0.1:8000/p/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/chosen.jquery.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/spinbox.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-datepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/moment.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/daterangepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-colorpicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/jquery.knob.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/autosize.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/jquery.inputlimiter.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-tag.min.js"></script>
 
     <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="http://18.220.213.59/p/dropzone.min.css" />
-    <script src="http://18.220.213.59/p/dropzone.min.js"></script>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/p/dropzone.min.css" />
+    <script src="http://127.0.0.1:8000/p/dropzone.min.js"></script>
 
     <!-- ace scripts -->
-    <script src="http://18.220.213.59/p/ace-elements.min.js"></script>
-    <script src="http://18.220.213.59/p/ace.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/ace-elements.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
 
     <link href="{{ asset("vendor/switchery/dist/switchery.min.css")}}" rel="stylesheet" type="text/css" />
     <script src="{{ asset('vendor/switchery/dist/switchery.min.js') }}"></script>
@@ -186,7 +186,7 @@
                             </li>
                             <li class="list-group-item" style="height: 55px">
                                 <b>{{trans('crudbooster.assign_to')}}</b> <p class="text-muted" style="text-align: right; color: #3c8dbc;">
-                                    {{ $lead->user_fullname }}
+                                    {{ $lead->name }} {{ $lead->lastname }}
                                 </p>
                             </li>
                             <li class="list-group-item" style="height: 55px">
@@ -224,11 +224,19 @@
                 <!-- Custom Tabs -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
+                        <!--
                         <li class="active tabs_leads_activities"><a href="#activities" data-toggle="tab"><i class='fa fa-flag'></i> {{trans('crudbooster.history')}}<strong>(<?php echo(count($recent_activities))?>)</strong></a></li>
                         <li class="tabs_leads_notes"><a href="#notes" data-toggle="tab"><i class='fa fa-file-text-o'></i> {{trans('crudbooster.notes')}}<strong>(<?php echo(count($notes))?>)</strong></a></li>
                         <li class="tabs_leads_tasks"><a href="#tasks" data-toggle="tab"><i class='fa fa-calendar-minus-o'></i> {{trans('crudbooster.tasks')}}<strong>(<?php echo(count($tasks))?>)</strong></a></li>
                         <li class="tabs_business"><a href="#business" data-toggle="tab"><i class='fa fa-briefcase'></i> {{trans('crudbooster.negociations')}}<strong>(<?php echo(count($business))?>)</strong></a></li>
                         <li class="tabs_leads_campaigns"><a href="#campaigns" data-toggle="tab"><i class='fa fa-envelope-o'></i> {{trans('crudbooster.campaigns_emails')}}<strong>(<?php echo(count($campaigns))?>)</strong></a></li>
+                        -->
+
+                        <li class="active tabs_leads_activities"><a href="#activities" data-toggle="tab"><i class='fa fa-flag'></i> {{trans('crudbooster.history')}}</a></li>
+                        <li class="tabs_leads_notes"><a href="#notes" data-toggle="tab"><i class='fa fa-file-text-o'></i> {{trans('crudbooster.notes')}}</a></li>
+                        <li class="tabs_leads_tasks"><a href="#tasks" data-toggle="tab"><i class='fa fa-calendar-minus-o'></i> {{trans('crudbooster.tasks')}}</a></li>
+                        <li class="tabs_business"><a href="#business" data-toggle="tab"><i class='fa fa-briefcase'></i> {{trans('crudbooster.negociations')}}</a></li>
+                        <li class="tabs_leads_campaigns"><a href="#campaigns" data-toggle="tab"><i class='fa fa-envelope-o'></i> {{trans('crudbooster.campaigns_emails')}}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane activities active" id="activities">
@@ -289,7 +297,7 @@
                                                             confirmButtonText: '{{trans('crudbooster.yes')}}',
                                                             cancelButtonText: '{{trans('crudbooster.no')}}',
                                                             closeOnConfirm: false },
-                                                            function(){  location.href='http://18.220.213.59/crm/eazy_notes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
+                                                            function(){  location.href='http://127.0.0.1:8000/crm/eazy_notes/delete/{{ $note->id }}' });"><i class="fa fa-trash"></i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -304,7 +312,7 @@
                                         <textarea class="form-control" type="text" id="note_value" name="note_value" rows="3" value=""> </textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <button type="button" id="add_note" class="btn btn-xl btn-primary" >{{trans('crudbooster.add_note')}}</button>
+                                        <button type="button" id="add_note" class="btn btn-xl btn-primary" >{{trans('crudbooster.add')}}</button>
                                     </div>
                                 </div>
 
@@ -338,8 +346,8 @@
                                             <td>{{$task->name}}</td>
                                             <td>{{$task->created_at}}</td>
                                             <td style="text-align: center">
-                                                {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://18.220.213.59/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
-                                                <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://18.220.213.59/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
+                                                {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
+                                                <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
                                                 --}}
                                                 <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
                                                         title: '{{trans('crudbooster.are_you_sure')}}',
@@ -395,8 +403,8 @@
                                             <td>{{$business_item->total}}</td>
                                             <td>{{$business_item->date_limit}}</td>
                                             {{--<td style="text-align: center">
-                                                --}}{{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://18.220.213.59/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
-                                                <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://18.220.213.59/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
+                                                --}}{{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
+                                                <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>
                                                 --}}{{--
                                                 --}}{{-- <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
                                                          title: '{{trans('crudbooster.are_you_sure')}}',
