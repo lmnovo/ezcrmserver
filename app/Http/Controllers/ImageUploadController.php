@@ -60,7 +60,7 @@ class ImageUploadController extends Controller
 
         //Si ya existe el producto
         if (count($exists)) {
-            $quantity = $exists->quantity + 1;
+            $quantity = $exists->quantity + request('product_quantity');
             DB::table('business_products')
                 ->where('business_id', request('business_id'))
                 ->where('products_id', request('product_id'))
@@ -69,7 +69,7 @@ class ImageUploadController extends Controller
             $sumarizedData = [
                 'business_id' => request('business_id'),
                 'products_id' => request('product_id'),
-                'quantity' => 1,
+                'quantity' => request('product_quantity'),
                 'created_at' => Carbon::now(config('app.timezone')),
             ];
 
@@ -78,4 +78,41 @@ class ImageUploadController extends Controller
 
         CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.request('business_id')),trans("crudbooster.text_open_edit_quote"));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function addNewProductPost()
+    {
+        //dd(request()->all());
+        //Si existe la imagen, si no está vacía
+        $imageName = null;
+        if (!empty(request('image'))) {
+            request()->validate([
+                'image' => 'required|file|mimes:jpg,png,jpeg,gif,bmp,pdf,xls,xlsx,doc,docx,txt,zip,rar,7z',
+            ]);
+
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images/products'), $imageName);
+        }
+
+        $sumarizedData = [
+            'name' => request('new_product_name'),
+            'description' => request('new_product_description'),
+            'buy_price' => request('new_product_buy_price'),
+            'sell_price' => request('new_product_sell_price'),
+            'weight' => request('new_product_weight'),
+            'photo' => $imageName,
+            'created_at' => Carbon::now(config('app.timezone')),
+        ];
+
+        DB::table('products')->insert($sumarizedData);
+
+        CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.request('business_id')),trans("crudbooster.text_open_edit_quote"));
+    }
+
+
 }

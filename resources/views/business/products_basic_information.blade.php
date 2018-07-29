@@ -19,7 +19,7 @@
             <div class="row">
                 <div class='col-sm-3'>
                     <label>{{trans('crudbooster.Business_Name')}}*</label>
-                    <input type='text' name='business_name' required class='form-control' value="{{ $business->name }}"/>
+                    <input type='text' id="business_name" name='business_name' required class='form-control' value="{{ $business->name }}"/>
                 </div>
 
                 <div class='col-sm-3'>
@@ -37,7 +37,7 @@
 
                 <div class='col-sm-3'>
                     <label>{{trans('crudbooster.total_amount')}}*</label>
-                    <input type='text' name='total' required class='form-control' value="{{ $business->total }}"/>
+                    <input type='text' id="total" name='total' required class='form-control' value="{{ $business->total }}"/>
                 </div>
 
                 <div class='col-sm-3'>
@@ -66,7 +66,7 @@
 
                 <div class='col-sm-9'>
                     <label>{{trans('crudbooster.description')}}</label>
-                    <textarea name='description' rows="3" class='form-control'> {{ $business->description }} </textarea>
+                    <textarea id="description" name='description' rows="3" class='form-control'> {{ $business->description }} </textarea>
                 </div>
             </div>
     </div>

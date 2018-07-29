@@ -631,7 +631,7 @@ return [
     'text_open_edit_quote' => 'You can create new business!',
     'text_open_created_business' => 'Business Created Successfully!',
     'text_open_edited_business' => 'Business Edited Successfully!',
-    'total_amount' => 'Total Amount',
+    'total_amount' => 'Initial Amount',
     'date_limit' => 'Date Limit',
     'campaigns_emails' => 'Campaigns',
     'negociations' => 'Negociations',
@@ -651,6 +651,11 @@ return [
     'date_due' => 'Date Due',
     'task_help' => 'Automáticamente usted recibirá un correo electrónico 1 hora antes de la fecha de vencimiento de la tarea. Esta acción se puede modificar en el campo "Recordatorio por correo".',
     'notification_email' => 'Reminder by Email',
+    'new' => 'New',
+    'add_new_product' => 'Add New Product',
+    'subtotal_ammount' => 'Subtotal Ammount (Without Tax)',
+    'total_ammount' => 'Total Ammount',
+    'products_tax' => 'Products Tax',
 
 
 

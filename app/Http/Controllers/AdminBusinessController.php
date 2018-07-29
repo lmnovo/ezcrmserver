@@ -606,6 +606,90 @@
             $this->cbView('business.create',$data);
         }
 
+        //Guardar mediante ajax los cambios en el Business
+        public function getAjaxsave(\Illuminate\Http\Request $request) {
+	        //Business Actual
+	        $business = DB::table('business')->where('id',$request->get('id'))->first();
+
+            $name = $business->name;
+            $description = $business->description;
+            $cms_users_id = $business->cms_users_id;
+            $total = $business->total;
+            $date_limit = $business->date_limit;
+            $stages_groups_id = $business->stages_groups_id;
+
+            if (!empty($request->get('business_name'))) {
+                $name = $request->get('business_name');
+            }
+            if (!empty($request->get('business_description'))) {
+                $description = $request->get('business_description');
+            }
+            if (!empty($request->get('business_user_id'))) {
+                $cms_users_id = $request->get('business_user_id');
+            }
+            if (!empty($request->get('business_total'))) {
+                $total = $request->get('business_total');
+            }
+            if (!empty($request->get('business_date_limit'))) {
+                $date_limit = $request->get('business_date_limit');
+            }
+            if (!empty($request->get('business_stages_groups_id'))) {
+                $stages_groups_id = $request->get('business_stages_groups_id');
+            }
+
+            $sumarizedData = [
+                'name' => $name,
+                'description' => $description,
+                'cms_users_id' => $cms_users_id,
+                'total' => $total,
+                'date_limit' => $date_limit,
+                'stages_groups_id' => $stages_groups_id,
+            ];
+            return DB::table('business')->where('id',$request->get('id'))->update($sumarizedData);
+        }
+
+        //Guardar mediante ajax los cambios en el Business - Lead
+        public function getAjaxleadsave(\Illuminate\Http\Request $request) {
+            //Lead Actual del Business Actual
+            $leads = DB::table('leads')->where('id',$request->get('lead_id'))->first();
+
+            $name = $leads->name;
+            $lastname = $leads->lastname;
+            $email = $leads->email;
+            $phone = $leads->phone;
+            $states_id = $leads->states_id;
+            $city = $leads->city;
+
+            if (!empty($request->get('lead_name'))) {
+                $name = $request->get('lead_name');
+            }
+            if (!empty($request->get('lead_lastname'))) {
+                $lastname = $request->get('lead_lastname');
+            }
+            if (!empty($request->get('lead_email'))) {
+                $email = $request->get('lead_email');
+            }
+            if (!empty($request->get('lead_phone'))) {
+                $phone = $request->get('lead_phone');
+            }
+            if (!empty($request->get('lead_states_id'))) {
+                $states_id = $request->get('lead_states_id');
+            }
+            if (!empty($request->get('lead_city'))) {
+                $city = $request->get('lead_city');
+            }
+
+            $sumarizedData = [
+                'name' => $name,
+                'lastname' => $lastname,
+                'email' => $email,
+                'phone' => $phone,
+                'states_id' => $states_id,
+                'city' => $city,
+            ];
+            return DB::table('leads')->where('id',$request->get('lead_id'))->update($sumarizedData);
+        }
+
         //Se ejecuta a partir de la acción "getCreate" y guarda la información de un nuevo Business
         public function getEditsave(\Illuminate\Http\Request $request) {
 	        //dd($request->all());

@@ -2,6 +2,7 @@
     <div class='panel-heading' style="background-color: #337ab7; color: white;">
         <strong><i class="fa fa-product-hunt"></i> {{trans('crudbooster.products')}} </strong>
     </div>
+
     <button style="margin-left: 20px; margin-top: 20px;" class="btn btn-success pull-left newProduct" type="button" ><i class="fa fa-product-hunt"></i> {{trans('crudbooster.add_product')}} </button>
 
     <div id="table_products" class="table-responsive hover" style="margin: 70px;">

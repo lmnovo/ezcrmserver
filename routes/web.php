@@ -17,6 +17,7 @@ use Carbon\Carbon;
     Route::post('ajaxImageUpload', ['as'=>'ajaxImageUpload','uses'=>'ImageUploadController@imageUploadPost']);
 
     Route::post('ajaxAddProduct', ['as'=>'ajaxAddProduct','uses'=>'ImageUploadController@addProductPost']);
+    Route::post('ajaxAddNewProduct', ['as'=>'ajaxAddNewProduct','uses'=>'ImageUploadController@addNewProductPost']);
 
     Route::get('/', function () {
         return view('welcome');

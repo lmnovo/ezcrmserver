@@ -640,7 +640,7 @@ return [
     'no_history'  => 'No Existe Historial de Acciones',
     'text_open_edit_quote' => 'Usted puede crear un nuevo negocio!',
     'text_open_created_business' => 'Negociación Creada Satisfactoriamente!',
-    'total_amount' => 'Cantidad Total',
+    'total_amount' => 'Cantidad Inicial',
     'date_limit' => 'Fecha Estimada de Cierre',
     'campaigns_emails' => 'Campañas',
     'negociations' => 'Negociaciones',
@@ -660,5 +660,10 @@ return [
     'date_due' => 'Fecha de Vencimiento',
     'task_help' => 'Automáticamente usted recibirá un correo electrónico 1 hora antes de la fecha de vencimiento de la tarea. Esta acción se puede modificar en el campo "Recordatorio por correo".',
     'notification_email' => 'Recordatorio por Correo',
+    'new' => 'Nuevo',
+    'add_new_product' => 'Agregar Nuevo Producto',
+    'subtotal_ammount' => 'Monto Subtotal (Sin Impuestos)',
+    'total_ammount' => 'Monto Total',
+    'products_tax' => 'Impuesto de Productos',
 
 ];
