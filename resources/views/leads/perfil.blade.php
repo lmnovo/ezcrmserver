@@ -45,9 +45,14 @@
     <script>
         $(document).ready(function()
         {
-            $('#date').datepicker({
+            $('#date_due').datepicker({
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+            });
+
+            $('#reminder_email').datepicker({
+                autoclose: true,
+                todayHighlight: true,
             });
 
             //Acción para modificar el estado de la suscripción a campañas del lead
@@ -332,7 +337,8 @@
                                     <thead>
                                     <tr>
                                         <th>{{trans('crudbooster.name')}}</th>
-                                        <th>{{trans('crudbooster.created_at')}}</th>
+                                        <th>{{trans('crudbooster.date_due')}}</th>
+                                        <th>{{trans('crudbooster.notification_email')}}</th>
                                         <th style="text-align: center">{{trans('crudbooster.actions')}}</th>
                                     </tr>
                                     </thead>
@@ -345,6 +351,7 @@
                                         <tr>
                                             <td>{{$task->name}}</td>
                                             <td>{{$task->created_at}}</td>
+                                            <td>{{$task->updated_at}}</td>
                                             <td style="text-align: center">
                                                 {{--<a class="btn btn-xs btn-primary btn-detail" title="{{trans('crudbooster.detail')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/detail/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50"><i class="fa fa-eye"></i></a>
                                                 <a class="btn btn-xs btn-success btn-edit" title="{{trans('crudbooster.edit')}}" href="http://127.0.0.1:8000/crm/eazy_tasks/edit/{{$task->id}}?return_url=http%3A%2F%2F127.0.0.1%3A8000%2Fcrm%2Feazy_tasks%3Fforeign_key%3Dcustomers_id%26label%3DTasks%26parent_columns%3Dname%26parent_id%3D{{$id}}%26parent_table%3Daccount%26return_url%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fcrm%252Faccount%253Fm%253D50&parent_id=3288&parent_field="><i class="fa fa-pencil"></i></a>

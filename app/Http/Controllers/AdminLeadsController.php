@@ -405,10 +405,9 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     //Agregar Tarea de tipo Lead
     public function getAddsave(\Illuminate\Http\Request $request) {
 
-        $date = $request->get('date');
-
         $sumarizedData = [
-            'created_at' => $date,
+            'created_at' => $request->get('date'),
+            'updated_at' => $request->get('reminder_email'),
             'name' => $request->get('name'),
             'assign_to_id' => $request->get('lead_id'),
             'type' => 'leads',

@@ -657,5 +657,8 @@ return [
     'sell_price' => 'Precio de Venta',
     'weight' => 'Peso',
     'select_data' => 'Seleccionar Datos',
+    'date_due' => 'Fecha de Vencimiento',
+    'task_help' => 'Automáticamente usted recibirá un correo electrónico 1 hora antes de la fecha de vencimiento de la tarea. Esta acción se puede modificar en el campo "Recordatorio por correo".',
+    'notification_email' => 'Recordatorio por Correo',
 
 ];

@@ -74,12 +74,13 @@ $(document).ready(function()
     //Guardar los datos de la nueva Tarea
     $('#addSaveTask').on('click',function(){
         var name = $('#name').val();
-        var date = $('#date').val();
+        var date = $('#date_due').val();
+        var reminder_email = $('#reminder_email').val();
         var lead_id = $('#lead_id').val();
 
         $.ajax({
             url: '../addsave',
-            data: "name="+$('#name').val()+"&date="+$('#date').val()+"&lead_id="+$('#lead_id').val(),
+            data: "name="+$('#name').val()+"&date="+$('#date_due').val()+"&lead_id="+$('#lead_id').val()+"&reminder_email="+$('#reminder_email').val(),
             type:  'get',
             dataType: 'json',
             success : function(data) {
