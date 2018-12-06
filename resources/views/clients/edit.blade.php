@@ -182,7 +182,7 @@
                                         <div class="map" id="map-address"></div>
                                         <br>
                                         <p>
-                                            <span class="text-info" style="font-weight: bold">Current Location :</span><br>
+                                            <span class="text-info" style="font-weight: bold">Ubicación Actual :</span><br>
                                             <span id="current-location-span-address">-</span>
                                         </p>
 
@@ -457,7 +457,7 @@
                     <div class="col-sm-10">
 
 
-                        <a href="http://18.220.213.59/crm/customers25?" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Back</a>
+                        <a href="http://127.0.0.1:8000/crm/customers25?" class="btn btn-default"><i class="fa fa-chevron-circle-left"></i> Back</a>
 
 
                         <input type="submit" name="submit" value="Save" class="btn btn-success">

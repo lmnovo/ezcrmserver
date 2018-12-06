@@ -321,6 +321,8 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
             'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
         ]);
 
+        //Mostrar los detalles del Lead Creado
+        return $this->getDetail($id);
     }
 
     /*

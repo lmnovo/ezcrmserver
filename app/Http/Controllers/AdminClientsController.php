@@ -184,7 +184,7 @@
                             type:  'get',
                             dataType: 'json',
                             success : function(data) {
-                                window.location.href = 'http://18.220.213.59/crm/customers25/detail/'+customers_id;                                                        
+                                window.location.href = 'http://127.0.0.1:8000/crm/customers25/detail/'+customers_id;                                                        
                             }
                          });  
                     });
@@ -662,7 +662,7 @@
 
 
             $order = DB::table('user_trucks')->where('id',$id)->first();
-            dd($order);
+            //dd($order);
 
             //$customer = DB::table('customers')->where('id', $order->customers_id)->first();
             $customer = DB::table('account')->where('id', $order->id_account)->first();

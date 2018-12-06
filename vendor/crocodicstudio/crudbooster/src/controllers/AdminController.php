@@ -1,5 +1,6 @@
 <?php namespace crocodicstudio\crudbooster\controllers;
 
+use Carbon\Carbon;
 use crocodicstudio\crudbooster\controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -51,8 +52,13 @@ class AdminController extends CBController {
 	{											
 		return view('crudbooster::login');
 	}
+
+    public function getRegister()
+    {
+        return view('crudbooster::register');
+    }
  
-	public function postLogin() {		
+	public function postLogin() {
 
 		$validator = Validator::make(Request::all(),			
 			[
@@ -102,6 +108,58 @@ class AdminController extends CBController {
 			return redirect()->route('getLogin')->with('message', trans('crudbooster.alert_password_wrong'));			
 		}		
 	}
+
+    public function postRegister() {
+
+        $validator = Validator::make(Request::all(),
+            [
+                'name'=>'required',
+                'email'=>'required|email|unique:'.config('crudbooster.USER_TABLE'),
+                'password'=>'required'
+            ]
+        );
+
+        if ($validator->fails())
+        {
+            $message = $validator->errors()->all();
+            return redirect()->back()->with(['message'=>implode(', ',$message),'message_type'=>'danger']);
+        }
+
+        $password 	= Request::input("password");
+        $password   = \Hash::make($password);
+        $email = Request::input("email");
+        $name = Request::input("name");
+
+        $sumarizedData = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'status' => 'Active',
+            'photo' => 'images/user.png',
+            'created_at' => Carbon::now(config('app.timezone')),
+            'updated_at' => Carbon::now(config('app.timezone')),
+        ];
+
+        DB::table('cms_users')->insert($sumarizedData);
+
+        //Enviar email al usuario creado
+        $to[] = $email;
+
+        $subject = trans("crudbooster.email_register_subject");
+
+        $html = "<p>".trans("crudbooster.text_dear")." $name, ".trans("crudbooster.email_register")."</p>";
+
+        //Send Email with notification End Step
+        \Mail::send("crudbooster::emails.blank",['content'=>$html],function($message) use ($to,$subject) {
+            $message->priority(1);
+            $message->to($to);
+
+            $message->subject($subject);
+        });
+
+        return redirect()->route('getLogin');
+
+    }
 
 	public function getForgot() {		
 		return view('crudbooster::forgot');

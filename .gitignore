@@ -1,5 +1,11 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
 /.idea
-.env
-storage/framework/views/*
-storage/framework/sessions/*
-storage/framework/cache/*
+/.vscode
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log

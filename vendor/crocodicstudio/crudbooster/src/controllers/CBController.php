@@ -523,7 +523,7 @@ class CBController extends Controller {
                         //$value = "<a href=mailto:$value target='_blank'>$value</a>";
                         $id = DB::table('account')->where('email', $value)->first();
 
-                        $value = "<a href='http://18.220.213.59/crm/account/send-email/$id->id')>$value</a>";
+                        $value = "<a href='http://127.0.0.1:8000/crm/account/send-email/$id->id')>$value</a>";
                     }
 
                     if($col['urlClient']) {
@@ -1099,9 +1099,13 @@ class CBController extends Controller {
 						}
 					}
 
-					if($file->move($file_path,$filename)) {
+                    if ($file->move(public_path('images'), $filename)) {
+                        $this->arr[$name] = 'images/'.$filename;
+                    }
+
+					/*if($file->move($file_path,$filename)) {
 						$this->arr[$name] = 'uploads/'.date('Y-m').'/'.$filename;
-					}
+					}*/
 				}
 
 				if(!$this->arr[$name]) {
@@ -1632,9 +1636,12 @@ class CBController extends Controller {
 			//Move file to storage
 			$filename = md5(str_random(5)).'.'.$ext;
 			$url_filename = '';
-			if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
+            if ($file->move(public_path('images'), $filename)) {
+                $url_filename = 'images/'.$filename;
+            }
+			/*if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
 				$url_filename = 'uploads/'.date('Y-m').'/'.$filename;
-			}
+			}*/
 			$url = CRUDBooster::mainpath('import-data').'?file='.base64_encode($url_filename);
 			return redirect($url);
 		}else{
@@ -1721,9 +1728,13 @@ class CBController extends Controller {
 
 			//Move file to storage
 			$filename = md5(str_random(5)).'.'.$ext;
-			if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
+
+            if ($file->move(public_path('images'), $filename)) {
+                echo asset('images/'.$filename);
+            }
+			/*if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
 				echo asset('uploads/'.date('Y-m').'/'.$filename);
-			}
+			}*/
 		}
 	}
 
@@ -1740,9 +1751,14 @@ class CBController extends Controller {
 
 			//Move file to storage
 			$filename = md5(str_random(5)).'.'.$ext;
-			if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
+
+            if ($file->move(public_path('images'), $filename)) {
+                echo 'images/'.$filename;
+            }
+
+			/*if($file->move(storage_path('app'.DIRECTORY_SEPARATOR.date('Y-m')),$filename)) {
 				echo 'uploads/'.date('Y-m').'/'.$filename;
-			}
+			}*/
 		}
 	}
 

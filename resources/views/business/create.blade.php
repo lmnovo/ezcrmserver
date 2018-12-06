@@ -1,31 +1,31 @@
 @extends('crudbooster::admin_template')
 @section('content')
 
-    <script src='http://18.220.213.59/p/jquery-ui.custom.min.js'></script>
-    <script src="http://18.220.213.59/p/jquery.ui.touch-punch.min.js"></script>
-    <script src="http://18.220.213.59/p/chosen.jquery.min.js"></script>
-    <script src="http://18.220.213.59/p/spinbox.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-datepicker.min.js"></script>
-    {{--<script src="http://18.220.213.59/p/bootstrap-timepicker.min.js"></script>--}}
-    <script src="http://18.220.213.59/p/moment.min.js"></script>
-    <script src="http://18.220.213.59/p/daterangepicker.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-datetimepicker.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-colorpicker.min.js"></script>
-    <script src="http://18.220.213.59/p/jquery.knob.min.js"></script>
-    <script src="http://18.220.213.59/p/autosize.min.js"></script>
-    <script src="http://18.220.213.59/p/jquery.inputlimiter.min.js"></script>
-    <script src="http://18.220.213.59/p/bootstrap-tag.min.js"></script>
+    <script src='http://127.0.0.1:8000/p/jquery-ui.custom.min.js'></script>
+    <script src="http://127.0.0.1:8000/p/jquery.ui.touch-punch.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/chosen.jquery.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/spinbox.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-datepicker.min.js"></script>
+    {{--<script src="http://127.0.0.1:8000/p/bootstrap-timepicker.min.js"></script>--}}
+    <script src="http://127.0.0.1:8000/p/moment.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/daterangepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-colorpicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/jquery.knob.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/autosize.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/jquery.inputlimiter.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/bootstrap-tag.min.js"></script>
 
     <!-- ace scripts -->
-    <script src="http://18.220.213.59/p/ace-elements.min.js"></script>
-    <script src="http://18.220.213.59/p/ace.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/ace-elements.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
 
-    <script src="http://18.220.213.59/p/ace.min.js"></script>
+    <script src="http://127.0.0.1:8000/p/ace.min.js"></script>
 
-    <script src="http://18.220.213.59/js/leads/save_forms.js"></script>
+    <script src="http://127.0.0.1:8000/js/leads/save_forms.js"></script>
 
 {{--
-    <script src="http://18.220.213.59/js/products.js"></script>
+    <script src="http://127.0.0.1:8000/js/products.js"></script>
 --}}
 
     <script>
@@ -113,7 +113,7 @@
 
             $('#stages_group').select2();
             $('#product_name').select2();
-            $('#assign_to').select2();
+            $('#c').select2();
             $('#state').select2();
             $('#date_limit').datepicker({
                 autoclose: true,
@@ -128,7 +128,7 @@
                 $('#new_product_sell_price').val('');
                 $('#new_product_quantity').val('');
                 $('#new_product_weight').val('0.00');
-                $('#new_product_photo').attr('src','http://18.220.213.59/images/products/image-not-found.png');
+                $('#new_product_photo').attr('src','http://127.0.0.1:8000/images/products/image-not-found.png');
 
                 $('#addProductModal').modal('show');
                 $('#newProductModal').modal('hide');
@@ -143,7 +143,7 @@
                 $('#product_sell_price').val('');
                 $('#product_quantity').val('');
                 $('#product_weight').val('0.00');
-                $('#product_photo').attr('src','http://18.220.213.59/images/products/image-not-found.png');
+                $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/image-not-found.png');
                 $.ajax({
                     type: "GET",
                     url: "../products",
@@ -178,9 +178,9 @@
                         $('#product_total').val(parseFloat(data[0].sell_price));
 
                         if(data[0].photo==null)
-                            $('#product_photo').attr('src','http://18.220.213.59/images/products/image-not-found.png');
+                            $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/image-not-found.png');
                         else
-                            $('#product_photo').attr('src','http://18.220.213.59/images/products/'+data[0].photo);
+                            $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/'+data[0].photo);
                     }
                 });
 

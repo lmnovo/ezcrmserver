@@ -1,7 +1,10 @@
 <?php
 return [
+    'email_register'             => 'you have registered in the EZCRM system. Your account will be activated by the system\'s administrator.',
+    'email_register_subject'     => 'Account Registered',
     'email_footer'               => 'Do not reply any email to this email address. This email sent automatically by our system. ',
     'login_message'              => 'Please login to start your session',
+    'register_message'           => 'Please register to create a new account',
     'text_forgot_password'       => 'Forgot the password ?',
     'page_title_login'           => 'Login Panel',
     'page_title_forgot'          => 'Forgot Password',
@@ -110,6 +113,7 @@ return [
     'button_submit'          => 'Submit',
     'button_logout'          => 'Logout',
     'button_sign_in'         => 'Sign In',
+    'button_register'         => 'Register',
     'button_selected_action' => 'Actions',
     'button_download_file'   => 'Download file',
     'button_reset'           => 'Reset',
@@ -309,6 +313,7 @@ return [
 
     'text_information'  => 'Statistics',
     'text_quick_tour'  => 'Tour',
+    'text_quick_register'  => 'Register',
     'menu_Leads'   => 'Leads',
     'menu_Quotes'  => 'Quotes',
     'menu_Charts'  => 'Charts',

@@ -1,8 +1,11 @@
 <?php 
 return [
-	'emaill_footer'               =>'No respondas a este mensaje, es un mensaje generado automáticamente.',
+    'email_register'             => 'usted se ha registrado en el sistema EZCRM. Su cuenta será activada por el administrador del sistema.',
+    'email_register_subject'     => 'Cuenta Registrada',
+	'emaill_footer'              =>'No respondas a este mensaje, es un mensaje generado automáticamente.',
 	'login_message'              =>'Por favor, inicia sesión para comenzar',
-	'text_forgot_password'       =>'¿Olvidaste tu contraseña?',
+    'register_message'           => 'Por favor registre sus datos para crear nueva cuenta',
+    'text_forgot_password'       =>'¿Olvidaste tu contraseña?',
     'text_remember_password'     => 'Recordar contraseña',
 	'page_title_login'           =>'Inicio de sesión',
 	'page_title_forgot'          =>'Recuperar contraseña',
@@ -117,6 +120,7 @@ return [
 	'button_submit'          =>'Enviar',
 	'button_logout'          =>'Salir',	
 	'button_sign_in'         =>'Iniciar',
+    'button_register'         => 'Registrar',
 	'button_selected_action' =>'Acciones',
 	'button_download_file'   =>'Descargar Fichero',
 	'button_reset'           =>'Resetear',
@@ -319,6 +323,7 @@ return [
 
     'text_information'  => 'Estadísticas',
     'text_quick_tour'  => 'Manual',
+    'text_quick_register'  => 'Registro',
     'menu_Leads'  => 'Prospectos',
     'menu_Quotes'  => 'Cotizaciones',
     'menu_Charts'  => 'Reportes',
