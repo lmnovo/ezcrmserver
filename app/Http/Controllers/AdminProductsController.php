@@ -40,22 +40,22 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
-			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'min:0|numeric','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-            $this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
-            # END FORM DO NOT REMOVE THIS LINE
+			$this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
+			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"You can only enter the letter"];
-			//$this->form[] = ["label"=>"Weight","name"=>"weight","type"=>"number","required"=>TRUE,"validation"=>"integer|min:0"];
-			//$this->form[] = ["label"=>"Buy Price","name"=>"buy_price","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Sell Price","name"=>"sell_price","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Stock","name"=>"stock","type"=>"number","required"=>TRUE,"validation"=>"integer|min:0"];
-            //$this->form[] = ["label"=>"Description","name"=>"description","type"=>"textarea","required"=>TRUE,"validation"=>"string|min:5|max:5000"];
-            # OLD END FORM
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
+			//$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'min:0|double','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Description','name'=>'description','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
+			# OLD END FORM
 
 			/* 
 	        | ---------------------------------------------------------------------- 
@@ -262,8 +262,11 @@
 	    | @arr
 	    |
 	    */
-	    public function hook_before_add(&$postdata) {        
-	        //Your code here
+	    public function hook_before_add(&$postdata) {
+	        //validar que por defecto se envíe un ´weight´ de valor cero (0)
+	        if($postdata['weight'] == "") {
+                $postdata['weight'] = 0;
+            }
 
 	    }
 

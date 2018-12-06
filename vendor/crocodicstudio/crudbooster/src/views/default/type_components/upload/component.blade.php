@@ -6,7 +6,9 @@
 				<?php 
 					$file = str_replace('uploads/','',$value);
 					$is_temporary = (Request::get('temporary'))?:0;
-					if(Storage::exists($file)):								
+                    $url         = asset($value);
+
+					if($url != NULL):
 						$url         = asset($value);
 						@$ext         = strtolower(end(explode('.',$value)));
 						$images_type = array('jpg','png','gif','jpeg','bmp','tiff');																																				
