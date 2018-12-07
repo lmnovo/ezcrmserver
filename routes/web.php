@@ -131,14 +131,8 @@ use Carbon\Carbon;
     //Route::get('/admin/wizard/statistics', function () {
     Route::get('/crm/wizard', function () {
 
-        $dashboard = CRUDBooster::sidebarDashboard();
-        if($dashboard && $dashboard->url) {
-            return redirect($dashboard->url);
-        }
-
-
-
-        return view('statistics/index', compact('data'));
+        $object = new \crocodicstudio\crudbooster\controllers\AdminController();
+        return $object->getIndex();
     });
 
     /*Permite deshabilitar el envío de emails a los Leads*/

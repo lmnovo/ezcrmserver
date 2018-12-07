@@ -32,10 +32,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.notification_email')}}*</label>
+                                <label class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.notification_email')}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input required name="reminder_email" id="reminder_email" class="form-control date-picker" value="" type="text" data-date-format="yyyy-mm-dd">
+                                        <input name="reminder_email" id="reminder_email" class="form-control date-picker" value="" type="text" data-date-format="yyyy-mm-dd">
                                         <span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>
                                     </div>
                                 </div>

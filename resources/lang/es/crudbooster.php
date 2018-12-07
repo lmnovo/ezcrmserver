@@ -313,11 +313,7 @@ return [
     'updated_information'  => 'Información Actualizada',
     'add_task_type'  => 'Agregar Tipo de Tarea',
 
-    'chart_1'  => 'Cotizaciones vs Ventas',
-    'chart_2'  => 'Cotizaciones por Tipos',
-    'chart_3'  => 'Tipos of Prospectos',
-    'chart_4'  => 'Cotizaciones por Vendedores',
-    'chart_5'  => 'Cotizaciones por Estados',
+    'chart_1'  => 'Tipos de Prospectos',
     'by_months'  => 'por meses',
     'all_times'  => '',
 

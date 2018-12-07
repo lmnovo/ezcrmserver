@@ -139,14 +139,17 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <span style="border-radius: 3%;" class="info-box-icon bg-aqua" >
-                            <i class="fa fa-briefcase"></i>
-                        </span>
-
-                        <h3 class="profile-username text-center">{{ $business->business_name }}</h3>
-                        {{--<p class="text-muted" style="text-align: center">-Negocitation Name-</p>--}}
-
                         <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item" style="height: 100%; align-content: center">
+                                <span style="border-radius: 3%;" class="info-box-icon bg-aqua" >
+                                    <i class="fa fa-briefcase"></i>
+                                </span>
+
+                                <h3 class="profile-username text-center" style="padding-top: 15px; font-weight: bold">Business Name</h3>
+                                <br>
+                                <h3 class="profile-username text-center">{{ $business->business_name }}</h3>
+                            </li>
+
                             <li class="list-group-item" style="height: 55px;">
                                 <a title="{{trans('crudbooster.edit')}}" class='btn btn-success pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("business/edit/$id")}}'><i class="fa fa-pencil"></i> </a>
                             </li>

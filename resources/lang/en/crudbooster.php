@@ -303,11 +303,7 @@ return [
     'updated_information'  => 'Updated Information',
     'add_task_type'  => 'Add Task Type',
 
-    'chart_1'  => 'Quotes vs Sales',
-    'chart_2'  => 'Quotes by Types',
-    'chart_3'  => 'Types of Leads',
-    'chart_4'  => 'Quotes by Sellers',
-    'chart_5'  => 'Quotes by States',
+    'chart_1'  => 'Types of Prospects',
     'by_months'  => 'by months',
     'all_times'  => 'all times',
 
@@ -654,7 +650,7 @@ return [
     'weight' => 'Weight',
     'select_data' => 'Select Data',
     'date_due' => 'Date Due',
-    'task_help' => 'Automáticamente usted recibirá un correo electrónico 1 hora antes de la fecha de vencimiento de la tarea. Esta acción se puede modificar en el campo "Recordatorio por correo".',
+    'task_help' => 'You will automatically receive one hour before the sell-by date of the task an e-mail . This action can get modified at the "Reminder By Email".',
     'notification_email' => 'Reminder by Email',
     'new' => 'New',
     'add_new_product' => 'Add New Product',

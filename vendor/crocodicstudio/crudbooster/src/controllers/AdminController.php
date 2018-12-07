@@ -19,7 +19,21 @@ class AdminController extends CBController {
 			return redirect($dashboard->url);
 		}
 
+        $leads = \Illuminate\Support\Facades\DB::table('leads')
+            ->select(\Illuminate\Support\Facades\DB::raw('count(*) as ammount'))
+            ->where('leads.is_client', 0)
+            ->get();
 
+        $leads = \Illuminate\Support\Facades\DB::table('leads')
+            ->select(\Illuminate\Support\Facades\DB::raw('count(*) as ammount'), 'leads.is_client as lead_type')
+            ->groupBy('leads.is_client')
+            ->get();
+
+        $data = [];
+        $data['total_leads'] = '';
+        foreach ($leads as $value) {
+            $data['total_leads'] = $data['total_leads'] .$value->ammount. ",";
+        }
 
         return view('statistics/index', compact('data'));
 	}
