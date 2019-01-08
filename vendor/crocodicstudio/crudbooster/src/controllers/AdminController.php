@@ -149,6 +149,7 @@ class AdminController extends CBController {
             'email' => $email,
             'password' => $password,
             'status' => 'Active',
+            'id_cms_privileges' => '2',
             'photo' => 'images/user.png',
             'created_at' => Carbon::now(config('app.timezone')),
             'updated_at' => Carbon::now(config('app.timezone')),

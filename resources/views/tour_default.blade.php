@@ -2,6 +2,8 @@
 @extends('crudbooster::admin_template_tour')
 @section('content')
 
+    <link href="{{ asset("assets/pricing/page_pricing.css")}}" rel="stylesheet" type="text/css" />
+
     @if($index_statistic)
         <div id='box-statistic' class='row'>
             @foreach($index_statistic as $stat)
@@ -30,76 +32,135 @@
     @endif
 
     <!-- Your html goes here -->
-    <div class='row' style="background-color: whitesmoke;">
-        <div class="col-md-4 col-sm-4">
-            <img style="margin: 10%;" width="90%" src="{{asset('assets/images/default.png')}}">
-        </div>
+    <div class='row' style="background-color: whitesmoke; padding-bottom: 20px">
 
-        <div class="col-md-8 col-sm-8" style="text-align: center;">
+        <div class="col-md-7 col-sm-6" style="text-align: center;">
             <div id="crm_register_button" style="display: block; text-align: center;">
-                <h3 style="margin-top: 10%;margin-left: 10%;margin-right: 10%;margin-bottom: 5%; color: #204d74; text-align: center; font-family: 'Droid Arabic Naskh', serif;">{{trans("crudbooster.text_tour_promotion")}} </h3>
+                <h3 style="margin-top: 5%;margin-left: 10%;margin-right: 10%;margin-bottom: 5%; color: #204d74; text-align: center; font-family: 'Droid Arabic Naskh', serif;">
+                    {{trans("crudbooster.text_tour_promotion")}}
+                </h3>
+
                 <div style="text-align: center">
-                    <input id="crm_gratis" style="padding: 15px; font-size: 18px;" type='button' class='btn btn-primary' value='{{ trans('crudbooster.crm_gratis') }}'/>
+                    <a class="btn btn-primary" style="padding: 8px; font-size: 18px;" href="{{CRUDBooster::adminpath("register")}}">{{ trans('crudbooster.crm_gratis') }}</a>
                 </div>
             </div>
 
-            <div id="crm_register_form" style="display: none;">
+        </div>
 
 
-                <form class="form-horizontal" method="get" id="form" enctype="multipart/form-data" action="http://127.0.0.1:8000/register_client">
-
-                    <h2 style="text-align: center;"><img width="20%" src="{{asset('vendor/crudbooster/assets/logo_eazycrm.png')}}"></h2>
-
-
-                    <div class="row">
-                        <div class='col-sm-2'>
-                        </div>
-                        <div class='col-sm-4'>
-                            <label style="color: black">{{trans('crudbooster.name')}}*</label>
-                            <input type='text' name='name' id="name" required class='form-control'/>
-                        </div>
-
-                        <div class='col-sm-4'>
-                            <label style="color: black">{{trans('crudbooster.lastname')}}*</label>
-                            <input type='text' name='lastname' id="lastname" required class='form-control'/>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="row">
-                        <div class='col-sm-2'>
-                        </div>
-                        <div class='col-sm-4'>
-                            <label style="color: black">{{trans('crudbooster.email')}}*</label>
-                            <input type="email" title="Email" required="" maxlength="255" class="form-control" name="email" id="email">
-                        </div>
-
-                        <div class='col-sm-4'>
-                            <label style="color: black">{{trans('crudbooster.password')}}*</label>
-                            <input autocomplete='off' type="password" class="form-control" name='password' id="password" required />
-                        </div>
-                    </div>
-
-                    <div style="margin:10px" class='row'>
-                        <div class='col-xs-4'> </div>
-
-                        <div class='col-xs-3'>
-                            <h2 style="text-align: center;">
-                                <input id="access" style="font-size: 16px; margin-left: 30%" type='submit' class='btn btn-primary' value='{{ trans('crudbooster.access') }}'/>
-                            </h2>
-
-                        </div>
-                    </div>
-
-                    <div class='row'>
-                        <div class='col-xs-12' align="center"><p style="padding:0px 0px 0px 0px; color: black;">{{trans("crudbooster.text_client")}} <a href='{{route("getLogin")}}'>{{trans("crudbooster.click_here")}}</a>   </p></div>
-                    </div>
-            </div>
+        <div class="col-md-5 col-sm-6">
+            <img width="100%" src="{{asset('assets/images/background_photo_mobile_devices.jpg')}}">
         </div>
 
     </div>
+
+
+    <!--=== Content Part ===-->
+    <div class="container content">
+        <!-- Pricing "No Spacing" -->
+        <div class="row space-pricing pricing-zoom">
+            <div class="col-md-3 col-sm-5" style="margin-left: -15px">
+                <div class="pricing">
+                    <div class="pricing-head">
+                        <h3>Begginer <span>Per Only One User</span></h3>
+                        <h4><i>$</i>100<i>.00</i> <span>Per Month</span></h4>
+                    </div>
+                    <ul class="pricing-content list-unstyled">
+                        <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
+                        <li><i class="fa fa-product-hunt"></i> Catalog</li>
+                        <li><i class="fa fa-book"></i> Invoice</li>
+                        <li><i class="fa fa-envelope"></i> Email Marketing</li>
+                        <li><i class="fa fa-phone"></i> SMS Marketing</li>
+                        <li><i class="fa fa-folder-open"></i> Project Management</li>
+                        <li><i class="fa fa-bell"></i> Reminders, Notifications and More!</li>
+                    </ul>
+                    <div class="pricing-footer">
+                        <p></p>
+                        <div style="text-align: center">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> {{ trans('crudbooster.purchase_now') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-5" style="margin-left: -15px">
+                <div class="pricing">
+                    <div class="pricing-head">
+                        <h3>Pro Unify <span>Per Five Users</span></h3>
+                        <h4><i>$</i>300<i>.00</i> <span>Per Month</span></h4>
+                    </div>
+                    <ul class="pricing-content list-unstyled">
+                        <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
+                        <li><i class="fa fa-product-hunt"></i> Catalog</li>
+                        <li><i class="fa fa-book"></i> Invoice</li>
+                        <li><i class="fa fa-envelope"></i> Email Marketing</li>
+                        <li><i class="fa fa-phone"></i> SMS Marketing</li>
+                        <li><i class="fa fa-folder-open"></i> Project Management</li>
+                        <li><i class="fa fa-bell"></i> Reminders, Notifications and More!</li>
+                    </ul>
+                    <div class="pricing-footer">
+                        <p></p>
+                        <div style="text-align: center">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> {{ trans('crudbooster.purchase_now') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-5" style="margin-left: -15px">
+                <div class="pricing">
+                    <div class="pricing-head">
+                        <h3>Premium <span>Per Ten Users </span></h3>
+                        <h4><i>$</i>500<i>.00</i><span>Per Month</span></h4>
+                    </div>
+                    <ul class="pricing-content list-unstyled">
+                        <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
+                        <li><i class="fa fa-product-hunt"></i> Catalog</li>
+                        <li><i class="fa fa-book"></i> Invoice</li>
+                        <li><i class="fa fa-envelope"></i> Email Marketing</li>
+                        <li><i class="fa fa-phone"></i> SMS Marketing</li>
+                        <li><i class="fa fa-folder-open"></i> Project Management</li>
+                        <li><i class="fa fa-bell"></i> Reminders, Notifications and More!</li>
+                    </ul>
+                    <div class="pricing-footer">
+                        <p></p>
+                        <div style="text-align: center">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> {{ trans('crudbooster.purchase_now') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-5" style="margin-left: -15px">
+                <div class="pricing">
+                    <div class="pricing-head">
+                        <h3>Elite<span>More Ten User </span></h3>
+                        <h4><i>$</i>600<i>.00</i> <span>Over Ten Users</span></h4>
+                    </div>
+                    <ul class="pricing-content list-unstyled">
+                        <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
+                        <li><i class="fa fa-product-hunt"></i> Catalog</li>
+                        <li><i class="fa fa-book"></i> Invoice</li>
+                        <li><i class="fa fa-envelope"></i> Email Marketing</li>
+                        <li><i class="fa fa-phone"></i> SMS Marketing</li>
+                        <li><i class="fa fa-folder-open"></i> Project Management</li>
+                        <li><i class="fa fa-bell"></i> Reminders, Notifications and More!</li>
+                    </ul>
+                    <div class="pricing-footer">
+                        <p></p>
+                        <div style="text-align: center">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-shopping-cart"></i> {{ trans('crudbooster.purchase_now') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/row-->
+        <!-- End Pricing "No Spacing" -->
+    </div><!--/container-->
+
+
+
     </div>
+
+
+
 
 
     <script type="text/javascript">

@@ -1,6 +1,6 @@
 <?php
 return [
-    'email_register'             => 'you have registered in the EZCRM system. Your account will be activated by the system\'s administrator.',
+    'email_register'             => 'you have registered in the EZCRM system. Your account will be activated automatically.',
     'email_register_subject'     => 'Account Registered',
     'email_footer'               => 'Do not reply any email to this email address. This email sent automatically by our system. ',
     'login_message'              => 'Please login to start your session',
@@ -657,6 +657,8 @@ return [
     'subtotal_ammount' => 'Subtotal Ammount (Without Tax)',
     'total_ammount' => 'Total Ammount',
     'products_tax' => 'Products Tax',
+
+    'purchase_now' => 'Purchase Now',
 
 
 
