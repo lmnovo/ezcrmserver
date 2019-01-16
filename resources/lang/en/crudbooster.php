@@ -575,7 +575,7 @@ return [
     'crm_gratis'  => 'Begin with Free EzCRM',
     'access'  => 'Begin Now',
     'text_client'  => 'Already have an account?',
-    'text_tour_promotion'  => 'EzCRM allows managing your business adding potential customers, reminders, notifications, notes, automated tasks, campaigns, statistical charts. It allows sending e-mails and sms. Ezcrm is an easy and simple way you can organize your business in a few minutes.',
+    'text_tour_promotion'  => 'EzCRM allows you to manage your sales with the use of notifications, notes, campaigns, automated tasks, reports and it´s simple to use.',
     'text_tour_first_steps'  => 'First Steps',
     'first_steps'  => 'First Steps - Initial Configuration',
     'Content'  => 'Content',

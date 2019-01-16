@@ -62,8 +62,8 @@
             <div class="col-md-3 col-sm-5" style="margin-left: -15px">
                 <div class="pricing">
                     <div class="pricing-head">
-                        <h3>Begginer <span>Per Only One User</span></h3>
-                        <h4><i>$</i>100<i>.00</i> <span>Per Month</span></h4>
+                        <h3>Begginer <span>Only One User</span></h3>
+                        <h4><i>$</i>100<i>.00</i> <span>Monthly</span></h4>
                     </div>
                     <ul class="pricing-content list-unstyled">
                         <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
@@ -85,8 +85,8 @@
             <div class="col-md-3 col-sm-5" style="margin-left: -15px">
                 <div class="pricing">
                     <div class="pricing-head">
-                        <h3>Pro Unify <span>Per Five Users</span></h3>
-                        <h4><i>$</i>300<i>.00</i> <span>Per Month</span></h4>
+                        <h3>Pro <span>Five Users</span></h3>
+                        <h4><i>$</i>300<i>.00</i> <span>Monthly</span></h4>
                     </div>
                     <ul class="pricing-content list-unstyled">
                         <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
@@ -108,8 +108,8 @@
             <div class="col-md-3 col-sm-5" style="margin-left: -15px">
                 <div class="pricing">
                     <div class="pricing-head">
-                        <h3>Premium <span>Per Ten Users </span></h3>
-                        <h4><i>$</i>500<i>.00</i><span>Per Month</span></h4>
+                        <h3>Premium <span>Ten Users </span></h3>
+                        <h4><i>$</i>500<i>.00</i><span>Monthly</span></h4>
                     </div>
                     <ul class="pricing-content list-unstyled">
                         <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
@@ -132,7 +132,7 @@
                 <div class="pricing">
                     <div class="pricing-head">
                         <h3>Elite<span>More Ten Users </span></h3>
-                        <h4><i>$</i>600<i>.00</i> <span>Per Month</span></h4>
+                        <h4><i>$</i>600<i>.00</i> <span>Monthly</span></h4>
                     </div>
                     <ul class="pricing-content list-unstyled">
                         <li><i class="fa fa-briefcase"></i> Administrate your Business</li>
