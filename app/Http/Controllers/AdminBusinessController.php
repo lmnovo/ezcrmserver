@@ -390,8 +390,7 @@
 	    | 
 	    */
 	    public function hook_after_delete($id) {
-	        //Your code here
-
+            DB::table("business")->where("id",$id)->delete();
 	    }
 
 	    //Muestra los datos de un Business

@@ -131,7 +131,7 @@
             <div class="col-md-3 col-sm-5" style="margin-left: -15px">
                 <div class="pricing">
                     <div class="pricing-head">
-                        <h3>Elite<span>More Ten Users </span></h3>
+                        <h3>Elite<span>More Than Ten Users </span></h3>
                         <h4><i>$</i>600<i>.00</i> <span>Monthly</span></h4>
                     </div>
                     <ul class="pricing-content list-unstyled">

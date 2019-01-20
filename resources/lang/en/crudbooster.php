@@ -328,7 +328,7 @@ return [
     'menu_Appliances' => 'Appliances Details',
     'menu_Notes' => 'Notes',
 
-    'menu_Products' => 'Products',
+    'menu_Products' => 'Catalog',
     'menu_Phases' => 'Phases',
 
     'menu_Lead_Type' => 'Lead Type',

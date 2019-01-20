@@ -338,7 +338,7 @@ return [
     'menu_Appliances' => 'Detalles de Productos',
     'menu_Notes' => 'Notas',
 
-    'menu_Products' => 'Productos',
+    'menu_Products' => 'Catálogo',
     'menu_Phases' => 'Etapas',
 
     'menu_Lead_Type' => 'Tipo de Prospecto',
@@ -585,7 +585,7 @@ return [
     'crm_gratis'  => 'Comience con EazyCRM Gratis',
     'access'  => 'Comience Ahora',
     'text_client'  => '¿Ya se encuentra registrado?',
-    'text_tour_promotion'  => 'EzCRM le permite administrar tu negocio adicionando clientes potenciales, recordatorios, notificaciones, notas, tareas automatizadas, campañas, gráficas estadísticas. Permite enviar correos electrónicos y sms. Ezcrm es una forma fácil y simple usted puede organizar su negocio en pocos minutos.',
+    'text_tour_promotion'  => 'EzCRM permite gestionar sus ventas con el uso de notificaciones, notas, campañas, tareas automatizadas, informes y es muy fácil de utilizar.',
     'text_tour_first_steps'  => 'Primeros Pasos',
     'first_steps'  => 'Primeros Pasos - Configuración Inicial',
     'Content'  => 'Contenido',

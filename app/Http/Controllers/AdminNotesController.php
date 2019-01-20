@@ -319,8 +319,7 @@
 	    | 
 	    */
 	    public function hook_after_delete($id) {
-	        //Your code here
-
+            DB::table("eazy_notes")->where("id",$id)->delete();
 	    }
 
 

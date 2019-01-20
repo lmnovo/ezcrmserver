@@ -383,7 +383,7 @@
 	    |
 	    */
 	    public function hook_after_delete($id) {
-	        //Your code here
+            DB::table("leads")->where("id",$id)->delete();
 	    }
 
         public function getEdit($id) {

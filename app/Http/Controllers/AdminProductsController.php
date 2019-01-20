@@ -30,6 +30,7 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Photo","name"=>"photo","image"=>true];
 			$this->col[] = ["label"=>"Name","name"=>"name"];
 			$this->col[] = ["label"=>"Weight","name"=>"weight"];
 			$this->col[] = ["label"=>"Buy Price","name"=>"buy_price"];
@@ -39,7 +40,8 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:10000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'min:0|numeric','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
@@ -49,8 +51,9 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
-			//$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'min:0|double','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'string','width'=>'col-sm-10','placeholder'=>'You can only enter the letter'];
+			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Weight','name'=>'weight','type'=>'number','validation'=>'min:0|numeric','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Buy Price','name'=>'buy_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Sell Price','name'=>'sell_price','type'=>'text','validation'=>'required|min:0|numeric','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Stock','name'=>'stock','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
@@ -315,8 +318,7 @@
 	    | 
 	    */
 	    public function hook_before_delete($id) {
-	        //Your code here
-
+            DB::table("products")->where("id",$id)->delete();
 	    }
 
 	    /* 
