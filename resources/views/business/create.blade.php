@@ -180,7 +180,7 @@
                         if(data[0].photo==null)
                             $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/image-not-found.png');
                         else
-                            $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/'+data[0].photo);
+                            $('#product_photo').attr('src','http://127.0.0.1:8000/'+data[0].photo);
                     }
                 });
 
