@@ -430,6 +430,12 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     //Mostrar el perfil de un Lead dado su id
     public function getDetail($id) {
 
+        $lead_user_null = DB::table('leads')->where('id',$id)->first();
+
+        if($lead_user_null->cms_users_id == null) {
+            DB::table('leads')->where('id',$id)->update(['cms_users_id'=>1]);
+        }
+
         //Create an Auth
         if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
             CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
