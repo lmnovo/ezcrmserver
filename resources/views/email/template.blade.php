@@ -12,6 +12,6 @@
     <li>{{trans("crudbooster.phase_note")}} </li>
     <li>{{trans("crudbooster.phase_quote")}}</li>
 </ul>
-<p>{{trans("crudbooster.phase_sign")}}, Chef Units</p>
+<p>{{trans("crudbooster.phase_sign")}}, EzCRM</p>
 </body>
 </html>

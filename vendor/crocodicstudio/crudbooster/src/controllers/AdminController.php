@@ -214,7 +214,7 @@ class AdminController extends CBController {
                             <li>".trans("crudbooster.email").": $html->email</li>
                             <li>".trans("crudbooster.password").":  ".$html->password."</li>
                         </ul>
-                        <p>".trans("crudbooster.phase_sign")." Chef Units</p>
+                        <p>".trans("crudbooster.phase_sign")." EzCRM</p>
                 ";
 
         //Send Email with notification End Step
