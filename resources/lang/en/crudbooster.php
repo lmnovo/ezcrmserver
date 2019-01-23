@@ -304,6 +304,7 @@ return [
     'add_task_type'  => 'Add Task Type',
 
     'chart_1'  => 'Types of Prospects',
+    'chart_2'  => 'Total Quotes',
     'by_months'  => 'by months',
     'all_times'  => 'all times',
 

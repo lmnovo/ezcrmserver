@@ -314,6 +314,7 @@ return [
     'add_task_type'  => 'Agregar Tipo de Tarea',
 
     'chart_1'  => 'Tipos de Prospectos',
+    'chart_2'  => 'Cotizaciones Totales',
     'by_months'  => 'por meses',
     'all_times'  => '',
 

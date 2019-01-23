@@ -20,11 +20,6 @@ class AdminController extends CBController {
 		}
 
         $leads = \Illuminate\Support\Facades\DB::table('leads')
-            ->select(\Illuminate\Support\Facades\DB::raw('count(*) as ammount'))
-            ->where('leads.is_client', 0)
-            ->get();
-
-        $leads = \Illuminate\Support\Facades\DB::table('leads')
             ->select(\Illuminate\Support\Facades\DB::raw('count(*) as ammount'), 'leads.is_client as lead_type')
             ->groupBy('leads.is_client')
             ->get();
@@ -34,6 +29,43 @@ class AdminController extends CBController {
         foreach ($leads as $value) {
             $data['total_leads'] = $data['total_leads'] .$value->ammount. ",";
         }
+
+        //---Elementos para la Chart 2 - TOTAL QUOTES by months
+        $monthTexts =  ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        $monthsQuotes = [];
+        $monthsQuotes['January']['2019'] = 0;
+        $monthsQuotes['February']['2019'] = 0;
+        $monthsQuotes['March']['2019'] = 0;
+        $monthsQuotes['April']['2019'] = 0;
+        $monthsQuotes['May']['2019'] = 0;
+        $monthsQuotes['June']['2019'] = 0;
+        $monthsQuotes['July']['2019'] = 0;
+        $monthsQuotes['August']['2019'] = 0;
+        $monthsQuotes['September']['2019'] = 0;
+        $monthsQuotes['October']['2019'] = 0;
+        $monthsQuotes['November']['2019'] = 0;
+        $monthsQuotes['December']['2019'] = 0;
+
+        $quotes = \Illuminate\Support\Facades\DB::table('business')
+            ->where('business.is_active', 1)
+            ->get();
+
+        foreach ($quotes as $quote) {
+            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $quote->created_at);
+
+            if (!empty($monthsQuotes[$monthTexts[$date->month-1]][$date->year])) {
+                $monthsQuotes[$monthTexts[$date->month-1]][$date->year] ++;
+            }
+            else {
+                $monthsQuotes[$monthTexts[$date->month-1]][$date->year] = 1;
+            }
+        }
+
+        $data['quotes_2019'] = '';
+        foreach ($monthsQuotes as $month) {
+            $data['quotes_2019'] = $data['quotes_2019'] .$month['2019']. ",";
+        }
+        //---Elementos para la Chart 2 - TOTAL QUOTES by months
 
         return view('statistics/index', compact('data'));
 	}
