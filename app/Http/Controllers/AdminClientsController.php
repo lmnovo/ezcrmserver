@@ -25,8 +25,8 @@
 			$this->button_detail = true;
 			$this->button_show = false;
 			$this->button_filter = true;
-			$this->button_import = true;
-			$this->button_export = true;
+			$this->button_import = false;
+			$this->button_export = false;
 			$this->table = "leads";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
@@ -702,7 +702,15 @@
             CRUDBooster::redirect(CRUDBooster::adminPath("invoice"),trans("crudbooster.text_save_invoice"));
         }
 
+        //Mostrar el perfil de un Client dado su id
         public function getDetail($id) {
+
+            $lead_user_null = DB::table('leads')->where('id',$id)->first();
+
+            if($lead_user_null->cms_users_id == null) {
+                DB::table('leads')->where('id',$id)->update(['cms_users_id'=>1]);
+            }
+
             //Create an Auth
             if(!CRUDBooster::isRead() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {
                 CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
@@ -716,11 +724,26 @@
             }
 
             $data = [];
-            $data['page_title'] = 'Lead Profile';
+            $data['page_title'] = 'Client Profile';
             $data['id'] = $id;
 
-            $data['notes'] = DB::table('notes')->where('leads_id', $id)->where('deleted_at', null)->get();
+            $data['notes'] = DB::table('eazy_notes')
+                ->where('assign_to_id', $id)->where('type','leads')->where('deleted_at', null)
+                ->get();
 
+            $data['recent_activities'] = DB::table('leads_activities')->where('leads_id', $id)->where('deleted_at', null)->orderby('created_at', 'DESC')->get();
+
+            $data['business'] = \Illuminate\Support\Facades\DB::table('business')
+                ->select(DB::raw('business.name as name'), 'stages.name as stage', 'business.created_at as created_at',
+                    'business.total as total', 'business.date_limit as date_limit', 'business.id as id')
+                ->join('stages', 'stages.id', '=', 'business.stages_id')
+                ->join('leads', 'leads.id', '=', 'business.leads_id')
+                ->where('business.leads_id', '=', $id)
+                ->where('business.is_active', '=', 1)
+                ->where('business.deleted_at', '=', null)
+                ->get();
+
+            //Obtener las tasks de type Leads
             $data['tasks'] = DB::table('eazy_tasks')
                 ->where('eazy_tasks.deleted_at', null)
                 ->where('assign_to_id', $id)
@@ -730,7 +753,7 @@
             $data['lead'] = \Illuminate\Support\Facades\DB::table('leads')
                 ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname', 'cms_users.fullname as user_fullname'
                     , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city'
-                    , 'leads.photo', 'leads.address', 'leads.subscribed')
+                    , 'leads.photo', 'leads.address', 'leads.subscribed', 'leads.is_client as is_client')
                 ->join('cms_users', 'cms_users.id', '=', 'leads.cms_users_id')
                 ->join('states', 'states.id', '=', 'leads.states_id')
                 ->join('leads_type', 'leads_type.id', '=', 'leads.leads_type_id')
@@ -746,7 +769,7 @@
                 ->get();
 
             //Please use cbView method instead view method from laravel
-            $this->cbView('clients.perfil',$data);
+            $this->cbView('leads.perfil',$data);
         }
 
         public function getSendSms($id) {

@@ -477,7 +477,7 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
         $data['lead'] = \Illuminate\Support\Facades\DB::table('leads')
             ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname', 'cms_users.fullname as user_fullname'
                 , 'leads.phone', 'leads.email', 'leads_type.name as leads_type', 'states.name as states', 'leads.city'
-                , 'leads.photo', 'leads.address', 'leads.subscribed')
+                , 'leads.photo', 'leads.address', 'leads.subscribed', 'leads.is_client as is_client')
             ->join('cms_users', 'cms_users.id', '=', 'leads.cms_users_id')
             ->join('states', 'states.id', '=', 'leads.states_id')
             ->join('leads_type', 'leads_type.id', '=', 'leads.leads_type_id')
@@ -622,6 +622,28 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
             return DB::table('leads')->where('id',$id)->update(['subscribed'=>$subscribed]);
         }
         return -1;
+    }
+
+    //Convertir Lead en Client
+    public function getConvertClient($id) {
+        $lead = DB::table('leads')->where('id',$id)->first();
+
+        if (!empty($lead)) {
+            DB::table('leads')->where('id',$id)->update(['is_client'=>1]);
+        }
+
+        CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$id),trans("crudbooster.text_edit_lead"));
+    }
+
+    //Convertir Lead en Client
+    public function getConvertLead($id) {
+        $lead = DB::table('leads')->where('id',$id)->first();
+
+        if (!empty($lead)) {
+            DB::table('leads')->where('id',$id)->update(['is_client'=>0]);
+        }
+
+        CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$id),trans("crudbooster.text_edit_lead"));
     }
 
 

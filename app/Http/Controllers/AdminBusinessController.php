@@ -24,8 +24,8 @@
 			$this->button_detail = true;
 			$this->button_show = false;
 			$this->button_filter = true;
-			$this->button_import = true;
-			$this->button_export = true;
+			$this->button_import = false;
+			$this->button_export = false;
 			$this->table = "business";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
@@ -710,7 +710,7 @@
                 'cms_users_id' => $request->get('assign_to'),
                 'stages_id' => $stage,
                 'stages_groups_id' => $request->get('stages_group'),
-                'total' => $request->get('total'),
+                'total' => $request->get('total_ammount'),
                 'date_limit' => $request->get('date_limit'),
                 'created_at' => Carbon::now(config('app.timezone')),
                 'is_active' => 1,

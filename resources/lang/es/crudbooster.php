@@ -365,6 +365,7 @@ return [
     'name' => 'Nombre',
     'photo' => 'Foto',
     'convert_client' => 'Convertir a Cliente',
+    'convert_lead' => 'Convertir a Prospecto',
 
 
     'address' => 'Dirección',
@@ -669,5 +670,7 @@ return [
     'products_tax' => 'Impuesto de Productos',
 
     'purchase_now' => 'Compre Ahora',
+    'is_lead' => 'PROSPECTO',
+    'is_client' => 'CLIENTE',
 
 ];

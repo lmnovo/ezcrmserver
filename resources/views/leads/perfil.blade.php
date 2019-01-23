@@ -154,6 +154,14 @@
                             {{ $lead->name }} {{ $lead->lastname }}
                         </h3>
 
+                        {{--<h3 class="profile-username text-center">
+                            @if( $lead->is_client == 0 )
+                                <b class="btn btn-primary">{{trans('crudbooster.is_lead')}}</b>
+                            @else
+                                <b class="btn btn-primary">{{trans('crudbooster.is_client')}}</b>
+                            @endif
+                        </h3>--}}
+
                         <ul class="list-unstyled user_data">
                             <li>
                                 <i class="fa fa-map-marker user-profile-icon"></i>
@@ -162,6 +170,7 @@
                                         @else
                                             {{ $lead->address }}
                                     @endif
+                                <br>
                             </li>
                         </ul>
 
@@ -171,6 +180,12 @@
                                 <a title="{{trans('crudbooster.send_email')}}" class='btn btn-warning pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-email/$id")}}'><i class="fa fa-envelope-o"></i></a>
                                 <a title="{{trans('crudbooster.send_sms')}}" class='btn btn-primary pull-right' style="margin: 2px" href='{{CRUDBooster::mainpath("send-sms/$id")}}'><i class="glyphicon glyphicon-phone"></i></a>
                                 <a title="{{trans('crudbooster.add_business')}}" class='btn btn-danger pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("business/add-business/$id")}}'><i class="glyphicon glyphicon-briefcase"></i></a>
+
+                                @if( $lead->is_client == 0 )
+                                    <a title="{{trans('crudbooster.convert_client')}}" class='btn btn-info pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("leads/convert-client/$id")}}'><i class="glyphicon glyphicon-user"></i></a>
+                                @else
+                                    <a title="{{trans('crudbooster.convert_lead')}}" class='btn btn-info pull-right' style="margin: 2px" href='{{CRUDBooster::adminpath("leads/convert-lead/$id")}}'><i class="glyphicon glyphicon-user"></i></a>
+                                @endif
 
                             </li>
                             <li class="list-group-item">

@@ -355,6 +355,7 @@ return [
     'name' => 'Name',
     'photo' => 'Photo',
     'convert_client' => 'Convert to Client',
+    'convert_lead' => 'Convert to Lead',
 
     'address' => 'Address',
     'email' => 'Email',
@@ -659,6 +660,8 @@ return [
     'products_tax' => 'Products Tax',
 
     'purchase_now' => 'Purchase Now',
+    'is_lead' => 'LEAD',
+    'is_client' => 'CLIENT',
 
 
 
