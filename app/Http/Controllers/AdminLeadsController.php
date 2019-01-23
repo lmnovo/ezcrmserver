@@ -46,19 +46,18 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 			$this->col[] = ["label"=>"Phone","name"=>"phone"];
 			$this->col[] = ["label"=>"Lead Type","name"=>"leads_type_id","join"=>"leads_type,name"];
 			$this->col[] = ["label"=>"Assigned","name"=>"cms_users_id","join"=>"cms_users,name"];
-			//$this->col[] = ["label"=>"Address","name"=>"address"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
+			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:10000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Last Name','name'=>'lastname','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:leads','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:253|email|unique:leads','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required|min:10|max:10|unique:leads','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'City','name'=>'city','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'State','name'=>'states_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'states,name'];
-			$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'cms_users,name'];
 			$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
@@ -66,15 +65,15 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
 
 			# OLD START FORM
 			//$this->form = [];
+			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:10000','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Name','name'=>'name','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Last Name','name'=>'lastname','type'=>'text','validation'=>'required|string|min:1|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:leads','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required|min:10|max:10','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:253|email|unique:leads','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Phone','name'=>'phone','type'=>'text','validation'=>'required|min:10|max:10|unique:leads','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Address','name'=>'address','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'City','name'=>'city','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','datatable'=>'states,name'];
 			//$this->form[] = ['label'=>'State','name'=>'states_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Photo','name'=>'photo','type'=>'upload','validation'=>'image|max:3000','width'=>'col-sm-10','datatable'=>'cms_users,name'];
-			//$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Assign To','name'=>'cms_users_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'cms_users,name'];
 			//$this->form[] = ['label'=>'Latitude','name'=>'latitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			//$this->form[] = ['label'=>'Longitude','name'=>'longitude','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM

@@ -415,7 +415,7 @@
 
             $data['business'] = \Illuminate\Support\Facades\DB::table('business')
                 ->select(DB::raw('leads.name as name'), 'leads.lastname as lastname',
-                    'business.total', 'business.date_limit', 'cms_users.fullname as fullname',
+                    'business.total', 'business.date_limit', 'cms_users.name as fullname',
                     'stages.name as stage_name', 'stages.number as stage_number',  'stages.id as stage_id',
                     'business.stages_groups_id as stages_groups_id', 'business.stages_id as business_stage_id',
                     'business.name as business_name', 'business.id as business_id')
@@ -732,7 +732,7 @@
             //Adicionar "Recent Activity" a la creación del business
             DB::table('leads_activities')->insert([
                 'leads_id'=>$lead_id,
-                'description'=>'The negociation: '.$request->get('business_name').', was added by: '.CRUDBooster::myName(),
+                'description'=>'The negociation: '.$request->get('business_name').', was added/edited by: '.CRUDBooster::myName(),
                 'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
             ]);
 

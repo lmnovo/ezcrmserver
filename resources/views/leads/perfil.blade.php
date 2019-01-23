@@ -405,7 +405,7 @@
 
                                     @foreach($business as $business_item)
                                         <tr>
-                                            <td><a href="{{CRUDBooster::adminpath("business/edit/$business_item->id")}}">{{$business_item->name}}</a> </td>
+                                            <td><a href="{{CRUDBooster::adminpath("business/detail/$business_item->id")}}">{{$business_item->name}}</a> </td>
                                             <td>{{$business_item->stage}}</td>
                                             <td>{{$business_item->total}}</td>
                                             <td>{{$business_item->date_limit}}</td>

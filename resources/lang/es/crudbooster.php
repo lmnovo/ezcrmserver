@@ -519,7 +519,7 @@ return [
     'Send Campaign'  => 'Campañas Enviadas',
     'Campaigns'  => 'Campañas',
     'menu_Send Campaign'  => 'Campañas Enviadas',
-    'menu_Business'  => 'Negociación',
+    'menu_Business'  => 'Cotizaciones',
     'menu_Stages'  => 'Etapas',
     'Stages'  => 'Etapas',
     'Business'  => 'Negociación',
@@ -590,6 +590,7 @@ return [
     'first_steps'  => 'Primeros Pasos - Configuración Inicial',
     'Content'  => 'Contenido',
     'created_at'  => 'Fecha de Creación',
+    'add_business' => 'Agregar Cotización',
 
     'add_buildout'  => 'Add Build Out',
 
@@ -644,7 +645,7 @@ return [
     'total_amount' => 'Cantidad Inicial',
     'date_limit' => 'Fecha Estimada de Cierre',
     'campaigns_emails' => 'Campañas',
-    'negociations' => 'Negociaciones',
+    'negociations' => 'Cotizaciones',
     'stage' => 'Etapa',
     'add_notes' => 'Agregar Notas',
     'note_creation'  => 'Agregar Notas',
