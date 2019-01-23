@@ -1664,7 +1664,8 @@ class CBController extends Controller {
 			$tablePK = CB::pk($this->table);
 			if(CRUDBooster::isColumnExists($this->table,'deleted_at')) {
 
-				DB::table($this->table)->whereIn($tablePK,$id_selected)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+				//DB::table($this->table)->whereIn($tablePK,$id_selected)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+				DB::table($this->table)->whereIn($tablePK,$id_selected)->delete();
 			}else{
 				DB::table($this->table)->whereIn($tablePK,$id_selected)->delete();
 			}
