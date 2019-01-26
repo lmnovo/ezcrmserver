@@ -732,7 +732,7 @@
             //Adicionar "Recent Activity" a la creación del business
             DB::table('leads_activities')->insert([
                 'leads_id'=>$lead_id,
-                'description'=>'The negociation: '.$request->get('business_name').', was added/edited by: '.CRUDBooster::myName(),
+                'description'=>'The quote: '.$request->get('business_name').', was added/edited by: '.CRUDBooster::myName(),
                 'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
             ]);
 

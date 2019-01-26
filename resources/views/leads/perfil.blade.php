@@ -507,7 +507,7 @@
                                                             confirmButtonText: '{{trans('crudbooster.yes')}}',
                                                             cancelButtonText: '{{trans('crudbooster.no')}}',
                                                             closeOnConfirm: false },
-                                                            function(){  location.href='{{CRUDBooster::adminpath("eazy_tasks/delete/$task->id")}}' });"><i class="fa fa-trash"></i>
+                                                            function(){  location.href='{{CRUDBooster::adminpath("settings_campaigns/delete/$campaign->campaign_id")}}' });"><i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>

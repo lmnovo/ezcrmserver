@@ -674,4 +674,5 @@ return [
     'is_lead' => 'PROSPECTO',
     'is_client' => 'CLIENTE',
 
+    'text_unsuscribed' => 'Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí',
 ];

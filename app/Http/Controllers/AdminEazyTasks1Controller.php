@@ -247,7 +247,7 @@
 	    | ---------------------------------------------------------------------- 
 	    |
 	    */    
-	    public function hook_row_index($column_index,&$column_value) {	        
+	    public function hook_row_index($column_index,&$column_value) {
 	    	//Your code here
 	    }
 
@@ -379,7 +379,7 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-
+            DB::table("eazy_tasks")->where("id",$id)->delete();
 	    }
 
 

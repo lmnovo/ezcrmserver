@@ -377,7 +377,7 @@
 
                 foreach ($to as $to_item) {
                     //Agregar links de suscripción a las campañas de email marketing
-                    $content = $html."</br> <a href='http://127.0.0.1:8000/unsubscribed/leads/$to_item'>Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí</a>";
+                    $content = $html."</br> <a href='http://127.0.0.1:8000/unsubscribed/leads/$to_item'>If you don't want to receive our email, click here</a>";
 
                     \Mail::send("crudbooster::emails.blank",['content'=>$content],function($message) use ($to_item,$subject,$template, $html) {
                         $message->priority(1);
@@ -403,9 +403,6 @@
                         'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
                     ]);
                 }
-
-
-
             }
             ///////////////////Envío Campaign SMS//////////////////////////
             else {
@@ -513,7 +510,7 @@
 	    | 
 	    */
 	    public function hook_after_delete($id) {
-	        //Your code here
+            DB::table("settings_campaigns")->where("id",$id)->delete();
 
 	    }
 
