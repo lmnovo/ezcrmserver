@@ -119,12 +119,15 @@
                                 $('#product_quantity').val(1);
                                 $('#product_total').val(parseFloat(data[0].sell_price));
                                 $('#add_button_product').removeAttr('disabled');
+                                $('#input_stock').removeClass('has-error');
+                                $('#input_stock').removeClass('has-warning');
                             }
                             else {
                                 swal("Stock Empty", "The inventory of the selected product is empty", "error");
                                 $('#product_quantity').val(0);
                                 $('#product_total').val(0);
                                 $('#add_button_product').attr('disabled', 'disabled');
+                                $('#input_stock').addClass('has-error');
                             }
                             //--F--Comprobar si existen productos en existencia
                         }
@@ -138,16 +141,31 @@
                         dataType: 'json',
                         success : function(data) {
                             //--B--Comprobar si existen productos en existencia
-                            if (data[0].stock >= 1) {
+                            if ($('#product_quantity').val() <= 0) {
+                                swal("Stock Information", "The quantity value must be higher than zero", "warning");
                                 $('#product_quantity').val(1);
-                                $('#product_total').val(parseFloat(data[0].sell_price));
                                 $('#add_button_product').removeAttr('disabled');
+                                $('#input_stock').addClass('has-warning');
+                                $('#product_total').val($('#product_quantity').val()*$('#product_sell_price').val());
                             }
-                            else {
+                            else if (data[0].stock >= $('#product_quantity').val()) {
+                                $('#add_button_product').removeAttr('disabled');
+                                $('#input_stock').removeClass('has-error');
+                                $('#input_stock').removeClass('has-warning');
+                            }
+                            else if(data[0].stock == 0) {
                                 swal("Stock Empty", "The inventory of the selected product is empty", "error");
                                 $('#product_quantity').val(0);
                                 $('#product_total').val(0);
                                 $('#add_button_product').attr('disabled', 'disabled');
+                                $('#input_stock').addClass('has-error');
+                            }
+                            else {
+                                swal("Stock Information", "The amount requested is higher than the existence of the inventory", "warning");
+                                $('#product_quantity').val(1);
+                                $('#add_button_product').removeAttr('disabled');
+                                $('#product_total').val($('#product_quantity').val()*$('#product_sell_price').val());
+                                $('#input_stock').addClass('has-warning');
                             }
                             //--F--Comprobar si existen productos en existencia
                         }
@@ -222,12 +240,19 @@
                         $('#product_sell_price').val(data[0].sell_price);
                         $('#product_weight').val(data[0].weight);
                         $('#product_id').val(data[0].id);
+                        $('#product_stock').val(data[0].stock);
+
+                        if(data[0].stock == 0) {
+                            $('#input_stock').addClass('has-error');
+                        }
 
                         //--B--Comprobar si existen productos en existencia
                         if (data[0].stock >= 1) {
                             $('#product_quantity').val(1);
                             $('#product_total').val(parseFloat(data[0].sell_price));
                             $('#add_button_product').removeAttr('disabled');
+                            $('#input_stock').removeClass('has-error');
+                            $('#input_stock').removeClass('has-warning');
                         }
                         else {
                             swal("Stock Empty", "The inventory of the selected product is empty", "error");

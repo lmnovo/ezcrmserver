@@ -665,5 +665,6 @@ return [
     'is_client' => 'CLIENT',
 
     'text_unsuscribed' => 'Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí',
+    'stock' => 'Stock',
 
 ];

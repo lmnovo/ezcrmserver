@@ -52,6 +52,12 @@ class ImageUploadController extends Controller
 
     public function addProductPost()
     {
+        //Obtener la cantidad en stock del producto solicitado
+        $stock_product = DB::table('products')->where('id', request('product_id'))->first();
+
+        //Reducimos la cantidad solicitado del stock del producto solicitado
+        DB::table('products')->where('id', request('product_id'))->update(['stock' => $stock_product->stock-request('product_quantity')]);
+
         //Comprobar si existe el producto agregado para dicho business
         $exists = DB::table('business_products')
             ->where('business_id', request('business_id'))

@@ -48,6 +48,15 @@
                             </div>
                         </div>
 
+                        <div id="input_stock" class="form-group">
+                            <label class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.stock')}}</label>
+                            <div class="col-md-9">
+                                <input type="text" readonly="readonly" title="{{trans('crudbooster.stock')}}" class="form-control number" name="product_stock" id="product_stock" value="">
+                                <div class="text-danger"></div>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.quantity')}}*</label>
                             <div class="col-md-9">
