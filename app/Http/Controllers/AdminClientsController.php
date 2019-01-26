@@ -772,25 +772,23 @@
             $this->cbView('leads.perfil',$data);
         }
 
+        //Enviar SMS dado el id de Client
         public function getSendSms($id) {
 
             $to = null;
 
             if(gettype($id) == 'array') {
-                $leadsSelected = DB::table('account')->whereIn('id',$id)->get();
-
+                $leadsSelected = DB::table('leads')->whereIn('id',$id)->get();
                 foreach ($leadsSelected as $item) {
-                    if (!empty($item->telephone)) {
-                        $to[] = $item->telephone;
+                    if (!empty($item->phone)) {
+                        $to[] = $item->phone;
                     }
                 }
-
             }
             else {
-                $leadsSelected = DB::table('account')->where('id',$id)->first();
-
-                if (!empty($leadsSelected->telephone)) {
-                    $to[] = $leadsSelected->telephone;
+                $leadsSelected = DB::table('leads')->where('id',$id)->first();
+                if (!empty($leadsSelected->phone)) {
+                    $to[] = $leadsSelected->phone;
                 }
             }
 
@@ -814,30 +812,34 @@
                 'cms_users_id' => CRUDBooster::myId()
             ];
 
+            $maxId = DB::table('settings_campaigns')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
+            $maxId = $maxId->id + 1;
             $lastId = DB::table('settings_campaigns')->insertGetId($sumarizedData);
 
-            //Open Edit Quote
+            //Open Edit Campaign
             CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns/edit/'.$lastId),trans("crudbooster.text_open_edit_campaign"));
-
         }
 
+        //Enviar Email dado el id de Client
         public function getSendEmail($id) {
             $emails = [];
 
+            //Si son varios correos a los que se les enviará la campaña
             if(gettype($id) == 'array') {
-                $customers = DB::table('clients')->whereIn('id', $id)->get();
+                $leads = DB::table('leads')->whereIn('id', $id)->get();
 
-                foreach ($customers as $item) {
+                foreach ($leads as $item) {
                     if (!empty($item->email)) {
                         $emails[] = $item->email;
                     }
                 }
 
+                //Si es un único correo al que se le enviará la campaña
             } else {
-                $customers = DB::table('clients')->where('id', $id)->first();
+                $lead = DB::table('leads')->where('id', $id)->first();
 
-                if (!empty($customers->email)) {
-                    $emails[] = $customers->email;
+                if (!empty($lead->email)) {
+                    $emails[] = $lead->email;
                 }
             }
 
@@ -861,9 +863,11 @@
                 'cms_users_id' => CRUDBooster::myId()
             ];
 
+            $maxId = DB::table('settings_campaigns')->select(\Illuminate\Support\Facades\DB::raw('MAX(id) as id'))->first();
+            $maxId = $maxId->id + 1;
             $lastId = DB::table('settings_campaigns')->insertGetId($sumarizedData);
 
-            //Open Edit Quote
+            //Open Edit Campaign
             CRUDBooster::redirect(CRUDBooster::adminPath('settings_campaigns/edit/'.$lastId),trans("crudbooster.text_open_edit_campaign"));
 
         }

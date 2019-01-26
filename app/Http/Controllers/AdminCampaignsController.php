@@ -471,11 +471,25 @@
             $actual_lead = DB::table('campaigns_leads')->where('id',$lastId->id)->first();
             $total_send = DB::table('settings_campaigns')->where('id', $id)->first();
 
-            if ($total_send->total_sent == 1) {
-                CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$actual_lead->leads_id),trans("crudbooster.text_send_campaign"));
-            } else {
-                CRUDBooster::redirect(CRUDBooster::adminPath('leads'),trans("crudbooster.text_send_campaign"));
+            //Comprobar si es un Lead o un Client
+            $lead_or_client = DB::table('leads')->where('id', $actual_lead->leads_id)->first();
+
+            //Si es un Lead
+            if ($lead_or_client->is_client == 0) {
+                if ($total_send->total_sent == 1) {
+                    CRUDBooster::redirect(CRUDBooster::adminPath('leads/detail/'.$actual_lead->leads_id),trans("crudbooster.text_send_campaign"));
+                } else {
+                    CRUDBooster::redirect(CRUDBooster::adminPath('leads'),trans("crudbooster.text_send_campaign"));
+                }
+            } else { //Si es un client
+                if ($total_send->total_sent == 1) {
+                    CRUDBooster::redirect(CRUDBooster::adminPath('clients/detail/'.$actual_lead->leads_id),trans("crudbooster.text_send_campaign"));
+                } else {
+                    CRUDBooster::redirect(CRUDBooster::adminPath('clients'),trans("crudbooster.text_send_campaign"));
+                }
             }
+
+
 	    }
 
 	    /* 
