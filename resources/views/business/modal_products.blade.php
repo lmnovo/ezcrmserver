@@ -24,9 +24,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.description')}}*</label>
+                            <label for="description" class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.description')}}</label>
                             <div class="col-md-9 col-xs-12 col-sm-9">
-                                <textarea required rows="6" class="form-control required" id="product_description" name="product_description" placeholder="{{trans('crudbooster.description')}}"></textarea>
+                                <textarea rows="6" class="form-control" id="product_description" name="product_description" placeholder="{{trans('crudbooster.description')}}"></textarea>
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" id="new_button_product">{{trans('crudbooster.new')}}</button>
-                <button type="submit" class="btn btn-primary" id="">{{trans('crudbooster.add')}}</button>
+                <button type="submit" id="add_button_product" class="btn btn-primary" id="">{{trans('crudbooster.add')}}</button>
             </div>
 
             {!! Form::close() !!}

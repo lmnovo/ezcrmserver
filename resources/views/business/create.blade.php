@@ -102,11 +102,58 @@
             });
             //-------------------------------------------------------------------------
 
-            //Si cambia la cantidad del Producto del Modal...
+            //Si cambia la "Cantidad del Producto" del Modal...
             $('#product_quantity').on('blur',function() {
+                var id = $('#product_id').val();
+
+                //Si borro el valor del campo "Cantidad de Producto"
                 if($('#product_quantity').val() == '') {
-                    $('#product_quantity').val(1);
+                    $.ajax({
+                        url: '../product',
+                        data: "&id="+id,
+                        type:  'get',
+                        dataType: 'json',
+                        success : function(data) {
+                            //--B--Comprobar si existen productos en existencia
+                            if (data[0].stock >= 1) {
+                                $('#product_quantity').val(1);
+                                $('#product_total').val(parseFloat(data[0].sell_price));
+                                $('#add_button_product').removeAttr('disabled');
+                            }
+                            else {
+                                swal("Stock Empty", "The inventory of the selected product is empty", "error");
+                                $('#product_quantity').val(0);
+                                $('#product_total').val(0);
+                                $('#add_button_product').attr('disabled', 'disabled');
+                            }
+                            //--F--Comprobar si existen productos en existencia
+                        }
+                    });
                 }
+                else { //Si le agrego un valor a la "Cantidad de Produto"
+                    $.ajax({
+                        url: '../product',
+                        data: "&id="+id,
+                        type:  'get',
+                        dataType: 'json',
+                        success : function(data) {
+                            //--B--Comprobar si existen productos en existencia
+                            if (data[0].stock >= 1) {
+                                $('#product_quantity').val(1);
+                                $('#product_total').val(parseFloat(data[0].sell_price));
+                                $('#add_button_product').removeAttr('disabled');
+                            }
+                            else {
+                                swal("Stock Empty", "The inventory of the selected product is empty", "error");
+                                $('#product_quantity').val(0);
+                                $('#product_total').val(0);
+                                $('#add_button_product').attr('disabled', 'disabled');
+                            }
+                            //--F--Comprobar si existen productos en existencia
+                        }
+                    });
+                }
+
                 $('#product_total').val($('#product_quantity').val()*$('#product_sell_price').val());
             });
             //-------------------------------------------------------------------------
@@ -160,6 +207,7 @@
                 $('#newProductModal').modal('show');
             });
 
+            //Al cambiar el select del "Product Name"
             $('#product_name').on('change',function(){
                 var id = $(this).val();
 
@@ -174,8 +222,20 @@
                         $('#product_sell_price').val(data[0].sell_price);
                         $('#product_weight').val(data[0].weight);
                         $('#product_id').val(data[0].id);
-                        $('#product_quantity').val(1);
-                        $('#product_total').val(parseFloat(data[0].sell_price));
+
+                        //--B--Comprobar si existen productos en existencia
+                        if (data[0].stock >= 1) {
+                            $('#product_quantity').val(1);
+                            $('#product_total').val(parseFloat(data[0].sell_price));
+                            $('#add_button_product').removeAttr('disabled');
+                        }
+                        else {
+                            swal("Stock Empty", "The inventory of the selected product is empty", "error");
+                            $('#product_quantity').val(0);
+                            $('#product_total').val(0);
+                            $('#add_button_product').attr('disabled', 'disabled');
+                        }
+                        //--F--Comprobar si existen productos en existencia
 
                         if(data[0].photo==null)
                             $('#product_photo').attr('src','http://127.0.0.1:8000/images/products/image-not-found.png');
