@@ -545,7 +545,9 @@
             $data['id'] = $id;
 
             $data['products'] = DB::table('business')
-                ->select(DB::raw('products.name'), 'products.description', 'products.sell_price', 'products.buy_price', 'products.weight', 'products.id as id', 'business_products.quantity as quantity')
+                ->select(DB::raw('products.name'), 'products.description', 'products.sell_price', 'products.buy_price',
+                    'products.weight', 'products.id as id', 'business_products.quantity as quantity',
+                    'business_products.id as business_products_id')
                 ->join('business_products', 'business_products.business_id', '=', 'business.id')
                 ->join('products', 'products.id', '=', 'business_products.products_id')
                 ->where('business.id', $id)->get();
@@ -783,6 +785,21 @@
         //Se obtienen el producto dado su "id"
         public function getProduct(\Illuminate\Http\Request $request) {
             return DB::table('products')->where('id', $request->get('id'))->get();
+        }
+
+        public function getProduct_delete($id) {
+	        //Obtengo la info del producto asociado a la quote
+            $product_business = DB::table('business_products')->where('id', $id)->first();
+
+	        //Repongo los productos del stock
+            $product = DB::table('products')->where('id', $product_business->products_id)->first();
+
+            DB::table('products')->where('id', $product_business->products_id)->update(['stock'=>  $product->stock + $product_business->quantity]);
+
+	        //Elimino los productos asociados a la quote
+            DB::table('business_products')->where('id', $id)->delete();
+
+            CRUDBooster::redirect(CRUDBooster::adminPath('business/edit/'.$product_business->business_id),trans("crudbooster.text_business_update"));
         }
 
 	}

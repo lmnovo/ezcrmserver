@@ -3,7 +3,7 @@
         <strong><i class="fa fa-product-hunt"></i> {{trans('crudbooster.products')}} </strong>
     </div>
 
-    <button style="margin-left: 20px; margin-top: 20px;" class="btn btn-success pull-left newProduct" type="button" ><i class="fa fa-product-hunt"></i> {{trans('crudbooster.add_product')}} </button>
+    <button style="margin-left: 20px; margin-top: 20px;" class="btn btn-success pull-left newProduct" type="button" ><i class="fa fa-product-hunt"></i> {{trans('crudbooster.add_products')}} </button>
 
     <div id="table_products" class="table-responsive hover" style="margin: 70px;">
         <table id="products" class="table table-striped table-responsive table-bordered" cellspacing="0">
@@ -42,11 +42,23 @@
                         <span class="editors hide"><select class="col-md-12 col-sm-12 editable form-control combo" ></select></span>
                         <span class="originals" id="tbl_sel_price">{{ $items->quantity * $items->sell_price }}</span>
                     </td>
+
                     <td style="text-align: center">
-                        <button class="btn btn-danger btn-xs" value="{{ $items->id }}" name="{{ $items->id }}" type="button" id="eliminar">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
+                        <a class="btn btn-xs btn-warning btn-delete" title="{{trans('crudbooster.delete')}}" href="javascript:;" onclick="swal({
+                                title: '{{trans('crudbooster.are_you_sure')}}',
+                                text: '{{trans('crudbooster.message_delete')}}',
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#ff0000',
+                                confirmButtonText: '{{trans('crudbooster.yes')}}',
+                                cancelButtonText: '{{trans('crudbooster.no')}}',
+                                closeOnConfirm: false },
+                                function(){
+                                location.href='http://127.0.0.1:8000/crm/business/product_delete/{{ $items->business_products_id }}'
+                                });"><i class="fa fa-trash"></i>
+                        </a>
                     </td>
+
                 </tr>
             @endforeach
 

@@ -273,6 +273,11 @@
 
             var oTableProducts= $('#products').DataTable();
 
+            //Botón de eliminar elementos de la lista de productos
+            $('#eliminar').on('click',function() {
+                alert("Eliminar");
+            });
+
         });
     </script>
 

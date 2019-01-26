@@ -102,7 +102,7 @@ class ImageUploadController extends Controller
             ]);
 
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images/products'), $imageName);
+            request()->image->move(public_path('images'), $imageName);
         }
 
         $sumarizedData = [
@@ -111,7 +111,8 @@ class ImageUploadController extends Controller
             'buy_price' => request('new_product_buy_price'),
             'sell_price' => request('new_product_sell_price'),
             'weight' => request('new_product_weight'),
-            'photo' => $imageName,
+            'photo' => "images/".$imageName,
+            'stock' => request('new_product_stock'),
             'created_at' => Carbon::now(config('app.timezone')),
         ];
 

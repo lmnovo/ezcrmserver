@@ -53,6 +53,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-md-3 col-xs-12 col-sm-3 control-label">{{trans('crudbooster.stock')}}</label>
+                            <div class="col-md-9">
+                                <input class="form-control number min:0" id="new_product_stock" name="new_product_stock" value="0" type="text"/>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="form-group">

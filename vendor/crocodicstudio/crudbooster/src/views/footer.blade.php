@@ -4,5 +4,5 @@
         {{ trans('crudbooster.powered_by') }} {{CRUDBooster::getSetting('appname')}}
     </div>
     <!-- Default to the left -->
-    <strong>{{ trans('crudbooster.copyright') }} &copy; 2018. {{ trans('crudbooster.all_rights_reserved') }} .</strong>
+    <strong>{{ trans('crudbooster.copyright') }} &copy; 2019. {{ trans('crudbooster.all_rights_reserved') }} .</strong>
 </footer>
