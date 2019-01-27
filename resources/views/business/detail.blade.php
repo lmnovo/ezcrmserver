@@ -207,9 +207,21 @@
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#stages" data-toggle="tab"><i class='fa fa-clock-o'></i> {{trans('crudbooster.Stages')}}<strong>(<?php echo(count($stages))?>)</strong></a></li>
-                            <li><a href="#notes" data-toggle="tab"><i class='fa fa-file-text-o'></i> {{trans('crudbooster.notes')}}<strong>(<?php echo(count($notes))?>)</strong></a></li>
-                            <li><a href="#tasks" data-toggle="tab"><i class='fa fa-calendar-minus-o'></i> {{trans('crudbooster.tasks')}}<strong>(<?php echo(count($tasks))?>)</strong></a></li>
+                            <li class="active">
+                                <a href="#stages" data-toggle="tab">
+                                    <i class='fa fa-clock-o'></i> {{trans('crudbooster.title_phase')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#notes" data-toggle="tab">
+                                    <i class='fa fa-file-text-o'></i> {{trans('crudbooster.notes')}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tasks" data-toggle="tab">
+                                    <i class='fa fa-calendar-minus-o'></i> {{trans('crudbooster.tasks')}}
+                                </a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="stages">
@@ -228,7 +240,7 @@
                                                     @if($stage->stage_id <= $business->business_stage_id)
                                                         <i id="{{ $stage->stage_id }}" data-id="{{ $stage->stage_id }}" data-type="{{ $stage->stage_number }}" class="fa fa-check-circle bg-blue step-check-active"></i>
                                                     @elseif($stage->stage_id == $business->stage_id+1)
-                                                        <i id="{{ $stage->stage_id }}" data-id="{{ $stage->stage_id }}" data-type="{{ $stage->stage_number }}" class="fa fa-check-circle bg-gray step-check-actual"></i>
+                                                        <i  title="Click to completed" id="{{ $stage->stage_id }}" data-id="{{ $stage->stage_id }}" data-type="{{ $stage->stage_number }}" class="fa fa-check-circle bg-red step-check-actual"></i>
                                                     @else
                                                         <i id="{{ $stage->stage_id }}" data-id="{{ $stage->stage_id }}" data-type="{{ $stage->stage_number }}" class="fa fa-check-circle bg-gray step-check-disabled"></i>
                                                     @endif

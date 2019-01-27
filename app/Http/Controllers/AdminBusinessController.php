@@ -740,11 +740,14 @@
 
             //Creamos los pasos por defecto (si no existen)
             //Comprobamos existencia inicialmente
-            $exists_business_stages =  DB::table('business_stages')
-                ->where('business_id',$request->get('business_id'))->first();
+            $exists_business_stages =  DB::table('business_stages')->where('business_id',$request->get('business_id'))->first();
+
             //Si no existe creamos las stages por defecto
             if (count($exists_business_stages) == 0) {
-                $stages =  DB::table('stages')->where('stages_groups_id',$request->get('stages_group'))->get();
+                $stages =  DB::table('stages')
+                    ->where('stages_groups_id',$request->get('stages_group'))
+                    ->where('deleted_at',null)
+                    ->get();
 
                 foreach ($stages as $stage) {
                     //Primera etapa por defecto
@@ -770,6 +773,14 @@
                         DB::table('business_stages')->insert($sumarizedDataBusinessStages);
                     }
                 }
+
+                //Adicionar "Recent Activity" de agregar nota a stage
+                DB::table('stages_activities')->insert([
+                    'stages_id'=> 1,
+                    'description'=>'This stage has been completed by: '.CRUDBooster::myName(),
+                    'business_id'=>$request->get('business_id'),
+                    'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
+                ]);
             }
 
             //Redireccionamos al lead que creo el business
@@ -787,6 +798,7 @@
             return DB::table('products')->where('id', $request->get('id'))->get();
         }
 
+        //Elimina un producto del listado de productos del quote
         public function getProduct_delete($id) {
 	        //Obtengo la info del producto asociado a la quote
             $product_business = DB::table('business_products')->where('id', $id)->first();

@@ -466,7 +466,7 @@ return [
     'Business_Name'  => 'Quote Name',
     'Return_Client'  => 'Return to Client',
     'current_phase'  => 'Current Phase',
-    'title_phase'  => 'Project\'s Phases',
+    'title_phase'  => 'Project\'s Stages',
 
     'step_name'  => 'Step Name',
     'notes'  => 'Notes',
