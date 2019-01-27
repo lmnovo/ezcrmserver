@@ -8,7 +8,7 @@ use Session;
 use Request;
 use DB;
 use CRUDBooster;
-use App\Mail\CampaignEmail;
+use App\Mail\TaskReminder;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;

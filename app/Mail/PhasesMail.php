@@ -30,9 +30,6 @@ class PhasesMail extends Mailable
      */
     public function build()
     {
-
-        dd($this->phase);
-
         return $this->view('email.template', [
             'mensaje' => $this->phase,
         ]);

@@ -678,4 +678,7 @@ return [
 
     'text_unsuscribed' => 'Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí',
     'stock' => 'Inventario',
+
+    'email_task_title' => 'Recordatorio de Tarea',
+    'email_task_content' => 'Este correo electrónico es un recordatorio de la tarea creada por usted con la siguiente información:',
 ];

@@ -669,4 +669,6 @@ return [
     'text_unsuscribed' => 'Si usted no quiere recibir más correos electrónicos nuestros. Clic Aquí',
     'stock' => 'Stock',
 
+    'email_task_title' => 'Task Reminder',
+    'email_task_content' => 'This email is a reminder of the task created by you with the following information',
 ];

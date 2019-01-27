@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CampaignEmail extends Mailable
+class TaskReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,8 +30,8 @@ class CampaignEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email', [
-            'mensaje' => $this->data,
+        return $this->view('email.task', [
+            'data' => $this->data,
         ]);
     }
 }
