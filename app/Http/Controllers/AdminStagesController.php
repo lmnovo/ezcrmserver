@@ -348,7 +348,7 @@
             //Adicionar "Recent Activity" del envío de Email
             DB::table('stages_activities')->insert([
                 'stages_id'=>$stages_id,
-                'description'=>'The stage: '.$stage_actual->name.', was finalized by: '.CRUDBooster::myName(),
+                'description'=>'The stage: '.$stage_actual->name.', was completed by: '.CRUDBooster::myName(),
                 'business_id'=>$business_id,
                 'created_at'=>Carbon::now(config('app.timezone'))->toDateTimeString(),
             ]);
@@ -356,8 +356,46 @@
             //Actualizar fecha de terminada la etapa actual
             DB::table('business')->where('id',$business_id)->update(['stages_id' => $stages_id]);
 
+            //Enviar email de confirmación de etapa completada
+            //---Obtener los destinatarios del email
+            $business = DB::table('business')->where('id',$business_id)->first();
+            $lead = DB::table('leads')->where('id',$business->leads_id)->first();
+            $user = DB::table('cms_users')->where('id',$business->cms_users_id)->first();
+            $to[] = $lead->email;
+            $to[] = $user->email;
+
+            for ($i=0; $i<2; $i++) {
+                $to_item = $to[$i];
+
+                $html = "<p>This is a notification of the EzCRM system to inform you that the Project Stage $stage_actual->number: '$stage_actual->name', has been successfully completed.</p>";
+                $subject = "Stage Completed";
+                $template = null;
+
+                $content = $html."</br> <a href='http://127.0.0.1:8000/unsubscribed/leads/$lead->id'>If you don't want to receive our email, click here</a>";
+
+                \Mail::send("crudbooster::emails.blank",['content'=>$content],function($message) use ($to_item,$subject,$template, $html) {
+                    $message->priority(1);
+                    $message->cc($to_item);
+
+                    if($template->from_email) {
+                        $from_name = ($template->from_name)?:CRUDBooster::getSetting('appname');
+                        $message->from($template->from_email,$from_name);
+                    }
+
+                    if($template->cc_email) {
+                        $message->cc($template->cc_email);
+                    }
+
+                    $message->subject($subject);
+                });
+
+            }
+
+
+
             return DB::table('business_stages')->where('stages_id',$stages_id)->where('business_id',$business_id)
                 ->update(['updated_at' => Carbon::now(config('app.timezone')), 'is_completed'=>1]);
+
         }
 
 

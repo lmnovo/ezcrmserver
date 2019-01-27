@@ -75,7 +75,6 @@
             $('#addTasks').on('click',function(){
                 $('#taskLeadModal').modal('show');
             });
-
             $('#addSaveTask').on('click',function(){
                 var name = $('#name').val();
                 var date = $('#date').val();
@@ -93,7 +92,7 @@
                 });
             });
             //***********************************************************************
-
+            //Si se da clic en la Etapa Actual (color red)
             $(document).on('click','.step-check-actual',function(){
 
                 var stages_id = $(this).data('id');
@@ -102,7 +101,7 @@
                 var business_id = $('#business_id').val();
 
                 swal({
-                        title: "Do you want to finalize this stage?",
+                        title: "Do you want to completed this stage?",
                         text: "Stage "+stages_id_position,
                         type: "info",
                         showCancelButton: true,
