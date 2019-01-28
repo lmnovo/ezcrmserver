@@ -671,4 +671,12 @@ return [
 
     'email_task_title' => 'Task Reminder',
     'email_task_content' => 'This email is a reminder of the task created by you with the following information',
+
+    'leads_clients' => 'Leads and Clients',
+    'products_buildouts' => 'Add Catalog',
+    'Add_Buildout_to_Catalog' => 'Add Product and Buildout',
+    'buildout_catalog' => 'Add Product and Buildout to Catalog',
+    'product_catalog' => 'Add Appliance to Catalog',
+    'emails_sms_sent' => 'Emails and SMS Sent',
+    'taxes' => 'Taxes',
 ];

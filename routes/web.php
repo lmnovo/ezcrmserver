@@ -58,6 +58,7 @@ use Carbon\Carbon;
     Route::get('crm/tour/general', function () { return view('tour_general'); });
     Route::get('crm/tour/add_lead', function () { return view('tour_add_lead'); });
     Route::get('crm/tour/edit_lead', function () { return view('tour_edit_lead'); });
+    Route::get('crm/tour/catalog', function () { return view('tour_add_product'); });
     Route::get('crm/tour/add_quote', function () { return view('tour_add_quote'); });
     Route::get('crm/tour/add_client', function () { return view('tour_add_client'); });
     Route::get('crm/tour/sending_campaings', function () { return view('tour_sending_campaigns'); });
