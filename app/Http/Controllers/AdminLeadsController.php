@@ -367,7 +367,9 @@ class AdminLeadsController extends \crocodicstudio\crudbooster\controllers\CBCon
     |
     */
     public function hook_after_delete($id) {
+        //Eliminar leads y activities relacionadas
         DB::table("leads")->where("id",$id)->delete();
+        DB::table("leads_activities")->where("leads_id",$id)->delete();
     }
 
     //Agregar nueva nota de tipo Lead

@@ -71,8 +71,10 @@ use Carbon\Carbon;
     Route::get('crm/tour/menu_management', function () { return view('tour_menu_management'); });
     Route::get('crm/tour/configuration_privileges', function () { return view('tour_privileges_configuration'); });
     Route::get('crm/tour/proyects_management', function () { return view('tour_proyects_management'); });
+    Route::get('crm/tour/import_leads', function () { return view('tour_import_leads'); });
 
-    Route::get('lang/{lang}', function ($lang) {
+
+        Route::get('lang/{lang}', function ($lang) {
         session(['lang' => $lang]);
         return \Redirect::back();
     })->where([

@@ -52,8 +52,8 @@
                 <video width="100%" height="100%" controls
                        poster="{{asset('tour/preview.jpeg')}}" >
                     <source
-                            src="{{asset('tour/add-clients.webm')}}"
-                            type="video/webm">
+                            src="{{asset('tour/add_client.mp4')}}"
+                            type="video/mp4">
 
                     Your browser doesn't support HTML5 video tag.
                 </video>
